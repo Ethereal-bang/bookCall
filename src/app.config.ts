@@ -4,7 +4,9 @@ export default {
     'pages/publish/publish',
     "pages/person/person",
     'pages/index/index',
-    'pages/bookOut/bookOut',
+    /*其他页面:*/
+    'pages/bookOut/bookOut',  // 主动换出
+    'pages/bookIn/bookIn',  // 希望换入
   ],
   tabBar: {
     list: [
@@ -25,5 +27,5 @@ export default {
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black'
-  }
+  },
 }

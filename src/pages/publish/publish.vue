@@ -14,10 +14,18 @@
     <text>先选择这次发布书籍的目的吧~</text>
     <view>
       <navigator
-        url="./pages/index/index"
-        open-type="switchTab"
+        url="/pages/bookOut/bookOut"
+        open-type="navigate"
       >
         主动换出
+      </navigator>
+    </view>
+    <view>
+      <navigator
+        url="/pages/bookIn/bookIn"
+        open-type="navigate"
+      >
+        希望换入
       </navigator>
     </view>
   </view>
