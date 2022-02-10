@@ -1,3 +1,9 @@
+# 项目启动
+
+1. `npm run dev:weapp`
+2. 微信开发者工具选择项目目录 /dist 文件夹
+
+
 # 项目初始化
 
 技术栈：Vue + TS + Sass + taro-ui-vue（使用 taro-ui-vue 的模板）
