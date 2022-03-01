@@ -38,7 +38,12 @@
           分类换书
         </view>
         <view class="at-col category">
-          全部书籍
+          <navigator
+            url="/pages/bookList/bookList"
+            open-type="navigate"
+          >
+            全部书籍
+          </navigator>
         </view>
       </view>
       <view class="at-row at-row__justify--between">
