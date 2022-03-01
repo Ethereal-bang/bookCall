@@ -47,22 +47,22 @@
         </view>
       </view>
       <view class="at-row at-row__justify--between">
-        <AtTag class="at-col">
+        <AtTag class="at-col" :on-click="genreClick" name="novel">
           小说
         </AtTag>
-        <AtTag class="at-col">
+        <AtTag class="at-col" :on-click="genreClick" name="literature">
           文学
         </AtTag>
-        <AtTag class="at-col">
+        <AtTag class="at-col" :on-click="genreClick" name="internet">
           互联网
         </AtTag>
-        <AtTag class="at-col">
+        <AtTag class="at-col" :on-click="genreClick" name="technology">
           科技
         </AtTag>
-        <AtTag class="at-col">
+        <AtTag class="at-col" :on-click="genreClick" name="psychology">
           心理学
         </AtTag>
-        <AtTag class="at-col">
+        <AtTag class="at-col" :on-click="genreClick" name="other">
           其他
         </AtTag>
       </view>
@@ -173,6 +173,11 @@ export default {
     handleClick(value) {
       this.current1 = value
     },
+    genreClick(val) {
+      wx.navigateTo({
+        url: `../../pages/bookGenreList/bookGenreList?tag=${val.name}`,
+      })
+    }
   },
 }
 </script>
