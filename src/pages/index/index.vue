@@ -83,28 +83,13 @@
           <view class="tab-content">
             <AtList>
               <AtListItem
-                title="解忧杂货店"
-                note="换书寄语:无论现在多么的不开心"
-                extra-text="可换"
-                thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
-              />
-              <AtListItem
-                title="解忧杂货店"
-                note="换书寄语:无论现在多么的不开心"
-                extra-text="求换"
-                thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
-              />
-              <AtListItem
-                title="解忧杂货店"
-                note="换书寄语:无论现在多么的不开心"
-                extra-text="可换"
-                thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
-              />
-              <AtListItem
-                title="解忧杂货店"
-                note="换书寄语:无论现在多么的不开心"
-                extra-text="可换"
-                thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
+                v-for="book in bookList"
+                :key="book.key"
+                :title="book.title"
+                :note="book.note"
+                :extra-text="book.tag"
+                :thunb="book.url"
+                :on-click="bookDetailClick.bind(this, book.key)"
               />
             </AtList>
           </view>
@@ -160,6 +145,12 @@ export default {
         { title: '推荐' },
         { title: '等你换' },
         { title: 'Ta想要' }
+      ],
+
+      bookList: [
+        {key: 1, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "可换"},
+        {key: 2, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "可换"},
+        {key: 3, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "求换"},
       ]
     }
   },
@@ -177,7 +168,13 @@ export default {
       wx.navigateTo({
         url: `../../pages/bookGenreList/bookGenreList?tag=${val.name}`,
       })
-    }
+    },
+    bookDetailClick(key) {
+      console.log(key)
+      wx.navigateTo({
+        url: `../../pages/bookDetail/bookDetail?key=${key}`,
+      })
+    },
   },
 }
 </script>
