@@ -21,7 +21,26 @@
       <view>“__________________”</view>
     </view>
 
-    <button>找Ta换</button>
+    <button
+      @tap="handle"
+    >
+      找Ta换
+    </button>
+    <view id="info" class="hide">
+      <view>请选择以下联系方式联系这位同学，更多的交流才能更好的完成换书~(点击即可复制)</view>
+      <view>
+        <text>微信</text>
+        <text>XXXXXX</text>
+      </view>
+      <view>
+        <text>QQ</text>
+        <text>XXXXXX</text>
+      </view>
+      <view>
+        <text>电话</text>
+        <text>未留下该方式</text>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -35,10 +54,22 @@ export default {
   },
   onLoad: function (options) {
     this.key = options.key;
+  },
+  methods: {
+    handle() {
+      const info = document.querySelector("#info");
+      info.removeAttribute("class");
+      info.setAttribute("class", "show")
+    },
   }
 }
 </script>
 
-<style scoped>
-
+<style>
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
 </style>
