@@ -46,26 +46,22 @@
           </navigator>
         </view>
       </view>
-      <view class="at-row at-row__justify--between">
-        <AtTag class="at-col" :on-click="genreClick" name="novel">
-          小说
-        </AtTag>
-        <AtTag class="at-col" :on-click="genreClick" name="literature">
-          文学
-        </AtTag>
-        <AtTag class="at-col" :on-click="genreClick" name="internet">
-          互联网
-        </AtTag>
-        <AtTag class="at-col" :on-click="genreClick" name="technology">
-          科技
-        </AtTag>
-        <AtTag class="at-col" :on-click="genreClick" name="psychology">
-          心理学
-        </AtTag>
-        <AtTag class="at-col" :on-click="genreClick" name="other">
-          其他
-        </AtTag>
-      </view>
+      <scroll-view
+        class="scroll-tag"
+        style="width: 100%"
+        :scroll-x="true"
+        @scroll="scroll"
+      >
+        <view>
+          <AtTag
+            v-for="genre in tags"
+            :key="genre.key"
+            :name="genre.name"
+          >
+            {{ genre.title }}
+          </AtTag>
+        </view>
+      </scroll-view>
     </view>
     <!--换书广场-->
     <view>
@@ -151,6 +147,15 @@ export default {
         {key: 1, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "可换"},
         {key: 2, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "可换"},
         {key: 3, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "求换"},
+      ],
+
+      tags: [
+        {key: 1, name: "novel", title: "小说"},
+        {key: 2, name: "literature", title: "文学"},
+        {key: 3, name: "internet", title: "互联网"},
+        {key: 4, name: "technology", title: "科技"},
+        {key: 5, name: "psychology", title: "心理学"},
+        {key: 6, name: "other", title: "其他"},
       ]
     }
   },
@@ -178,5 +183,8 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style>
+.scroll-tag {
+  white-space: nowrap;
+}
 </style>
