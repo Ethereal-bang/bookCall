@@ -1,5 +1,8 @@
 <template>
+  <view class="index_background">
   <view class="index">
+        <!--校园认证-->
+    <!-- <view>我的大学</view> -->
     <!--搜索框-->
     <AtSearchBar
       input-type="text"
@@ -8,8 +11,21 @@
       :on-change="onChange.bind(this, 'searchValue')"
       :on-action-click="onActionClick"
     />
-    <!--校园认证-->
-    <view>我的大学</view>
+  <view class="at-row">
+    <AtTag class="at-col" name='tag-1' type='primary' circle size='small' :onClick="onClick">
+          程序设计
+        </AtTag>
+        <AtTag class="at-col" name='tag-1' type='primary' circle size='small' >
+          高数
+        </AtTag>
+        <AtTag class="at-col" name='tag-1' type='primary' circle size='small'>
+          大学物理
+        </AtTag>
+        <AtTag class="at-col" name='tag-1' type='primary' circle size='small'>
+          科技
+        </AtTag>
+  </view>
+
     <!--轮播图-->
     <swiper
       indicator-color="#999"
@@ -32,39 +48,54 @@
       </swiper-item>
     </swiper>
     <!--分类换书-->
-    <view>
+    <view class="divide">
       <view class="at-row at-row__justify--between">
-        <view class="at-col category">
+        <view class="at-col category titleText">
           分类换书
         </view>
-        <view class="at-col category">
-          全部书籍
+        <view class="at-col category titleText">
+        <view class="atAll">全部分类◇</view>
         </view>
       </view>
-      <view class="at-row at-row__justify--between">
-        <AtTag class="at-col">
-          小说
-        </AtTag>
-        <AtTag class="at-col">
-          文学
-        </AtTag>
-        <AtTag class="at-col">
-          互联网
-        </AtTag>
-        <AtTag class="at-col">
-          科技
-        </AtTag>
-        <AtTag class="at-col">
-          心理学
-        </AtTag>
-        <AtTag class="at-col">
-          其他
-        </AtTag>
+      <view class="at-row">
+        <AtTabBar
+        selectedColor='#a99b85'
+        conSize=24
+         :tabList="[
+        { title: '文学', image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png'},
+        { title: '教材教辅', image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png'},
+        { title: '互联网', image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'},
+        { title: '科技', image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png'}
+        ]"
+        :onClick="handleClick"
+        :current="current"
+        />
+<!-- 
+        <AtGrid mode='rect' :hasBorder="false" :columnNum=4 :data="
+ [
+    {
+      image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
+      value: '领取中心'
+    },
+    {
+      image: 'https://img20.360buyimg.com/jdphoto/s72x72_jfs/t15151/308/1012305375/2300/536ee6ef/5a411466N040a074b.png',
+      value: '找折扣'
+    },
+    {
+      image: 'https://img10.360buyimg.com/jdphoto/s72x72_jfs/t5872/209/5240187906/2872/8fa98cd/595c3b2aN4155b931.png',
+      value: '领会员'
+    },
+    {
+      image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t10660/330/203667368/1672/801735d7/59c85643N31e68303.png',
+      value: '新品首发'
+    }
+  ]"
+/> -->
       </view>
     </view>
     <!--换书广场-->
-    <view>
-      <view>换书广场</view>
+    <view class="square">
+      <view class="titleText">换书广场</view>
       <AtTabs
         :swipeable="false"
         :current="current1"
@@ -119,21 +150,25 @@
       </AtTabs>
     </view>
   </view>
+  </view>
 </template>
 
 <script>
 // 按需引入, 更小的应用体积
-import { AtSearchBar, AtTag, AtTabs, AtTabsPane, AtList, AtListItem } from 'taro-ui-vue'
+import { AtNavBar,AtSearchBar,AtTag,AtTabBar,AtTabs, AtTabsPane, AtList, AtListItem,AtGrid } from 'taro-ui-vue'
 import './index.scss'
 
 export default {
   components: {
+    AtNavBar,
     AtSearchBar,
     AtTag,
+    AtTabBar,
     AtTabs,
     AtTabsPane,
     AtList,
     AtListItem,
+    AtGrid,
   },
   data() {
     return {
