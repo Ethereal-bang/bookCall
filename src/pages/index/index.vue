@@ -50,16 +50,16 @@
         class="scroll-tag"
         style="width: 100%"
         :scroll-x="true"
-        @scroll="scroll"
       >
-        <view>
-          <AtTag
-            v-for="genre in tags"
-            :key="genre.key"
-            :name="genre.name"
-          >
-            {{ genre.title }}
-          </AtTag>
+        <view
+          v-for="genre in tags"
+          :key="genre.key"
+          :name="genre.name"
+          class="scroll-item"
+          :dataset="genre.name"
+          @tap="genreClick"
+        >
+          {{ genre.title }}
         </view>
       </scroll-view>
     </view>
@@ -115,7 +115,6 @@ import './index.scss'
 export default {
   components: {
     AtSearchBar,
-    AtTag,
     AtTabs,
     AtTabsPane,
     AtList,
@@ -169,9 +168,11 @@ export default {
     handleClick(value) {
       this.current1 = value
     },
-    genreClick(val) {
+    genreClick(e) {
+      const genre = e.target.dataset
+      console.log(genre)
       wx.navigateTo({
-        url: `../../pages/bookGenreList/bookGenreList?tag=${val.name}`,
+        url: `../../pages/bookGenreList/bookGenreList?tag=${genre}`,
       })
     },
     bookDetailClick(key) {
@@ -186,5 +187,9 @@ export default {
 <style>
 .scroll-tag {
   white-space: nowrap;
+}
+.scroll-item {
+  display: inline-block;
+  width: 20%;
 }
 </style>
