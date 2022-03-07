@@ -1,5 +1,8 @@
 <template>
+  <view class="index_background">
   <view class="index">
+        <!--校园认证-->
+    <!-- <view>我的大学</view> -->
     <!--搜索框-->
     <AtSearchBar
       input-type="text"
@@ -8,8 +11,21 @@
       :on-change="onChange.bind(this, 'searchValue')"
       :on-action-click="onActionClick"
     />
-    <!--校园认证-->
-    <view>我的大学</view>
+  <view class="at-row">
+    <AtTag class="at-col" name='tag-1' type='primary' circle size='small' :onClick="onClick">
+          程序设计
+        </AtTag>
+        <AtTag class="at-col" name='tag-1' type='primary' circle size='small' >
+          高数
+        </AtTag>
+        <AtTag class="at-col" name='tag-1' type='primary' circle size='small'>
+          大学物理
+        </AtTag>
+        <AtTag class="at-col" name='tag-1' type='primary' circle size='small'>
+          科技
+        </AtTag>
+  </view>
+
     <!--轮播图-->
     <swiper
       indicator-color="#999"
@@ -32,17 +48,16 @@
       </swiper-item>
     </swiper>
     <!--分类换书-->
-    <view>
+    <view class="divide">
       <view class="at-row at-row__justify--between">
-        <view class="at-col category">
+        <view class="at-col category titleText">
           分类换书
         </view>
-        <view class="at-col category">
-          <navigator
+        <view class="at-col category titleText">
+          <navigator class="atAll"
             url="/pages/bookList/bookList"
-            open-type="navigate"
-          >
-            全部书籍
+            open-type="navigate">
+            全部书籍◇
           </navigator>
         </view>
       </view>
@@ -64,8 +79,8 @@
       </scroll-view>
     </view>
     <!--换书广场-->
-    <view>
-      <view>换书广场</view>
+    <view class="square">
+      <view class="titleText">换书广场</view>
       <AtTabs
         :swipeable="false"
         :current="current1"
@@ -105,20 +120,23 @@
       </AtTabs>
     </view>
   </view>
+  </view>
 </template>
 
 <script>
 // 按需引入, 更小的应用体积
-import { AtSearchBar, AtTag, AtTabs, AtTabsPane, AtList, AtListItem } from 'taro-ui-vue'
+import { AtNavBar,AtSearchBar,AtTag,AtTabBar,AtTabs, AtTabsPane, AtList, AtListItem,AtGrid } from 'taro-ui-vue'
 import './index.scss'
 
 export default {
   components: {
+    AtNavBar,
     AtSearchBar,
     AtTabs,
     AtTabsPane,
     AtList,
     AtListItem,
+    AtGrid,
   },
   data() {
     return {

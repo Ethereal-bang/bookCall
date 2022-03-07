@@ -4,5 +4,46 @@ input {
 }
 .index {
   padding: 0 7vw;
+  border-radius: 5% 5% 0% 0%;
+  background-color: #ffffff;
+  color: #7b7b7b;
+  font-size: 28rpx;
 }
-
+// 主页背景，为了实现圆角
+.index_background{
+  background-color: #a99b85;
+}
+//分类换书
+.divide{
+  border-radius: 2% 2% 2% 2%;
+  background-color: #ffffff;
+  color: #7b7b7b;
+  width: 648rpx;
+  height: 210rpx;
+}
+.at-row__justify--between{
+  height: 40rpx;
+  margin-top: 8rpx;
+}
+.atAll{
+  color: '#e4e3e3';
+  font-size: 17rpx;
+  margin-left: 280rpx;
+  margin-top: 5rpx;
+  margin-right: 10rpx;
+  border:1px solid #cdcdcd;
+  border-radius: 25%;
+}
+.at-col{
+  background-color: #ffffff;
+}
+.titleText{
+  // font-weight: bold;
+  padding-left: 13rpx;
+}
+// 换书广场
+.square{
+  border-radius: 2% 2% 2% 2%;
+  background-color: #ffffff;
+  //color: #b3b3b3;
+}
