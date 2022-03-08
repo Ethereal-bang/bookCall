@@ -19,7 +19,7 @@ export default {
         pagePath: "pages/index/index",
         text: "首页",
         selectedColor:'#a99b85',
-        iconpath:''
+        // iconpath:''
       }, {
         pagePath: 'pages/publish/publish',
         text: "发布",
