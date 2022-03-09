@@ -8,10 +8,13 @@
         >
           我的大学
         </view>
-        <view :style="showState">
-          <view>重庆邮电大学</view>
-          <view>重庆工商大学</view>
-          <view>重庆交通大学</view>
+        <view :style="showState" @tap="choseWitchUniversity">
+          <view
+            v-for="uni in university"
+            :data-name="uni.name"
+          >
+            {{ uni.title }}
+          </view>
         </view>
       </view>
       <!--搜索框-->
@@ -94,40 +97,42 @@
       <view class="square">
         <view class="titleText">换书广场</view>
         <AtTabs
-          :swipeable="false"
-          :current="current1"
-          :tab-list="tabList1"
-          :on-click="handleClick"
+          :current="currentTab"
+          :tab-list="tabList"
+          :on-click="clickTab"
         >
           <AtTabsPane
-            :current="current1"
+            :current="currentTab"
             :index="0"
           >
-            <view class="tab-content">
-              <AtList>
-                <AtListItem
-                  v-for="book in bookList"
-                  :key="book.key"
-                  :title="book.title"
-                  :note="book.note"
-                  :extra-text="book.tag"
-                  :thunb="book.url"
-                  :on-click="bookDetailClick.bind(this, book.key)"
-                />
-              </AtList>
-            </view>
+            <AtList>
+              <AtListItem
+                v-for="book in bookList"
+                :key="book.key"
+                :title="book.title"
+                :note="book.note"
+                :extra-text="book.tag"
+                :thunb="book.url"
+                :on-click="bookDetailClick.bind(this, book.key)"
+                v-if="isChosenUniversity"
+              />
+              <AtListItem
+                v-if="!isChosenUniversity"
+                note="选择你所在的大学后，才能查看书籍动态以及发布书籍哦~（点击左上角立即选择）"
+              />
+            </AtList>
           </AtTabsPane>
           <AtTabsPane
-            :current="current1"
+            :current="currentTab"
             :index="1"
           >
-            <view class="tab-content"/>
+            <view class="tab-content">Tab2</view>
           </AtTabsPane>
           <AtTabsPane
-            :current="current1"
-            :index="2"
+            :current="currentTab"
+            :index="3"
           >
-            <view class="tab-content"/>
+            <view class="tab-content">Tab3</view>
           </AtTabsPane>
         </AtTabs>
       </view>
@@ -166,8 +171,8 @@ export default {
         'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
       ],
 
-      current1: 0,
-      tabList1: [
+      currentTab: 0,
+      tabList: [
         {title: '推荐'},
         {title: '等你换'},
         {title: 'Ta想要'}
@@ -187,7 +192,14 @@ export default {
         {key: 5, name: "psychology", title: "心理学"},
         {key: 6, name: "other", title: "其他"},
       ],
+      /*校园认证：*/
       showState: "display:none",
+      isChosenUniversity: false,
+      university: [
+        {title: "重庆邮电大学", name: "cy"},
+        {title: "重庆工商大学", name: "gs"},
+        {title: "重庆交通大学", name: "cj"},
+      ],
     }
   },
   methods: {
@@ -197,8 +209,8 @@ export default {
     onActionClick() {
       console.log("点击：搜索")
     },
-    handleClick(value) {
-      this.current1 = value
+    clickTab(value) {
+      this.currentTab = value
     },
     genreClick(e) {
       const genre = e.target.dataset
@@ -219,6 +231,11 @@ export default {
       else
         this.showState = "";
     },
+    choseWitchUniversity(e) {
+      console.log(e.target.dataset);  // 获得选择的学校代号
+      this.showState = "display:none";  // 选后关闭下拉单
+      this.isChosenUniversity = true; // 换书广场显示
+    }
   },
 }
 </script>
@@ -230,5 +247,10 @@ export default {
 .scroll-item {
   display: inline-block;
   width: 20%;
+}
+
+.tab-content {
+  height: 10vh;
+  color: #a99b85;
 }
 </style>
