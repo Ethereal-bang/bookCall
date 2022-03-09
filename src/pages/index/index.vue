@@ -194,7 +194,7 @@ export default {
       ],
       /*校园认证：*/
       showState: "display:none",
-      isChosenUniversity: false,
+      isChosenUniversity: true,
       university: [
         {title: "重庆邮电大学", name: "cy"},
         {title: "重庆工商大学", name: "gs"},
