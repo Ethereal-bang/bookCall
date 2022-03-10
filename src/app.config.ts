@@ -7,7 +7,10 @@ export default {
     /*其他页面:*/
     "pages/bookList/bookList",  // 书籍列表
     "pages/bookGenreList/bookGenreList",  // 种类列表
-    "pages/bookDetail/bookDetail" // 书籍详情
+    "pages/bookDetail/bookDetail", // 书籍详情
+    "pages/personalPublish/personalPublish",  // 个人发布
+    "pages/personalContact/personalContact",  // 联系方式
+    "pages/changeRules/changeRules",  // 换书规则
   ],
   tabBar: {
     color:'#b4b4b3',
