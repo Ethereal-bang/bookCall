@@ -5,11 +5,12 @@ export default {
     'pages/publish/publish',
     "pages/person/person",
     /*其他页面:*/
-    'pages/bookOut/bookOut',  // 主动换出
-    'pages/bookIn/bookIn',  // 希望换入
     "pages/bookList/bookList",  // 书籍列表
     "pages/bookGenreList/bookGenreList",  // 种类列表
-    "pages/bookDetail/bookDetail" // 书籍详情
+    "pages/bookDetail/bookDetail", // 书籍详情
+    "pages/personalPublish/personalPublish",  // 个人发布
+    "pages/personalContact/personalContact",  // 联系方式
+    "pages/changeRules/changeRules",  // 换书规则
   ],
   tabBar: {
     color:'#b4b4b3',
@@ -19,7 +20,7 @@ export default {
         pagePath: "pages/index/index",
         text: "首页",
         selectedColor:'#a99b85',
-        iconpath:''
+        // iconpath:''
       }, {
         pagePath: 'pages/publish/publish',
         text: "发布",

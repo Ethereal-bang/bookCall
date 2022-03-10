@@ -1,44 +1,106 @@
 <template>
   <view>
-    <view>Test: {{ key }}</view>
+    <PersonalBar />
+    <view>Test-Key: {{ key }}</view>
+
     <image
       mode="aspectFit"
     />
+
+    <view>南朝清谈</view>
+
     <view>
-      <text>书名</text>
-      <text>xxx</text>
+      <AtTag
+        v-if="bookState"
+      >
+        可换
+      </AtTag>
+      <AtTag
+        v-if="!bookState"
+      >
+        求换
+      </AtTag>
+      <AtTag>8成新</AtTag>
+      <AtTag>文学</AtTag>
     </view>
     <view>
-      <text>新旧程度</text>
-      <text>8成新</text>
-    </view>
-    <view>
-      <text>更多信息</text>
-      <text>暂无</text>
-    </view>
-    <view>
-      <view>拥有此书的唤友想对你说：</view>
-      <view>“__________________”</view>
+      <text>换书寄语：</text>
+      <text>是本好书~</text>
     </view>
 
-    <button>找Ta换</button>
+    <view>
+      <view
+        v-for="item in info"
+      >
+        {{ item.title }}  {{ item.content }}
+      </view>
+    </view>
+
+    <button
+      v-if="!isOwn"
+      @tap="handle"
+    >
+      找Ta换
+    </button>
+    <view id="info" class="hide">
+      <view>请选择以下联系方式联系这位同学，更多的交流才能更好的完成换书~(点击即可复制)</view>
+      <view>
+        <text>微信</text>
+        <text>XXXXXX</text>
+      </view>
+      <view>
+        <text>QQ</text>
+        <text>XXXXXX</text>
+      </view>
+      <view>
+        <text>电话</text>
+        <text>未留下该方式</text>
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
+import PersonalBar from "../../components/PersonalBar";
+import { AtTag } from 'taro-ui-vue';
+
 export default {
   name: "BookDetail",
   data() {
     return {
-      key: "",
+      key: "",  // 书籍编号
+      info: [
+        {title: "作者", content: "暂无"},
+        {title: "版本", content: "暂无"},
+        {title: "日期", content: "暂无"},
+        {title: "ISBN", content: "暂无"},
+      ],
+      bookState: true,  // true表可换，false表在求
+      isOwn: false,   // 是否为本人
     }
+  },
+  components: {
+    PersonalBar,
+    AtTag,
   },
   onLoad: function (options) {
     this.key = options.key;
+  },
+  methods: {
+    handle() {
+      const info = document.querySelector("#info");
+      info.removeAttribute("class");
+      info.setAttribute("class", "show")
+    },
   }
 }
 </script>
 
-<style scoped>
-
+<style>
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
 </style>
