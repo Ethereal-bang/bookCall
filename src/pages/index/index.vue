@@ -3,148 +3,158 @@
     <view class="index">
       <!--校园认证-->
       <view>
+        <image
+          :src=imgPaths.location
+          mode="aspectFit"
+          style="height: 16px; width: 16px; display: inline-block"
+        />
         <view
           @tap="choseUniversity"
+          style="display: inline-block"
         >
-          我的大学
-        </view>
-        <view :style="showState" @tap="choseWitchUniversity">
-          <view
-            v-for="uni in university"
-            :data-name="uni.name"
-          >
-            {{ uni.title }}
-          </view>
-        </view>
+        {{ chosenUniversity }}
       </view>
-      <!--搜索框-->
-      <AtSearchBar
-        input-type="text"
-        placeholder="搜索书籍名称"
-        :value="searchValue"
-        :on-change="onChange.bind(this, 'searchValue')"
-        :on-action-click="onActionClick"
-      />
-      <view class="at-row">
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          程序设计
-        </AtTag>
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          高数
-        </AtTag>
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          大学物理
-        </AtTag>
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          科技
-        </AtTag>
-      </view>
-
-      <!--轮播图-->
-      <swiper
-        indicator-color="#f0f2f5"
-        indicator-active-color="#999999"
-        current="current"
-        :duration="duration"
-        :interval="interval"
-        :circular="isCircular"
-        :autoplay="isAutoplay"
-        :indicator-dots="hasIndicatorDots"
-      >
-        <swiper-item
-          v-for="(item, idx) in imgUrls"
-          :key="idx"
+      <view :style="showState" @tap="choseWitchUniversity">
+        <view
+          v-for="uni in university"
+          :data-name="uni.name"
+          :data-title="uni.title"
         >
-          <image
-            :src="item"
-            class="slide-image"
-          />
-        </swiper-item>
-      </swiper>
-      <!--分类换书-->
-      <view class="divide">
-        <view class="at-row at-row__justify--between">
-          <view class="at-col category titleText">
-            分类换书
-          </view>
-          <view class="at-col category titleText">
-            <navigator class="atAll"
-                       url="/pages/bookList/bookList"
-                       open-type="navigate"
-            >
-              全部书籍◇
-            </navigator>
-          </view>
+          {{ uni.title }}
         </view>
-        <!-- <scroll-view
-          class="scroll-tag"
-          style="width: 100%"
-          :scroll-x="true"
-        >
-          <view 
-            v-for="genre in tags"
-            :key="genre.key"
-            :name="genre.name"
-            class="scroll-item"
-            :dataset="genre.name"
-            @tap="genreClick"
-          >
-            {{ genre.title }}
-          </view>
-        </scroll-view> -->
-        <AtTabBar class="tabbaricon" iconsize: 50, color:#a0a0a0, selectedColor:#a0a0a0,
-  :tabList="[
-      { title: '小说', image: './Group_1.png', text: 'new' },
-      { title: '教材教辅', image: './Group_2.png' },
-      { title: '互联网', image: './Group_3.png', text: '100', max: 99 },
-      { title: '文学', image: './Group_4.png', text: '30', max: 99 }
-    ]"
-/>
-      </view>
-      <!--换书广场-->
-      <view class="square">
-        <view class="titleText">换书广场</view>
-        <AtTabs
-          :current="currentTab"
-          :tab-list="tabList"
-          :on-click="clickTab"
-        >
-          <AtTabsPane
-            :current="currentTab"
-            :index="0"
-          >
-            <AtList>
-              <AtListItem
-                v-for="book in bookList"
-                :key="book.key"
-                :title="book.title"
-                :note="book.note"
-                :extra-text="book.tag"
-                :thunb="book.url"
-                :on-click="bookDetailClick.bind(this, book.key)"
-                v-if="isChosenUniversity"
-              />
-              <AtListItem
-                v-if="!isChosenUniversity"
-                note="选择你所在的大学后，才能查看书籍动态以及发布书籍哦~（点击左上角立即选择）"
-              />
-            </AtList>
-          </AtTabsPane>
-          <AtTabsPane
-            :current="currentTab"
-            :index="1"
-          >
-            <view class="tab-content">Tab2</view>
-          </AtTabsPane>
-          <AtTabsPane
-            :current="currentTab"
-            :index="3"
-          >
-            <view class="tab-content">Tab3</view>
-          </AtTabsPane>
-        </AtTabs>
       </view>
     </view>
+    <!--搜索框-->
+    <AtSearchBar
+      input-type="text"
+      placeholder="搜索书籍名称"
+      :value="searchValue"
+      :on-change="onChange.bind(this, 'searchValue')"
+      :on-action-click="onActionClick"
+    />
+    <view class="at-row">
+      <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
+        程序设计
+      </AtTag>
+      <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
+        高数
+      </AtTag>
+      <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
+        大学物理
+      </AtTag>
+      <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
+        科技
+      </AtTag>
+    </view>
+
+    <!--轮播图-->
+    <swiper
+      indicator-color="#f0f2f5"
+      indicator-active-color="#999999"
+      current="current"
+      :duration="duration"
+      :interval="interval"
+      :circular="isCircular"
+      :autoplay="isAutoplay"
+      :indicator-dots="hasIndicatorDots"
+    >
+      <swiper-item
+        v-for="(item, idx) in imgUrls"
+        :key="idx"
+      >
+        <image
+          :src="item"
+          mode="aspectFit"
+          style="height: 100%"
+        />
+      </swiper-item>
+    </swiper>
+    <!--分类换书-->
+    <view class="divide">
+      <view class="at-row at-row__justify--between">
+        <view class="at-col category titleText">
+          分类换书
+        </view>
+        <view class="at-col category titleText">
+          <navigator class="atAll"
+                     url="/pages/bookList/bookList"
+                     open-type="navigate"
+          >
+            全部书籍◇
+          </navigator>
+        </view>
+      </view>
+      <scroll-view
+        class="scroll-tag"
+        style="width: 100%"
+        :scroll-x="true"
+      >
+        <view
+          v-for="genre in tags"
+          :key="genre.key"
+          :name="genre.name"
+          class="scroll-item"
+          :dataset="genre.name"
+          @tap="genreClick"
+        >
+          <view>
+            <image
+              :src=genre.src
+              mode="aspectFit"
+              style="height: 34px; width: 100%"
+            />
+            <text
+              style="display: block; text-align: center"
+            >{{ genre.title }}
+            </text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+    <!--换书广场-->
+    <view class="square">
+      <view class="titleText">换书广场</view>
+      <AtTabs
+        :current="currentTab"
+        :tab-list="tabList"
+        :on-click="clickTab"
+      >
+        <AtTabsPane
+          :current="currentTab"
+          :index="0"
+        >
+          <AtList>
+            <AtListItem
+              v-for="book in bookList"
+              :key="book.key"
+              :title="book.title"
+              :note="book.note"
+              :extra-text="book.tag"
+              :thunb="book.url"
+              :on-click="bookDetailClick.bind(this, book.key)"
+              v-if="isChosenUniversity"
+            />
+            <AtListItem
+              v-if="!isChosenUniversity"
+              note="选择你所在的大学后，才能查看书籍动态以及发布书籍哦~（点击左上角立即选择）"
+            />
+          </AtList>
+        </AtTabsPane>
+        <AtTabsPane
+          :current="currentTab"
+          :index="1"
+        >
+          <view class="tab-content">Tab2</view>
+        </AtTabsPane>
+        <AtTabsPane
+          :current="currentTab"
+          :index="3"
+        >
+          <view class="tab-content">Tab3</view>
+        </AtTabsPane>
+      </AtTabs>
+    </view>
+  </view>
   </view>
 </template>
 
@@ -152,6 +162,8 @@
 // 按需引入, 更小的应用体积
 import {AtNavBar, AtTabBar, AtSearchBar, AtTabs, AtTabsPane, AtList, AtListItem, AtGrid, AtTag} from 'taro-ui-vue'
 import './index.scss'
+
+const imgPaths = require("../../utils/base64");
 
 export default {
   components: {
@@ -175,9 +187,8 @@ export default {
       isAutoplay: true,
       hasIndicatorDots: true,
       imgUrls: [
-        'https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180',
-        'https://img11.360buyimg.com/babel/s700x360_jfs/t1/4776/39/2280/143162/5b9642a5E83bcda10/d93064343eb12276.jpg!q90!cc_350x180',
-        'https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180',
+        imgPaths.banner1,
+        imgPaths.banner2,
       ],
 
       currentTab: 0,
@@ -192,15 +203,16 @@ export default {
         {key: 2, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "可换"},
         {key: 3, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "求换"},
       ],
-
-      // tags: [
-      //   {key: 1, name: "novel", title: "小说"},
-      //   {key: 2, name: "literature", title: "文学"},
-      //   {key: 3, name: "internet", title: "互联网"},
-      //   {key: 4, name: "technology", title: "科技"},
-      //   {key: 5, name: "psychology", title: "心理学"},
-      //   {key: 6, name: "other", title: "其他"},
-      // ],
+      /*分类换书*/
+      tags: [
+        {key: 1, name: "novel", title: "小说", src: imgPaths.genre1},
+        {key: 2, name: "literature", title: "文学", src: imgPaths.genre2},
+        {key: 3, name: "internet", title: "互联网", src: imgPaths.genre3},
+        {key: 4, name: "technology", title: "科技", src: imgPaths.genre4},
+        {key: 5, name: "psychology", title: "心理学", src: imgPaths.genre5},
+        {key: 6, name: "teaching", title: "教材教辅", src: imgPaths.genre6},
+        {key: 7, name: "other", title: "其他", src: imgPaths.genre7},
+      ],
       /*校园认证：*/
       showState: "display:none",
       isChosenUniversity: false,
@@ -209,6 +221,8 @@ export default {
         {title: "重庆工商大学", name: "gs"},
         {title: "重庆交大学", name: "cj"},
       ],
+      chosenUniversity: "我的大学",
+      imgPaths,
     }
   },
   methods: {
@@ -244,6 +258,7 @@ export default {
       console.log(e.target.dataset);  // 获得选择的学校代号
       this.showState = "display:none";  // 选后关闭下拉单
       this.isChosenUniversity = true; // 换书广场显示
+      this.chosenUniversity = e.target.dataset.title; // 下拉单显示
     }
   },
 }
