@@ -10,18 +10,30 @@
     <view>南朝清谈</view>
 
     <view>
-      <AtTag
+      <AtTag class="booktag" size="small"
         v-if="bookState"
+        :active="true"
+                :circle="index % 2 === 0"
       >
         可换
       </AtTag>
       <AtTag
-        v-if="!bookState"
+        v-if="!bookState" size="small"
+        :active="true"
+                :circle="index % 2 === 0"
+                 class="booktag"
       >
         求换
       </AtTag>
-      <AtTag>8成新</AtTag>
-      <AtTag>文学</AtTag>
+
+      <AtTag size="small"
+                :active="true"
+                :circle="index % 2 === 0"
+                 class="booktag">8成新</AtTag>
+      <AtTag size="small" 
+          :active="true"
+                :circle="index % 2 === 0"
+                 class="booktag"  key="">文学</AtTag>
     </view>
     <view>
       <text>换书寄语：</text>

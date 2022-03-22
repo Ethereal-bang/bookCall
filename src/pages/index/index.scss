@@ -4,14 +4,14 @@ input {
 }
 .index {
   padding: 0 7vw;
-  border-radius: 5% 5% 0 0;
+  border-radius: 33rpx 33rpx 0 0;
   background-color: #ffffff;
   color: #7b7b7b;
   font-size: 28rpx;
 }
 // 主页背景，为了实现圆角
 .index_background{
-  background-color: #a99b85;
+  background-color: #81cea2;
 }
 //分类换书
 .divide{
@@ -32,10 +32,16 @@ input {
   margin-top: 5rpx;
   margin-right: 10rpx;
   border:1px solid #cdcdcd;
-  border-radius: 25%;
+  border-radius: 25rpx;
 }
 .at-col{
   background-color: #ffffff;
+ 
+}
+.tag{
+  width: 30rpx;
+  // height: 32rpx;
+  margin-left: 20rpx;
 }
 .titleText{
   // font-weight: bold;

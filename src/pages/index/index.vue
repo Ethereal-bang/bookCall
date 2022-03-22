@@ -26,24 +26,24 @@
         :on-action-click="onActionClick"
       />
       <view class="at-row">
-        <AtTag class="at-col" name="tag-1" type="primary" circle size="small">
+        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
           程序设计
         </AtTag>
-        <AtTag class="at-col" name="tag-1" type="primary" circle size="small">
+        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
           高数
         </AtTag>
-        <AtTag class="at-col" name="tag-1" type="primary" circle size="small">
+        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
           大学物理
         </AtTag>
-        <AtTag class="at-col" name="tag-1" type="primary" circle size="small">
+        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
           科技
         </AtTag>
       </view>
 
       <!--轮播图-->
       <swiper
-        indicator-color="#999"
-        indicator-active-color="#333"
+        indicator-color="#f0f2f5"
+        indicator-active-color="#999999"
         current="current"
         :duration="duration"
         :interval="interval"
@@ -76,12 +76,12 @@
             </navigator>
           </view>
         </view>
-        <scroll-view
+        <!-- <scroll-view
           class="scroll-tag"
           style="width: 100%"
           :scroll-x="true"
         >
-          <view
+          <view 
             v-for="genre in tags"
             :key="genre.key"
             :name="genre.name"
@@ -91,7 +91,15 @@
           >
             {{ genre.title }}
           </view>
-        </scroll-view>
+        </scroll-view> -->
+        <AtTabBar class="tabbaricon" iconsize: 50, color:#a0a0a0, selectedColor:#a0a0a0,
+  :tabList="[
+      { title: '小说', image: './Group_1.png', text: 'new' },
+      { title: '教材教辅', image: './Group_2.png' },
+      { title: '互联网', image: './Group_3.png', text: '100', max: 99 },
+      { title: '文学', image: './Group_4.png', text: '30', max: 99 }
+    ]"
+/>
       </view>
       <!--换书广场-->
       <view class="square">
@@ -142,12 +150,13 @@
 
 <script>
 // 按需引入, 更小的应用体积
-import {AtNavBar, AtSearchBar, AtTabs, AtTabsPane, AtList, AtListItem, AtGrid, AtTag} from 'taro-ui-vue'
+import {AtNavBar, AtTabBar, AtSearchBar, AtTabs, AtTabsPane, AtList, AtListItem, AtGrid, AtTag} from 'taro-ui-vue'
 import './index.scss'
 
 export default {
   components: {
     AtNavBar,
+    AtTabBar,
     AtSearchBar,
     AtTabs,
     AtTag,
@@ -184,21 +193,21 @@ export default {
         {key: 3, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "求换"},
       ],
 
-      tags: [
-        {key: 1, name: "novel", title: "小说"},
-        {key: 2, name: "literature", title: "文学"},
-        {key: 3, name: "internet", title: "互联网"},
-        {key: 4, name: "technology", title: "科技"},
-        {key: 5, name: "psychology", title: "心理学"},
-        {key: 6, name: "other", title: "其他"},
-      ],
+      // tags: [
+      //   {key: 1, name: "novel", title: "小说"},
+      //   {key: 2, name: "literature", title: "文学"},
+      //   {key: 3, name: "internet", title: "互联网"},
+      //   {key: 4, name: "technology", title: "科技"},
+      //   {key: 5, name: "psychology", title: "心理学"},
+      //   {key: 6, name: "other", title: "其他"},
+      // ],
       /*校园认证：*/
       showState: "display:none",
       isChosenUniversity: false,
       university: [
         {title: "重庆邮电大学", name: "cy"},
         {title: "重庆工商大学", name: "gs"},
-        {title: "重庆交通大学", name: "cj"},
+        {title: "重庆交大学", name: "cj"},
       ],
     }
   },

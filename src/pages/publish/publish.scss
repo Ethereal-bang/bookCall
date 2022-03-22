@@ -1,0 +1,105 @@
+.publish{
+    background-color: #ffffff;
+    color: #696969;
+    font-size: 30rpx;
+}
+.title{
+    position:relative;
+    left:42rpx;
+    top: 5rpx;
+    border-style: solid;
+    border-color: #ffffff;
+}
+.tag{
+    margin-left: 40rpx;
+    margin-top: 6rpx;
+}
+.at-col-3{
+    margin-left: 40rpx;
+    margin-top: 8rpx;
+    margin-bottom: 8rpx;
+}
+.scan{
+    width: 5rpx;
+    height: 42rpx;
+    background: #FFCA4E;
+    border-radius: 10rpx 10rpx 10rpx 10rpx;
+    position: relative;
+    right: 24rpx;
+    // left: 22rpx;
+    top: 29rpx;
+}
+.scanicon{
+    position: relative;
+    right: 53rpx;
+    left: 20rpx;
+    top: 5rpx;
+}
+.inp{
+    width: 50rpx;
+    height: 22rpx;
+    position: relative;
+    background-color: aqua;
+    top: -20rpx;
+}
+
+.icon_x{
+    position:relative;
+    top:-3rpx;
+    right:9rpx;
+}
+.inputicon{
+    position:relative;
+    top:47rpx;
+}
+.icon_g{
+    position:relative;
+    top:4rpx;
+    right:-17rpx;
+}
+.input{
+    position:relative;
+    left: -15rpx;
+    top: -30;
+    // background-color: red;
+    // background-color: #f7f7f7;
+    border-radius: 2rpx;
+    // border-style: none;
+    width: 640rpx; height: 50rpx;  
+}
+.jiyu{
+    position:relative;
+    left:17rpx;
+    top: 5rpx;
+}
+.jiyug{
+    position:relative;
+    left:34rpx;
+    top: 5rpx;
+    
+}
+.mesg{
+    background-color: #f7f7f7;
+    border-radius: 12rpx;
+    border-style: none;
+    width: 640rpx; height: 100rpx;   
+    position:relative;
+    top: 5rpx;
+    left:50rpx;
+}
+.button{
+    
+        width: 301rpx;
+        height: 89rpx;
+        background: #FFCA4E;
+        border-radius: 14rpx 14rpx 14rpx 14rpx;
+        border-style: none;
+        position:relative;
+        top: 15rpx;
+}
+.text1{
+    width: 401rpx;
+    height: 89rpx;
+    font-size: 22rpx;
+        // background: #FFCA4E;
+}

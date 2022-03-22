@@ -19,23 +19,28 @@ export default {
       {
         pagePath: "pages/index/index",
         text: "首页",
-        selectedColor:'#a99b85',
+        selectedColor:'#ffd35c',
+        iconPath:"./index.png",
+        selectedIconPath:"./index_.png"
+        
         // iconpath:''
       }, {
         pagePath: 'pages/publish/publish',
         text: "发布",
-        selectedColor:'#a99b85'
+        selectedColor:'#ffd35c'
       }, {
         pagePath: "pages/person/person",
         text: "我的",
-        selectedColor:'#a99b85'
+        selectedColor:'#ffd35c',
+        iconPath:"./mine.png",
+        selectedIconPath:"./mine.png"
       },
     ]
   },
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#a99b85',
-    backgroundColor: "#a99b85",
+    navigationBarBackgroundColor: '#81cea2',
+    backgroundColor: "#81cea2",
     navigationBarTextStyle: 'white',
     // navigationStyle:'custom'
   },

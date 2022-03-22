@@ -1,13 +1,22 @@
 <template>
   <view class="publish">
     <view>
-      <view>发布目的</view>
-      <AtTag>换出</AtTag>
-      <AtTag>换入</AtTag>
+      
+      <view class="title">
+        <image class="icon_x" src="./icon_x.png" style=" width: 17rpx; height: 17rpx; display: inline-block"/>
+        <text>发布目的</text>
+        <image class="icon_g" src="./Group_64.png" style=" width: 30rpx; height: 30rpx; display: inline-block"/>
+      </view>
+      <AtTag class="tag">换出</AtTag>
+      <AtTag class="tag">换入</AtTag>
     </view>
 
     <view>
-      <view>书籍图片(封面必填)</view>
+      <view class="title">
+        <image class="icon_x" src="./icon_x.png" style=" width: 17rpx; height: 17rpx; display: inline-block"/>
+        <text>书籍图片(封面必填)</text>
+        <image class="icon_g" src="./Group_64.png" style=" width: 30rpx; height: 30rpx; display: inline-block"/>
+        </view>
       <view class="at-row">
         <view
           class="at-col at-col-3"
@@ -18,10 +27,9 @@
           background: #F0F0F0;
           display: inline-block;"
         >
-          <image
-            :src="picUrl"
+          <image src="./img.png"
             mode="aspectFit"
-            style="height: 36px; display: inline"
+            style="height: 26px; display: inline"
           />
         </view>
         <view
@@ -49,34 +57,26 @@
       </view>
     </view>
 
-    <view class="at-row">
-      <AtInput
-        class="at-col"
+    <view class="at-row title">
+      <image class="inputicon icon_x" src="./icon_x.png" style=" width: 17rpx; height: 17rpx; display: inline-block"/>
+      
+      <AtInput 
+        class="at-col input title "
         type="text"
         placeholder="请填写书籍名称/扫一扫ISBN码"
         :value="inputName"
         @change="onInputNameChange"
       />
-      <view
-        class="at-col at-col-3"
-        style="width: 65px;
-          height: 22px;
-          background: #FFCA4E;
-          border-radius: 4px 4px 4px 4px;
-          opacity: 1;"
-      >
+      <view class="at-col at-col-3 scan">
         <view class="at-row">
-          <text
-            class="at-col"
-            style="display: inline"
-          >
+          <text>
             扫码
           </text>
           <image
-            class="at-col"
-            src="./scanCode.png"
+            class="at-col scanicon"
+            src="./scan.png"
             mode="aspectFit"
-            style="height: 20px; display: inline"
+            style="height: 37rpx; display: inline"
           />
 
         </view>
@@ -85,19 +85,24 @@
     </view>
 
     <view>
-      <view>
-        <text>换书寄语</text>
+      <view class="title">
+        
+        <text class="jiyu">换书寄语</text>
+        <image class="jiyug icon_g" src="./Group_64.png" style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       </view>
       <AtTextarea
         :value="inputWords"
         :on-change="onInputWordsChange"
         placeholder="想说的话都可以留下来哦~~"
         :count="false"
+        class="mesg"
       />
     </view>
 
-    <view>
+    <view class="title">
+      <image class="icon_x" src="./icon_x.png" style=" width: 17rpx; height: 17rpx; display: inline-block"/>
       <text>标签选择</text>
+      <image class="icon_g" src="./Group_64.png" style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       <view class="at-row at-row__align-content--around">
         <AtAccordion
           title="书籍类别"
@@ -125,27 +130,25 @@
     </view>
 
     <view>
-      <view>
+      <view class="title">
+        <image class="icon_x" src="./icon_x.png" style=" width: 17rpx; height: 17rpx; display: inline-block"/>
         <text>预留联系方式</text>
+        <image class="icon_g" src="./Group_64.png" style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       </view>
-      <text>请勾选并填写你期待的联系方式，方便他人联系你进行换书，至少一种！</text>
+      <text  class="title text1">请勾选并填写你期待的联系方式，方便他人联系你进行换书，至少一种！</text>
       <AtCheckbox
         :options="contactOptions"
         :selectedList="checkedContactList"
         :on-change="checkContact"
       />
-      <text>下次发布书籍时，无需再次填写，可去“我的->联系方式“查看或修改~</text>
+      <text  class="title text1">下次发布书籍时，无需再次填写，可去“我的->联系方式“查看或修改~</text>
     </view>
 
     <AtButton
       type="primary"
       :on-click="post"
-      style="
-        width: 201px;
-        height: 49px;
-        background: #FFCA4E;
-        border-radius: 4px 4px 4px 4px;
-        opacity: 1;"
+      class="button"
+      
     >
       发布
     </AtButton>
@@ -157,6 +160,7 @@
 import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtCheckbox, AtButton} from "taro-ui-vue";
 import uploadPng from "../../assets/upload.png";
 import Taro from "@tarojs/taro";
+import './publish.scss'
 
 export default {
   name: "Publish",
