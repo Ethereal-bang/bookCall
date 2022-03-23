@@ -27,7 +27,7 @@ input {
 }
 .atAll{
   color: '#e4e3e3';
-  //font-size: 18px;
+  font-size: 20px;
   margin-left: 280rpx;
   margin-top: 5rpx;
   margin-right: 10rpx;
@@ -52,4 +52,63 @@ input {
   border-radius: 2% 2% 2% 2%;
   background-color: #ffffff;
   //color: #b3b3b3;
+}
+//可换
+.item-extra__info{
+  padding-left: 23rpx;
+  border-width: 3rpx;
+  border-style:solid;
+  //text-align: center;
+  //border-color: #f0ae2b;
+  color: #f0ae2b;
+  //background-color: #81cea2;
+  border-radius: 13rpx;
+}
+
+  //搜索按钮
+.at-search-bar__action{
+  color: #ffffff;
+  text-align: center;
+  background-color: #81cea2;
+  border-radius: 23rpx;
+
+}
+.at-tabs__header{
+  margin-top: 13rpx;
+  background-color: #f1f1f1;
+  height: 50rpx;
+  width: 400rpx;
+  margin-left: 150rpx;
+  
+  border-radius: 59rpx;
+}
+.at-tabs__item
+{
+padding-bottom: 20rpx;
+color: #7b7b7b;
+border-style: none;
+padding-top: 6rpx;
+font-size: small;
+}
+.at-tabs__item--active
+{
+  background-color: #ffcf4d;
+  border-radius: 59rpx;
+  border-style: none;
+  border-bottom-color:#ffcf4d ;
+  color: #ffffff;
+}
+.at-tabs__item-underline{
+  background-color: #ffcf4d;
+}
+.item-content__info-title{
+  color: blanchedalmond;
+}
+.at-list__item{
+  color: #7b7b7b;
+  //color:#ffcf4d;
+  font-size: 39rpx;
+}
+._n_18{
+  margin-left: 30rpx;
 }

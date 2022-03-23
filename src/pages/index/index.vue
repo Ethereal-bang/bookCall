@@ -2,11 +2,11 @@
   <view class="index_background">
     <view class="index">
       <!--校园认证-->
-      <view>
+      <view >
         <image
           :src=imgPaths.location
           mode="aspectFit"
-          style="height: 16px; width: 16px; display: inline-block"
+          style="height: 39rpx; width: 39rpx; display: inline-block ;padding-top:3rpx"
         />
         <view
           @tap="choseUniversity"
@@ -59,14 +59,20 @@
       :indicator-dots="hasIndicatorDots"
     >
       <swiper-item
-        v-for="(item, idx) in imgUrls"
+        v-for="(item, idx) in banners"
         :key="idx"
       >
-        <image
-          :src="item"
-          mode="aspectFit"
+        <navigator
+          :url="item.navigatePath"
+          open-type="navigate"
           style="height: 100%"
-        />
+        >
+          <image
+            :src="item.imgPath"
+            mode="aspectFit"
+            style="height: 100%"
+          />
+        </navigator>
       </swiper-item>
     </swiper>
     <!--分类换书-->
@@ -80,7 +86,7 @@
                      url="/pages/bookList/bookList"
                      open-type="navigate"
           >
-            全部书籍◇
+            &nbsp&nbsp全部书籍&nbsp◇&nbsp
           </navigator>
         </view>
       </view>
@@ -130,9 +136,11 @@
               :title="book.title"
               :note="book.note"
               :extra-text="book.tag"
-              :thunb="book.url"
+              :thumb="book.url"
               :on-click="bookDetailClick.bind(this, book.key)"
+              style="color:#57665e"
               v-if="isChosenUniversity"
+              
             />
             <AtListItem
               v-if="!isChosenUniversity"
@@ -186,9 +194,9 @@ export default {
       isCircular: true,// 衔接滑动
       isAutoplay: true,
       hasIndicatorDots: true,
-      imgUrls: [
-        imgPaths.banner1,
-        imgPaths.banner2,
+      banners: [
+        {imgPath: imgPaths.banner1, navigatePath: "/pages/index/index"},
+        {imgPath: imgPaths.banner2, navigatePath: "/pages/changeRules/changeRules"},
       ],
 
       currentTab: 0,

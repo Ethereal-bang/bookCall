@@ -1,13 +1,14 @@
 <template>
-  <view>
+  <view class="bookDetail">
     <PersonalBar />
-    <view>Test-Key: {{ key }}</view>
 
     <image
+      src="./book.png"
+      class="bookimg"
       mode="aspectFit"
     />
-
-    <view>南朝清谈</view>
+  <view class="bookmes">
+    <view class="bookname">南朝清谈</view>
 
     <view>
       <AtTag class="booktag" size="small"
@@ -39,7 +40,7 @@
       <text>换书寄语：</text>
       <text>是本好书~</text>
     </view>
-
+  
     <view>
       <view
         v-for="item in info"
@@ -47,10 +48,11 @@
         {{ item.title }}  {{ item.content }}
       </view>
     </view>
-
+</view>
     <button
       v-if="!isOwn"
       @tap="handle"
+      class="button"
     >
       找Ta换
     </button>
@@ -75,7 +77,7 @@
 <script>
 import PersonalBar from "../../components/PersonalBar";
 import { AtTag } from 'taro-ui-vue';
-
+import './bookDetail.scss';
 export default {
   name: "BookDetail",
   data() {
@@ -116,3 +118,4 @@ export default {
   display: none;
 }
 </style>
+

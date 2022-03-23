@@ -1,0 +1,63 @@
+input {
+    width: 70%;
+    margin-left: 2vw;
+  }
+.bookDetail {
+    padding: 0 7vw;
+    border-radius: 33rpx 33rpx 0 0;
+    background-color: #ffffff;
+    color: #7b7b7b;
+    font-size: 28rpx;
+  }
+  .button{
+
+    width: 301rpx;
+    height: 89rpx;
+    color: #ffffff;
+    background: #FFCA4E;
+    border-radius: 14rpx 14rpx 14rpx 14rpx;
+    border-style: none;
+    position:relative;
+    top: 15rpx;
+}
+.booktag{
+  border-color: #e58140;
+  color: #e58140;
+}
+.bookname{
+  font-size: large;
+  font-style: normal;
+  margin-bottom: 14rpx;
+}
+.bookimg{
+  width: 779rpx;
+  height: 872rpx;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  margin-top: 0rpx;
+  margin-left: 0rpx;
+}
+.bookmes{
+  //width: 779rpx;
+  //height: 872rpx;
+  position: absolute;
+  left: 6%;
+  top: 52%;
+  margin-top: 0rpx;
+  margin-left: 0rpx;
+}
+.button{
+  position: absolute;
+  left: 31%;
+  top: 74%;
+  margin-top: 0rpx;
+  margin-left: 0rpx;
+}
+.show{
+  position: absolute;
+  left: 2%;
+  top: 81%;
+  margin-top: 0rpx;
+  margin-left: 0rpx;
+}
