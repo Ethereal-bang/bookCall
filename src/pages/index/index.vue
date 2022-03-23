@@ -56,6 +56,7 @@
       :interval="interval"
       :circular="isCircular"
       :autoplay="isAutoplay"
+      :speed="3500"
       :indicator-dots="hasIndicatorDots"
     >
       <swiper-item

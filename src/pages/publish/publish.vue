@@ -138,7 +138,7 @@
         <text>预留联系方式</text>
         <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       </view>
-      <text class="title text1">请勾选并填写你期待的联系方式，方便他人联系你进行换书，至少一种！</text>
+      <text class="title text1">请选择并填写你的一种联系方式，方便他人联系你进行换书</text>
       <AtRadio
         :options="contactOptions"
         :value="contactValue"
