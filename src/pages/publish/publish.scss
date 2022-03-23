@@ -28,6 +28,7 @@
     right: 24rpx;
     // left: 22rpx;
     top: 29rpx;
+    z-index: 2; // 让其较input显示在顶层
 }
 .scanicon{
     position: relative;
@@ -65,7 +66,7 @@
     // background-color: #f7f7f7;
     border-radius: 2rpx;
     // border-style: none;
-    width: 640rpx; height: 50rpx;  
+    width: 640rpx; height: 50rpx;
 }
 .jiyu{
     position:relative;
@@ -76,19 +77,19 @@
     position:relative;
     left:34rpx;
     top: 5rpx;
-    
+
 }
 .mesg{
     background-color: #f7f7f7;
     border-radius: 12rpx;
     border-style: none;
-    width: 640rpx; height: 100rpx;   
+    width: 640rpx; height: 100rpx;
     position:relative;
     top: 5rpx;
     left:50rpx;
 }
 .button{
-    
+
         width: 301rpx;
         height: 89rpx;
         background: #FFCA4E;
