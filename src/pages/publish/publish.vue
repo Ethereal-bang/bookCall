@@ -139,10 +139,16 @@
         <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       </view>
       <text class="title text1">请勾选并填写你期待的联系方式，方便他人联系你进行换书，至少一种！</text>
-      <AtCheckbox
+      <AtRadio
         :options="contactOptions"
-        :selectedList="checkedContactList"
-        :on-change="checkContact"
+        :value="contactValue"
+        :on-click="chooseContact"
+      />
+      <AtInput
+        type="number"
+        placeholder="留下你的联系方式~"
+        :value="inputContact"
+        :on-change="onInputContactChange"
       />
       <text class="title text1">下次发布书籍时，无需再次填写，可去“我的->联系方式“查看或修改~</text>
     </view>
@@ -159,7 +165,7 @@
 </template>
 
 <script>
-import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtCheckbox, AtButton} from "taro-ui-vue";
+import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
 const picUrls = require("../../utils/base64");
@@ -172,7 +178,6 @@ export default {
     AtTextarea, // 多行文本框
     AtAccordion,  // 下拉菜单-手风琴
     AtRadio,  // 单选按钮
-    AtCheckbox, // 多选框
     AtButton,
   },
   data() {
@@ -205,7 +210,8 @@ export default {
         {label: "手机号", value: "phone",},
         {label: "微信号", value: "wx"},
       ],
-      checkedContactList: [],
+      contactValue: "",
+      inputContact: "",
       purpose: "",  // 发布目的
       outBGC: "background-color: #F5F5F5",
       inBGC: "background-color: #F5F5F5",
@@ -244,12 +250,24 @@ export default {
       this.chosenOld = val;
       console.log(this.chosenOld)
     },
-    checkContact(val) {
-      this.checkedContactList = val;
-      console.log(this.checkedContactList)
+    chooseContact(val) {
+      this.contactValue = val;
+      console.log(this.contactValue)
+    },
+    onInputContactChange(val) {
+      this.inputContact = val;
     },
     post() {
-      console.log("发布！")
+      const info = {
+        purpose: this.purpose,
+        img: this.upload_img, // 路径是本地！要修改
+        bookName: this.inputName,
+        words: this.inputWords,
+        genre: this.chosenGenre,
+        old: this.chosenOld,
+        contact: this.inputContact,
+      }
+      console.log(info)
     },
     choosePurpose(e) {
       // 设置目的
