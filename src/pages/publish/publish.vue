@@ -264,4 +264,9 @@ export default {
 </script>
 
 <style>
+.at-accordion__content {
+  position: absolute;
+  z-index: 2; /*让其显示在后文的上方*/
+  width: 30%;
+}
 </style>
