@@ -59,14 +59,20 @@
       :indicator-dots="hasIndicatorDots"
     >
       <swiper-item
-        v-for="(item, idx) in imgUrls"
+        v-for="(item, idx) in banners"
         :key="idx"
       >
-        <image
-          :src="item"
-          mode="aspectFit"
+        <navigator
+          :url="item.navigatePath"
+          open-type="navigate"
           style="height: 100%"
-        />
+        >
+          <image
+            :src="item.imgPath"
+            mode="aspectFit"
+            style="height: 100%"
+          />
+        </navigator>
       </swiper-item>
     </swiper>
     <!--分类换书-->
@@ -186,9 +192,9 @@ export default {
       isCircular: true,// 衔接滑动
       isAutoplay: true,
       hasIndicatorDots: true,
-      imgUrls: [
-        imgPaths.banner1,
-        imgPaths.banner2,
+      banners: [
+        {imgPath: imgPaths.banner1, navigatePath: "/pages/index/index"},
+        {imgPath: imgPaths.banner2, navigatePath: "/pages/changeRules/changeRules"},
       ],
 
       currentTab: 0,
