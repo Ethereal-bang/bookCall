@@ -14,14 +14,12 @@
       <AtTag class="booktag" size="small"
         v-if="bookState"
         :active="true"
-                :circle="index % 2 === 0"
       >
         可换
       </AtTag>
       <AtTag
         v-if="!bookState" size="small"
         :active="true"
-                :circle="index % 2 === 0"
                  class="booktag"
       >
         求换
@@ -29,18 +27,16 @@
 
       <AtTag size="small"
                 :active="true"
-                :circle="index % 2 === 0"
                  class="booktag">8成新</AtTag>
-      <AtTag size="small" 
+      <AtTag size="small"
           :active="true"
-                :circle="index % 2 === 0"
                  class="booktag"  key="">文学</AtTag>
     </view>
     <view>
       <text>换书寄语：</text>
       <text>是本好书~</text>
     </view>
-  
+
     <view>
       <view
         v-for="item in info"
@@ -58,7 +54,7 @@
     </button>
     <view id="info" class="hide">
       <view>请选择以下联系方式联系这位同学，更多的交流才能更好的完成换书~(点击即可复制)</view>
-      <view>
+      <view @tap="clip">
         <text>微信</text>
         <text>XXXXXX</text>
       </view>
@@ -77,6 +73,8 @@
 <script>
 import PersonalBar from "../../components/PersonalBar";
 import { AtTag } from 'taro-ui-vue';
+import Taro from "@tarojs/taro";
+
 import './bookDetail.scss';
 export default {
   name: "BookDetail",
@@ -106,6 +104,14 @@ export default {
       info.removeAttribute("class");
       info.setAttribute("class", "show")
     },
+    clip() {  // 点击复制
+      Taro.setClipboardData({
+        data: "微信号_Test",
+        success: (res) => {
+          console.log("success")
+        }
+      })
+    }
   }
 }
 </script>

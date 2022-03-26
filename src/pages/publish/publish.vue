@@ -160,12 +160,12 @@
     >
       发布
     </AtButton>
-
+    <AtToast :isOpened="isToastOpen" text="请填完所有必选项" />
   </view>
 </template>
 
 <script>
-import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton} from "taro-ui-vue";
+import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
 const picUrls = require("../../utils/base64");
@@ -179,6 +179,7 @@ export default {
     AtAccordion,  // 下拉菜单-手风琴
     AtRadio,  // 单选按钮
     AtButton,
+    AtToast,  // 轻提示
   },
   data() {
     return {
@@ -215,6 +216,7 @@ export default {
       purpose: "",  // 发布目的
       outBGC: "background-color: #F5F5F5",
       inBGC: "background-color: #F5F5F5",
+      isToastOpen: false,
     }
   },
   methods: {
@@ -267,7 +269,12 @@ export default {
         old: this.chosenOld,
         contact: this.inputContact,
       }
+      if (!info.contact) {
+        this.isToastOpen = true;
+        return;
+      }
       console.log(info)
+      this.isToastOpen = false;
     },
     choosePurpose(e) {
       // 设置目的
