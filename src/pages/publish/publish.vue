@@ -66,6 +66,7 @@
       <AtInput
         class="at-col input title "
         type="text"
+        :border="false"
         placeholder="请填写书籍名称/扫一扫ISBN码"
         :value="inputName"
         @change="onInputNameChange"
@@ -111,6 +112,7 @@
           title="书籍类别"
           :open="isGenreListOpen"
           :on-click="openGenreList"
+          :hasBorder="false"
         >
           <AtRadio
             :options="chooseGenre"
@@ -122,6 +124,7 @@
           title="新旧程度"
           :open="isOldListOpen"
           :on-click="openOldList"
+          :hasBorder="false"
         >
           <AtRadio
             :options="chooseOld"
@@ -139,12 +142,15 @@
         <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       </view>
       <text class="title text1">请勾选并填写你期待的联系方式，方便他人联系你进行换书，至少一种！</text>
+      
       <AtRadio
+      class="choise"
         :options="contactOptions"
         :value="contactValue"
         :on-click="chooseContact"
       />
       <AtInput
+      class="number"
         type="number"
         placeholder="留下你的联系方式~"
         :value="inputContact"
@@ -152,7 +158,7 @@
       />
       <text class="title text1">下次发布书籍时，无需再次填写，可去“我的->联系方式“查看或修改~</text>
     </view>
-
+    
     <AtButton
       type="primary"
       :on-click="post"
