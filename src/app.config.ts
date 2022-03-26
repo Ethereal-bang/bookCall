@@ -19,7 +19,7 @@ export default {
       {
         pagePath: "pages/index/index",
         text: "首页",
-        selectedColor:'#ffd35c',
+        selectedColor:'#ffcf4d',
         iconPath:"./index.png",
         selectedIconPath:"./index_.png"
         
@@ -27,13 +27,15 @@ export default {
       }, {
         pagePath: 'pages/publish/publish',
         text: "发布",
-        selectedColor:'#ffd35c'
+        selectedColor:'##ffcf4d',
+        iconPath:"./publish.png",
+        selectedIconPath:"./publish.png"
       }, {
         pagePath: "pages/person/person",
         text: "我的",
-        selectedColor:'#ffd35c',
+        selectedColor:'#ffcf4d',
         iconPath:"./mine.png",
-        selectedIconPath:"./mine.png"
+        selectedIconPath:"./mine_.png"
       },
     ]
   },

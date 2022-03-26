@@ -2,11 +2,11 @@
   <view class="index_background">
     <view class="index">
       <!--校园认证-->
-      <view>
+      <view >
         <image
           :src=imgPaths.location
           mode="aspectFit"
-          style="height: 16px; width: 16px; display: inline-block"
+          style="height: 39rpx; width: 39rpx; display: inline-block ;padding-top:3rpx"
         />
         <view
           @tap="choseUniversity"
@@ -87,7 +87,7 @@
                      url="/pages/bookList/bookList"
                      open-type="navigate"
           >
-            全部书籍◇
+            &nbsp&nbsp全部书籍&nbsp◇&nbsp
           </navigator>
         </view>
       </view>
@@ -137,9 +137,11 @@
               :title="book.title"
               :note="book.note"
               :extra-text="book.tag"
-              :thunb="book.url"
+              :thumb="book.url"
               :on-click="bookDetailClick.bind(this, book.key)"
+              style="color:#57665e"
               v-if="isChosenUniversity"
+              
             />
             <AtListItem
               v-if="!isChosenUniversity"
