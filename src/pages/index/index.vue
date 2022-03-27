@@ -14,7 +14,7 @@
         >
           {{ chosenUniversity }}
         </view>
-        <view :style="showState" @tap="choseWitchUniversity">
+        <view v-if="showState" @tap="choseWitchUniversity" class="universityList">
           <view
             v-for="uni in university"
             :data-name="uni.name"
@@ -24,7 +24,7 @@
           </view>
         </view>
       </view>
-      <AtToast :isOpened="isToastOpen" text="请先选择大学！" />
+      <AtToast :isOpened="isToastOpen" text="请先选择大学！"/>
       <!--搜索框-->
       <AtSearchBar
         input-type="text"
@@ -48,123 +48,6 @@
         </AtTag>
       </view>
 
-    <!--轮播图-->
-    <swiper
-      indicator-color="#f0f2f5"
-      indicator-active-color="#999999"
-      current="current"
-      :duration="duration"
-      :interval="interval"
-      :circular="isCircular"
-      :autoplay="isAutoplay"
-      :speed="3500"
-      :indicator-dots="hasIndicatorDots"
-    >
-      <swiper-item
-        v-for="(item, idx) in banners"
-        :key="idx"
-      >
-        <navigator
-          :url="item.navigatePath"
-          open-type="navigate"
-          style="height: 100%"
-        >
-          <image
-            :src="item.imgPath"
-            mode="aspectFit"
-            style="height: 100%"
-          />
-        </navigator>
-      </swiper-item>
-    </swiper>
-    <!--分类换书-->
-    <view class="divide">
-      <view class="at-row at-row__justify--between">
-        <view class="at-col category titleText">
-          分类换书
-        </view>
-        <view class="at-col category titleText">
-          <navigator class="atAll"
-                     url="/pages/bookList/bookList"
-                     open-type="navigate"
-          >
-            &nbsp&nbsp全部书籍&nbsp◇&nbsp
-          </navigator>
-        </view>
-      </view>
-      <scroll-view
-        class="scroll-tag"
-        style="width: 100%"
-        :scroll-x="true"
-      >
-        <view
-          v-for="genre in tags"
-          :key="genre.key"
-          :name="genre.name"
-          class="scroll-item"
-          :dataset="genre.name"
-          @tap="genreClick"
-        >
-          <view>
-            <image
-              :src=genre.src
-              mode="aspectFit"
-              style="height: 34px; width: 100%"
-            />
-            <text
-              style="display: block; text-align: center"
-            >{{ genre.title }}
-            </text>
-          </view>
-        </view>
-      </scroll-view>
-    </view>
-    <!--换书广场-->
-    <view class="square">
-      <view class="titleText">换书广场</view>
-      <AtTabs
-        :current="currentTab"
-        :tab-list="tabList"
-        :on-click="clickTab"
-      >
-        <AtTabsPane
-          :current="currentTab"
-          :index="0"
-        >
-          <AtList>
-            <AtListItem
-              v-for="book in bookList"
-              :key="book.key"
-              :title="book.title"
-              :note="book.note"
-              :extra-text="book.tag"
-              :thumb="book.url"
-              :on-click="bookDetailClick.bind(this, book.key)"
-              style="color:#57665e"
-              v-if="isChosenUniversity"
-
-            />
-            <AtListItem
-              v-if="!isChosenUniversity"
-              note="选择你所在的大学后，才能查看书籍动态以及发布书籍哦~（点击左上角立即选择）"
-            />
-          </AtList>
-        </AtTabsPane>
-        <AtTabsPane
-          :current="currentTab"
-          :index="1"
-        >
-          <view class="tab-content">Tab2</view>
-        </AtTabsPane>
-        <AtTabsPane
-          :current="currentTab"
-          :index="3"
-        >
-          <view class="tab-content">Tab3</view>
-        </AtTabsPane>
-      </AtTabs>
-    </view>
-  </view>
       <!--轮播图-->
       <swiper
         indicator-color="#f0f2f5"
@@ -205,7 +88,7 @@
                        url="/pages/bookList/bookList"
                        open-type="navigate"
             >
-              全部书籍◇
+              &nbsp&nbsp全部书籍&nbsp◇&nbsp
             </navigator>
           </view>
         </view>
@@ -251,12 +134,12 @@
             <AtList>
               <AtListItem
                 v-for="book in bookList"
-                :key="book.key"
-                :title="book.title"
-                :note="book.note"
-                :extra-text="book.tag"
-                :thunb="book.url"
-                :on-click="bookDetailClick.bind(this, book.key)"
+                :key="book.id"
+                :title="book.name"
+                :note="book.words"
+                :extra-text="book.states"
+                :on-click="bookDetailClick.bind(this, book.id)"
+                style="color:#57665e"
                 v-if="isChosenUniversity"
               />
               <AtListItem
@@ -269,13 +152,31 @@
             :current="currentTab"
             :index="1"
           >
-            <view class="tab-content">Tab2</view>
+            <AtListItem
+              v-for="book in bookList"
+              v-if="book.states === '可换'"
+              :key="book.id"
+              :title="book.name"
+              :note="book.words"
+              :extra-text="book.states"
+              :on-click="bookDetailClick.bind(this, book.id)"
+              style="color:#57665e"
+            />
           </AtTabsPane>
           <AtTabsPane
             :current="currentTab"
-            :index="3"
+            :index="2"
           >
-            <view class="tab-content">Tab3</view>
+            <AtListItem
+              v-for="book in bookList"
+              v-if="book.states === '求换'"
+              :key="book.id"
+              :title="book.name"
+              :note="book.words"
+              :extra-text="book.states"
+              :on-click="bookDetailClick.bind(this, book.id)"
+              style="color:#57665e"
+            />
           </AtTabsPane>
         </AtTabs>
       </view>
@@ -298,7 +199,9 @@ import {
   AtToast
 } from 'taro-ui-vue'
 import './index.scss'
-
+import books from "../../mock/books.json";
+import bookList from "../bookList/bookList";
+import Taro from "@tarojs/taro";
 const imgPaths = require("../../utils/base64");
 
 export default {
@@ -335,11 +238,7 @@ export default {
         {title: 'Ta想要'}
       ],
 
-      bookList: [
-        {key: 1, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "可换"},
-        {key: 2, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "可换"},
-        {key: 3, title: "解忧杂货店", note: "换书寄语:无论现在多么的不开心", tag: "求换"},
-      ],
+      bookList: books,
       /*分类换书*/
       tags: [
         {key: 1, name: "novel", title: "小说", src: imgPaths.genre1},
@@ -351,12 +250,12 @@ export default {
         {key: 7, name: "other", title: "其他", src: imgPaths.genre7},
       ],
       /*校园认证：*/
-      showState: "display:none",
+      showState: false,
       isChosenUniversity: false,
       university: [
         {title: "重庆邮电大学", name: "cy"},
         {title: "重庆工商大学", name: "gs"},
-        {title: "重庆交大学", name: "cj"},
+        {title: "重庆交通大学", name: "cj"},
       ],
       chosenUniversity: "我的大学",
       imgPaths,
@@ -386,21 +285,18 @@ export default {
     },
     bookDetailClick(key) {
       console.log(key)
-      wx.navigateTo({
+      Taro.navigateTo({
         url: `../../pages/bookDetail/bookDetail?key=${key}`,
       })
     },
     choseUniversity() {
-      if (this.showState === "")
-        this.showState = "display:none";
-      else
-        this.showState = "";
+      this.showState = !this.showState;
     },
     choseWitchUniversity(e) {
       console.log(e.target.dataset);  // 获得选择的学校代号
-      this.showState = "display:none";  // 选后关闭下拉单
-      this.isChosenUniversity = true; // 换书广场显示
+      this.choseUniversity()// 选后关闭下拉单
       this.chosenUniversity = e.target.dataset.title; // 下拉单显示
+      this.isChosenUniversity = true; // 换书广场显示（true则报错？？
       this.isToastOpen = false;
     },
     judgeUniversity() { // 交互时判断是否选择大学
@@ -425,5 +321,10 @@ export default {
 .tab-content {
   height: 10vh;
   color: #a99b85;
+}
+.universityList {
+  position: absolute;
+  z-index: 1;
+  background-color: #f0ae2b;
 }
 </style>

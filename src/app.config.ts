@@ -22,7 +22,7 @@ export default {
         selectedColor:'#ffcf4d',
         iconPath:"./index.png",
         selectedIconPath:"./index_.png"
-        
+
         // iconpath:''
       }, {
         pagePath: 'pages/publish/publish',
