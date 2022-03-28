@@ -109,7 +109,7 @@
               <image
                 :src=genre.src
                 mode="aspectFit"
-                style="height: 34px; width: 100%"
+                style="height: 45px; width: 100%"
               />
               <text
                 style="display: block; text-align: center"
@@ -147,6 +147,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
+                :thumb="imgPaths[book.img]" 
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -172,6 +173,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
+                :thumb="imgPaths[book.img]" 
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -192,6 +194,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
+                :thumb="imgPaths[book.img]" 
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -223,9 +226,7 @@ import './index.scss'
 import books from "../../mock/books.json";
 import bookList from "../bookList/bookList";
 import Taro from "@tarojs/taro";
-
 const imgPaths = require("../../utils/base64");
-
 export default {
   components: {
     AtNavBar,
@@ -389,11 +390,24 @@ export default {
 }
 .at-list__item {/*列表项*/
   height: 15vh;
+  
 }
 .item_out {
   color: #f0ae2b;
+  /*width: 130rpx;
+  */
+  height: 128rpx;
 }
 .item_in {
-
+height: 128rpx;
+}
+.at-list__item--thumb{
+  
+}
+.item-thumb__info {
+    
+}
+.item-content__info-note{
+  font-size: small;
 }
 </style>
