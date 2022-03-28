@@ -74,8 +74,10 @@
 import PersonalBar from "../../components/PersonalBar";
 import { AtTag } from 'taro-ui-vue';
 import Taro from "@tarojs/taro";
-
 import './bookDetail.scss';
+
+const books = require("../../mock/books.json");
+
 export default {
   name: "BookDetail",
   data() {
@@ -83,8 +85,6 @@ export default {
       key: "",  // 书籍编号
       info: [
         {title: "作者", content: "暂无"},
-        {title: "版本", content: "暂无"},
-        {title: "日期", content: "暂无"},
         {title: "ISBN", content: "暂无"},
       ],
       bookState: true,  // true表可换，false表在求
@@ -96,7 +96,8 @@ export default {
     AtTag,
   },
   onLoad: function (options) {
-    this.key = options.key;
+    this.bookData = books[this.key];
+    console.log(this.bookData)
   },
   methods: {
     handle() {

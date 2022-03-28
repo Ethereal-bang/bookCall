@@ -151,6 +151,7 @@
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
                 v-if="isChosenUniversity"
+                :class="(book.states === '可换') ? 'item_out' : 'item_in'"
               />
               <AtListItem
                 v-if="!isChosenUniversity"
@@ -174,6 +175,7 @@
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
+                :class="(book.states === '可换') ? 'item_out' : 'item_in'"
               />
             </AtList>
           </AtTabsPane>
@@ -193,6 +195,7 @@
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
+                :class="(book.states === '可换') ? 'item_out' : 'item_in'"
               />
             </AtList>
           </AtTabsPane>
@@ -353,9 +356,9 @@ export default {
   white-space: nowrap;
 }
 
-.scroll-item {
+.scroll-item {  /*分类换书*/
   display: inline-block;
-  width: 20%;
+  width: 25%;
 }
 
 .tab-content {
@@ -377,9 +380,6 @@ export default {
   top: 1vh;
   height: 5vh;
 }
-.at-list__item {/*列表项*/
-  height: 15vh;
-}
 .at-tabs__body_scroll {
   width: 100%;
   /*position: absolute;*/
@@ -387,5 +387,13 @@ export default {
   height: 85vh;
   overflow-y: scroll;
 }
+.at-list__item {/*列表项*/
+  height: 15vh;
+}
+.item_out {
+  color: #f0ae2b;
+}
+.item_in {
 
+}
 </style>

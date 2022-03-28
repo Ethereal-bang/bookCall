@@ -44,15 +44,26 @@ input {
   margin-left: 20rpx;
 }
 //可换
+.item_out {
+  .item-extra__info {
+    background-color: #f0ae2b;
+    color: white;
+  }
+}
+.item_in {
+  .item-extra__info {
+    background-color: #81cea2;
+    color: white;
+  }
+}
 .item-extra__info{
   padding-left: 23rpx;
   border-width: 3rpx;
   border-style:solid;
-  //text-align: center;
-  //border-color: #f0ae2b;
-  color: #f0ae2b;
-  //background-color: #81cea2;
-  border-radius: 13rpx;
+  border-radius: 16rpx;
+}
+.at-item-extra__info {
+  max-width: 100rpx;
 }
 
   //搜索按钮
@@ -69,7 +80,6 @@ input {
   height: 50rpx;
   width: 400rpx;
   margin-left: 150rpx;
-
   border-radius: 59rpx;
 }
 .at-tabs__item
