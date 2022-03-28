@@ -1,6 +1,10 @@
 <template>
   <view class="bookDetail">
-    <PersonalBar />
+    <PersonalBar
+      :user-name="bookData.username"
+      :user-id="userData.id"
+      :avatar-url="bookData.img"
+    />
 
     <image
       src="./book.png"
@@ -8,17 +12,17 @@
       mode="aspectFit"
     />
   <view class="bookmes">
-    <view class="bookname">南朝清谈</view>
+    <view class="bookname">{{ bookData.name }}</view>
 
     <view>
       <AtTag class="booktag" size="small"
-        v-if="bookState"
+        v-if="bookData.states === '可换'"
         :active="true"
       >
         可换
       </AtTag>
       <AtTag
-        v-if="!bookState" size="small"
+        v-if="bookData.states === '求换'" size="small"
         :active="true"
                  class="booktag"
       >
@@ -27,21 +31,24 @@
 
       <AtTag size="small"
                 :active="true"
-                 class="booktag">8成新</AtTag>
+                 class="booktag">{{ bookData.old }}成新</AtTag>
       <AtTag size="small"
           :active="true"
-                 class="booktag"  key="">文学</AtTag>
+                 class="booktag"  key="">{{ bookData.genre }}</AtTag>
     </view>
     <view>
       <text>换书寄语：</text>
-      <text>是本好书~</text>
+      <text>{{ bookData.words }}</text>
     </view>
 
     <view>
-      <view
-        v-for="item in info"
-      >
-        {{ item.title }}  {{ item.content }}
+      <view>
+        <text>作者：</text>
+        <text>{{ bookData.author }}</text>
+      </view>
+      <view>
+        <text>ISBN：</text>
+        <text>暂无</text>
       </view>
     </view>
 </view>
@@ -77,18 +84,32 @@ import Taro from "@tarojs/taro";
 import './bookDetail.scss';
 
 const books = require("../../mock/books.json");
+const users = require("../../mock/users.json");
 
 export default {
   name: "BookDetail",
   data() {
     return {
       key: "",  // 书籍编号
-      info: [
-        {title: "作者", content: "暂无"},
-        {title: "ISBN", content: "暂无"},
-      ],
-      bookState: true,  // true表可换，false表在求
       isOwn: false,   // 是否为本人
+      bookData: {
+        "id": undefined,
+        "username": "Loading",
+        "name": "Loading",
+        "img": "",
+        "states": "Loading",
+        "words": "",
+        "genre": "",
+        "old": undefined,
+        "contact": "",
+        "author": ""
+      },
+      userData: {
+        "id": undefined,
+        "username": "",
+        "words": "",
+        "contact": undefined,
+      }, // 书籍所有者信息
     }
   },
   components: {
@@ -96,8 +117,17 @@ export default {
     AtTag,
   },
   onLoad: function (options) {
-    this.bookData = books[this.key];
-    console.log(this.bookData)
+    console.log(options)
+    this.key = options.key;
+    this.bookData = books[this.key - 1];
+    // 找到对应用户
+    for (const user of users) {
+      if (user.username === this.bookData.username) {
+        this.userData = user;
+        break;
+      }
+    }
+    console.log(this.bookData,this.userData)
   },
   methods: {
     handle() {
