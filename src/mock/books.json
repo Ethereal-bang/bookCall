@@ -46,5 +46,65 @@
     "old": 9,
     "contact": "15696158599",
     "author": "西格蒙德·弗洛伊德"
+  },
+  {
+    "id": 5,
+    "username": "大白熊",
+    "name": "动物农场",
+    "img": null,
+    "states": "可换",
+    "words": "反乌托邦的政治讽刺",
+    "genre": "novel",
+    "old": 8,
+    "contact": "15086861178",
+    "author": "乔治·奥威尔"
+  },
+  {
+    "id": 6,
+    "username": "大白熊",
+    "name": "平如美棠",
+    "img": null,
+    "states": "可换",
+    "words": "感人至深的爱情",
+    "genre": "literature",
+    "old": 8,
+    "contact": "15086861178",
+    "author": "饶平如"
+  },
+  {
+    "id": 7,
+    "username": "苏维埃巨熊",
+    "name": "杀死一只知更鸟",
+    "img": null,
+    "states": "可换",
+    "words": "用小孩的视角描写了一个关于成长、黑人、平等的故事",
+    "genre": "novel",
+    "old": 8,
+    "contact": "15696158599",
+    "author": "哈珀·李"
+  },
+  {
+    "id": 8,
+    "username": "苏维埃巨熊",
+    "name": "乡村教师",
+    "img": null,
+    "states": "可换",
+    "words": "人文与科幻的结合",
+    "genre": "novel",
+    "old": 9,
+    "contact": "15696158599",
+    "author": "刘慈欣"
+  },
+  {
+    "id": 9,
+    "username": "苏维埃巨熊",
+    "name": "卡拉马佐夫兄弟",
+    "img": null,
+    "states": "求换",
+    "words": "想看~",
+    "genre": "novel",
+    "old": 9,
+    "contact": "15696158599",
+    "author": "陀思妥耶夫斯基"
   }
 ]

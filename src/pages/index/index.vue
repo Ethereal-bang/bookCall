@@ -120,8 +120,16 @@
         </scroll-view>
       </view>
       <!--换书广场-->
-      <view class="square">
-        <view class="titleText">换书广场</view>
+      <view
+        style="border-radius: 2% 2% 2% 2%;background-color: #ffffff;"
+        :class="square_class"
+      >
+        <view
+          style="padding-left: 13rpx;"
+          :class="square_title_class"
+        >
+          换书广场
+        </view>
         <AtTabs
           :current="currentTab"
           :tab-list="tabList"
@@ -131,7 +139,9 @@
             :current="currentTab"
             :index="0"
           >
-            <AtList>
+            <AtList
+              :class="tabs_body_class"
+            >
               <AtListItem
                 v-for="book in bookList"
                 :key="book.id"
@@ -152,31 +162,39 @@
             :current="currentTab"
             :index="1"
           >
-            <AtListItem
-              v-for="book in bookList"
-              v-if="book.states === '可换'"
-              :key="book.id"
-              :title="book.name"
-              :note="book.words"
-              :extra-text="book.states"
-              :on-click="bookDetailClick.bind(this, book.id)"
-              style="color:#57665e"
-            />
+            <AtList
+              :class="tabs_body_class"
+            >
+              <AtListItem
+                v-for="book in bookList"
+                v-if="book.states === '可换'"
+                :key="book.id"
+                :title="book.name"
+                :note="book.words"
+                :extra-text="book.states"
+                :on-click="bookDetailClick.bind(this, book.id)"
+                style="color:#57665e"
+              />
+            </AtList>
           </AtTabsPane>
           <AtTabsPane
             :current="currentTab"
             :index="2"
           >
-            <AtListItem
-              v-for="book in bookList"
-              v-if="book.states === '求换'"
-              :key="book.id"
-              :title="book.name"
-              :note="book.words"
-              :extra-text="book.states"
-              :on-click="bookDetailClick.bind(this, book.id)"
-              style="color:#57665e"
-            />
+            <AtList
+              :class="tabs_body_class"
+            >
+              <AtListItem
+                v-for="book in bookList"
+                v-if="book.states === '求换'"
+                :key="book.id"
+                :title="book.name"
+                :note="book.words"
+                :extra-text="book.states"
+                :on-click="bookDetailClick.bind(this, book.id)"
+                style="color:#57665e"
+              />
+            </AtList>
           </AtTabsPane>
         </AtTabs>
       </view>
@@ -202,6 +220,7 @@ import './index.scss'
 import books from "../../mock/books.json";
 import bookList from "../bookList/bookList";
 import Taro from "@tarojs/taro";
+
 const imgPaths = require("../../utils/base64");
 
 export default {
@@ -251,7 +270,7 @@ export default {
       ],
       /*校园认证：*/
       showState: false,
-      isChosenUniversity: false,
+      isChosenUniversity: true,
       university: [
         {title: "重庆邮电大学", name: "cy"},
         {title: "重庆工商大学", name: "gs"},
@@ -260,6 +279,10 @@ export default {
       chosenUniversity: "我的大学",
       imgPaths,
       isToastOpen: false,
+      /*换书广场页面滚动*/
+      square_class: "",
+      square_title_class: "",
+      tabs_body_class: "",
     }
   },
   methods: {
@@ -307,9 +330,25 @@ export default {
       return true;
     }
   },
+  onPageScroll(scroll) {  // 监测页面滚动值
+    // console.log(scroll)
+    if (scroll.scrollTop >= 327) {
+      this.square_class = "square_scroll";
+      this.square_title_class = "title_scroll";
+      this.tabs_body_class = "at-tabs__body_scroll";
+    } else {
+      this.square_class = "";
+      this.square_title_class = "";
+      this.tabs_body_class = "";
+    }
+  }
 }
 </script>
 <style>
+.index {
+  height: 100vh;
+}
+
 .scroll-tag {
   white-space: nowrap;
 }
@@ -323,9 +362,30 @@ export default {
   height: 10vh;
   color: #a99b85;
 }
+
 .universityList {
   position: absolute;
   z-index: 1;
-  background-color: #f0ae2b;
+  background-color: whitesmoke;
 }
+
+.square_scroll {
+  height: 100vh;
+}
+.title_scroll {
+  position: sticky;
+  top: 1vh;
+  height: 5vh;
+}
+.at-list__item {/*列表项*/
+  height: 15vh;
+}
+.at-tabs__body_scroll {
+  width: 100%;
+  /*position: absolute;*/
+  /*top: 4vh;*/
+  height: 85vh;
+  overflow-y: scroll;
+}
+
 </style>
