@@ -308,12 +308,17 @@ export default {
         old: this.chosenOld,
         contact: this.inputContact,
       }
+      // 提交失败
       if (!info.contact) {
         this.isToastOpen = true;
         return;
       }
+      // 成功提交
       console.log(info)
       this.isToastOpen = false;
+      Taro.navigateTo({
+        url: `/pages/personalPublish/personalPublish?key=${1}`, // ?
+      })
     },
     choosePurpose(e) {
       // 设置目的

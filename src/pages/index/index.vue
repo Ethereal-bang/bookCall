@@ -226,6 +226,7 @@ import './index.scss'
 import books from "../../mock/books.json";
 import bookList from "../bookList/bookList";
 import Taro from "@tarojs/taro";
+import app from "../../app";
 const imgPaths = require("../../utils/base64");
 export default {
   components: {
@@ -345,6 +346,28 @@ export default {
       this.square_title_class = "";
       this.tabs_body_class = "";
     }
+  },
+  onLoad() {
+    // 登录（需后端
+    Taro.login({
+      success: (res) => {
+        if (res.code) {
+          // 发起网络请求
+          // ...
+          // console.log(res.code)
+        } else {
+          console.log("登录失败：" + res.errMsg);
+        }
+      }
+    })
+    // 获取用户信息
+    Taro.getUserInfo({
+      success: (res) => {
+        const { userInfo } = res;
+        Taro.setStorageSync("userInfo", userInfo);
+        Taro.setStorageSync("userId", 1); // 暂时写死
+      }
+    })
   }
 }
 </script>
