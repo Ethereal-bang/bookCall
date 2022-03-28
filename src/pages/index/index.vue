@@ -102,7 +102,7 @@
             :key="genre.key"
             :name="genre.name"
             class="scroll-item"
-            :dataset="genre.name"
+            :data-name="genre.name"
             @tap="genreClick"
           >
             <view>
@@ -279,7 +279,7 @@ export default {
         return;
       const genre = e.target.dataset
       console.log(genre)
-      wx.navigateTo({
+      Taro.navigateTo({
         url: `../../pages/bookGenreList/bookGenreList?tag=${genre}`,
       })
     },
@@ -300,10 +300,11 @@ export default {
       this.isToastOpen = false;
     },
     judgeUniversity() { // 交互时判断是否选择大学
-      if (this.isChosenUniversity) {
+      if (!this.isChosenUniversity) {
         this.isToastOpen = true;
         return false;
       }
+      return true;
     }
   },
 }

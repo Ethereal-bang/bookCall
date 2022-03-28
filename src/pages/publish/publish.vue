@@ -107,9 +107,11 @@
       <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
       <text>标签选择</text>
       <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
-      <view class="at-row at-row__align-content--around">
+      <view class="at-row at-row__justify--center">
         <AtAccordion
-          title="书籍类别"
+          class="at-col-4"
+          style="margin-left: -20px"
+          :title="genreTitle"
           :open="isGenreListOpen"
           :on-click="openGenreList"
           :hasBorder="false"
@@ -121,7 +123,9 @@
           />
         </AtAccordion>
         <AtAccordion
-          title="新旧程度"
+          class="at-col-4"
+          style="margin-left: 20px"
+          :title="oldTitle"
           :open="isOldListOpen"
           :on-click="openOldList"
           :hasBorder="false"
@@ -175,6 +179,37 @@ import Taro from "@tarojs/taro";
 import './publish.scss'
 const picUrls = require("../../utils/base64");
 
+const labelMap = {  // 通过映射关系将所选label渲染到标题
+  novel: "小说",
+  literature: "文学",
+  internet: "互联网",
+  technology: "科技",
+  psychology: "心理学",
+  other: "其他",
+  6: "6成新",
+  7: "7成新",
+  8: "8成新",
+  9: "9成新",
+  10: "全新",
+  5: "5成新及以下",
+  new: "全新",
+  almostNew: "较新",
+  any: "无所谓",
+}
+const outOld = [
+  {value: "6", label: "6成新",},
+  {value: "7", label: "7成新",},
+  {value: "8", label: "8成新",},
+  {value: "9", label: "9成新",},
+  {value: "10", label: "全新",},
+  {value: "5", label: "5成新及以下",},
+];
+const inOld = [
+  {value: "new", label: "全新",},
+  {value: "almostNew", label: "较新",},
+  {value: "any", label: "无所谓",},
+];
+
 export default {
   name: "Publish",
   components: {
@@ -202,16 +237,11 @@ export default {
         {value: "other", label: "其他"},
       ],
       chosenGenre: "",
+      genreTitle: "书籍类别",
       isOldListOpen: false,
-      chooseOld: [
-        {value: "6", label: "6成新",},
-        {value: "7", label: "7成新",},
-        {value: "8", label: "8成新",},
-        {value: "9", label: "9成新",},
-        {value: "10", label: "全新",},
-        {value: "5", label: "5成新及以下",},
-      ],
+      chooseOld: outOld,
       chosenOld: "",
+      oldTitle: "新旧程度",
       contactOptions: [
         {label: "手机号", value: "phone",},
         {label: "微信号", value: "wx"},
@@ -247,6 +277,8 @@ export default {
       this.isGenreListOpen = val;
     },
     clickGenre(val) {
+      this.openGenreList(false);  // 关闭菜单
+      this.genreTitle = labelMap[val];  // 更新标题为所选项
       this.chosenGenre = val;
       console.log(this.chosenGenre)
     },
@@ -254,6 +286,8 @@ export default {
       this.isOldListOpen = val;
     },
     clickOld(val) {
+      this.openOldList(false);
+      this.oldTitle = labelMap[val];
       this.chosenOld = val;
       console.log(this.chosenOld)
     },
@@ -288,7 +322,8 @@ export default {
       // 点击节点变色
       this.outBGC = "background-color: " + ((this.purpose === "out") ? "#FFCA4E" : "#F5F5F5");
       this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
-      },
+      this.chooseOld = (this.purpose === "out") ? outOld : inOld; // 根据所选目的切换表单选项
+    },
   }
 }
 </script>
