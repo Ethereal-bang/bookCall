@@ -10,19 +10,15 @@
         :current="currentTab"
         :index="0"
       >
-        <AtNoticebar>当书籍交换成功后，记得及时下架对应书籍，避免其他唤友频繁联系你哦~</AtNoticebar>
+        <AtNoticebar>当书籍交换成功后，记得及时点击书籍进入详情页下架，避免其他唤友频繁联系你哦~</AtNoticebar>
         <AtList>
           <AtListItem
-            title="解忧杂货店"
-            note="换书寄语:无论现在多么的不开心"
-            extra-text="下架"
-            thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
-          />
-          <AtListItem
-            title="解忧杂货店"
-            note="换书寄语:无论现在多么的不开心"
-            extra-text="下架"
-            thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
+            v-for="book in personPublic"
+            :key="book.id"
+            v-if="book.states === '可换'"
+            :title="book.name"
+            :note="book.words"
+            :on-click="bookDetailClick.bind(this, book.id)"
           />
         </AtList>
       </AtTabsPane>
@@ -34,16 +30,12 @@
         <AtNoticebar>当书籍交换成功后，记得及时下架对应书籍，避免其他唤友频繁联系你哦~</AtNoticebar>
         <AtList>
           <AtListItem
-            title="解忧杂货店"
-            note="换书寄语:无论现在多么的不开心"
-            extra-text="下架"
-            thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
-          />
-          <AtListItem
-            title="解忧杂货店"
-            note="换书寄语:无论现在多么的不开心"
-            extra-text="下架"
-            thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
+            v-for="book in personPublic"
+            :key="book.id"
+            v-if="book.states === '求换'"
+            :title="book.name"
+            :note="book.words"
+            :on-click="bookDetailClick.bind(this, book.id)"
           />
         </AtList>
       </AtTabsPane>
@@ -55,19 +47,14 @@
         <AtNoticebar>下架后的书籍如果最终没有交换成功，可重新上架哦~</AtNoticebar>
         <AtList>
           <AtListItem
-            title="解忧杂货店"
-            note="换书寄语:无论现在多么的不开心"
-            extra-text="重新上架"
-            thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
-          />
-          <AtListItem
-            title="解忧杂货店"
-            note="换书寄语:无论现在多么的不开心"
-            extra-text="重新上架"
-            thumb="https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png"
+            v-for="book in personPublic"
+            :key="book.id"
+            v-if="book.states === '下架'"
+            :title="book.name"
+            :note="book.words"
+            :on-click="bookDetailClick.bind(this, book.id)"
           />
         </AtList>
-
       </AtTabsPane>
     </AtTabs>
   </view>
@@ -75,6 +62,9 @@
 
 <script>
 import {AtTabs, AtTabsPane, AtList, AtListItem, AtDivider, AtNoticebar} from "taro-ui-vue";
+import Taro from "@tarojs/taro";
+
+const users = require("../../mock/users.json");
 
 export default {
   name: "PersonalPublish",
@@ -94,12 +84,28 @@ export default {
         {title: '求换'},
         {title: '已下架'},
       ],
+      key: undefined,
+      personPublic: [],
     }
   },
   methods: {
     handleClick(value) {
       this.currentTab = value
     },
+    bookDetailClick(key) {
+      console.log(key)
+      Taro.navigateTo({
+        url: `../../pages/bookDetail/bookDetail?key=${key}`,
+      })
+    },
+  },
+  onLoad(options) {
+    const id = Taro.getStorageSync("userId")  // 标识用户
+    users.map(user => {
+      if (user.id === id) {
+        this.personPublic = user.public;
+      }
+    })
   },
 }
 </script>
