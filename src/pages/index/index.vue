@@ -147,7 +147,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
-                :thumb="imgPaths[book.img]" 
+                :thumb="imgPaths[book.img]"
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -173,7 +173,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
-                :thumb="imgPaths[book.img]" 
+                :thumb="imgPaths[book.img]"
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -194,7 +194,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
-                :thumb="imgPaths[book.img]" 
+                :thumb="imgPaths[book.img]"
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -224,10 +224,9 @@ import {
 } from 'taro-ui-vue'
 import './index.scss'
 import books from "../../mock/books.json";
-import bookList from "../bookList/bookList";
 import Taro from "@tarojs/taro";
-import app from "../../app";
 const imgPaths = require("../../utils/base64");
+
 export default {
   components: {
     AtNavBar,
@@ -413,7 +412,7 @@ export default {
 }
 .at-list__item {/*列表项*/
   height: 15vh;
-  
+
 }
 .item_out {
   color: #f0ae2b;
@@ -425,10 +424,10 @@ export default {
 height: 128rpx;
 }
 .at-list__item--thumb{
-  
+
 }
 .item-thumb__info {
-    
+
 }
 .item-content__info-note{
   font-size: small;

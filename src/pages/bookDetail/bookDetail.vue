@@ -7,7 +7,7 @@
     />
 
     <image
-      src="./book.png"
+      :src="imgPaths[bookData.img]"
       class="bookimg"
       mode="aspectFit"
     />
@@ -83,7 +83,7 @@ import PersonalBar from "../../components/personBar/PersonalBar";
 import { AtTag } from 'taro-ui-vue';
 import Taro from "@tarojs/taro";
 import './bookDetail.scss';
-
+const imgPaths = require("../../utils/base64");
 const books = require("../../mock/books.json");
 const users = require("../../mock/users.json");
 
@@ -111,6 +111,7 @@ export default {
         "words": "",
         "contact": undefined,
       }, // 书籍所有者信息
+      imgPaths,
     }
   },
   components: {

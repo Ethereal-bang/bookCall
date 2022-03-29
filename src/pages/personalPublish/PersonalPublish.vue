@@ -19,6 +19,7 @@
             :title="book.name"
             :note="book.words"
             :on-click="bookDetailClick.bind(this, book.id)"
+            :thumb="imgPaths[book.img]"
           />
         </AtList>
       </AtTabsPane>
@@ -63,7 +64,7 @@
 <script>
 import {AtTabs, AtTabsPane, AtList, AtListItem, AtDivider, AtNoticebar} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
-
+const imgPaths = require("../../utils/base64");
 const users = require("../../mock/users.json");
 
 export default {
@@ -86,6 +87,7 @@ export default {
       ],
       key: undefined,
       personPublic: [],
+      imgPaths,
     }
   },
   methods: {
