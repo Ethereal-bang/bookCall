@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import PersonalBar from "../../components/PersonalBar";
+import PersonalBar from "../../components/personBar/PersonalBar";
 import { AtTag } from 'taro-ui-vue';
 import Taro from "@tarojs/taro";
 import './bookDetail.scss';
