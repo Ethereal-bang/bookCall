@@ -31,7 +31,7 @@
         placeholder="搜索书籍名称"
         :value="searchValue"
         :on-change="onChange.bind(this, 'searchValue')"
-        :on-action-click="onActionClick"
+        :on-action-click="onSearch"
       />
       <view class="at-row">
         <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
@@ -290,13 +290,18 @@ export default {
     }
   },
   methods: {
+    // 搜索框
     onChange(stateName, value) {
       this[stateName] = value;
     },
-    onActionClick() {
+    // 搜索
+    onSearch() {
       if (!this.judgeUniversity())
         return;
-      console.log("点击：搜索")
+      Taro.navigateTo({
+        url: "/pages/searchRes/searchRes?keyword=" + this.searchValue,
+      })
+
     },
     clickTab(value) {
       this.currentTab = value
