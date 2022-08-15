@@ -274,7 +274,7 @@ export default {
       ],
       /*校园认证：*/
       showState: false,
-      isChosenUniversity: true,
+      isChosenUniversity: false,
       university: [
         {title: "重庆邮电大学", name: "cy"},
         {title: "重庆工商大学", name: "gs"},
@@ -411,23 +411,13 @@ export default {
   overflow-y: scroll;
 }
 .at-list__item {/*列表项*/
-  height: 15vh;
+  height: 162rpx;
 
 }
 .item_out {
   color: #f0ae2b;
-  /*width: 130rpx;
-  */
-  height: 128rpx;
 }
 .item_in {
-height: 128rpx;
-}
-.at-list__item--thumb{
-
-}
-.item-thumb__info {
-
 }
 .item-content__info-note{
   font-size: small;

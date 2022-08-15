@@ -57,13 +57,12 @@ input {
   }
 }
 .item-extra__info{
-  padding-left: 23rpx;
   border-width: 3rpx;
   border-style:solid;
   border-radius: 16rpx;
 }
 .at-item-extra__info {
-  max-width: 100rpx;
+  //max-width: 100rpx;
 }
 
   //搜索按钮
@@ -103,11 +102,6 @@ font-size: small;
 }
 .item-content__info-title{
   color: blanchedalmond;
-}
-.at-list__item{
-  color: #7b7b7b;
-  //color:#ffcf4d;
-  font-size: 30rpx;
 }
 ._n_18{
   margin-left: 30rpx;

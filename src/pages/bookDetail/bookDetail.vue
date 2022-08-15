@@ -67,14 +67,16 @@
         <text>XXXXXX</text>
       </view>
       <view>
-        <text>QQ:</text>
-        <text>XXXXXX</text>
-      </view>
-      <view>
         <text>电话:</text>
         <text>未留下该方式</text>
       </view>
     </view>
+    <button
+      v-if="isOwn"
+      class="button"
+    >
+      下架
+    </button>
   </view>
 </template>
 
@@ -130,6 +132,10 @@ export default {
       }
     }
     console.log(this.bookData,this.userData)
+    // 写死，后面改！:
+    if (this.bookData.name === "编译原理") {
+      this.isOwn = true;
+    }
   },
   methods: {
     handle() {

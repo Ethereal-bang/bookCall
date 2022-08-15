@@ -170,11 +170,18 @@
       发布
     </AtButton>
     <AtToast :isOpened="isToastOpen" text="请填完所有必选项" />
+    <AtModal
+      :is-opened="isModalOpen"
+      title="发布成功"
+      content="发布的书籍可以在 '我的->个人发布' 里面找到哦"
+      confirm-text="确认"
+      :on-confirm="onModalConfirm"
+    />
   </view>
 </template>
 
 <script>
-import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast} from "taro-ui-vue";
+import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast, AtModal} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
 const picUrls = require("../../utils/base64");
@@ -220,6 +227,7 @@ export default {
     AtRadio,  // 单选按钮
     AtButton,
     AtToast,  // 轻提示
+    AtModal,  // 模态框
   },
   data() {
     return {
@@ -252,6 +260,7 @@ export default {
       outBGC: "background-color: #F5F5F5",
       inBGC: "background-color: #F5F5F5",
       isToastOpen: false,
+      isModalOpen: false,
     }
   },
   methods: {
@@ -316,9 +325,7 @@ export default {
       // 成功提交
       console.log(info)
       this.isToastOpen = false;
-      Taro.navigateTo({
-        url: `/pages/personalPublish/personalPublish?key=${1}`, // ?
-      })
+      this.isModalOpen = true;  // 打开模态框
     },
     choosePurpose(e) {
       // 设置目的
@@ -329,6 +336,11 @@ export default {
       this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
       this.chooseOld = (this.purpose === "out") ? outOld : inOld; // 根据所选目的切换表单选项
     },
+    onModalConfirm() {
+      Taro.switchTab({
+        url: `../../pages/index/index`,
+      })
+    }
   }
 }
 </script>
@@ -338,5 +350,8 @@ export default {
   position: absolute;
   z-index: 2; /*让其显示在后文的上方*/
   width: 30%;
+}
+.at-modal__content {
+  min-height: 10rpx;
 }
 </style>

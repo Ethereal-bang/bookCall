@@ -17,8 +17,20 @@
       font-size: 24px;
       font-weight: 100;
 }
-// .tabbaricon{
-//     iconsize: 50px;
-//     color: #fff;
-//     selectedColor:#a0a0a0;
-// }
+.at-list__item {  /*list item*/
+  font-size: 38rpx;
+  line-height: 2.5;
+}
+.at-list__item-extra {  /*可换、求换标签*/
+  line-height: 54rpx; /*让文子居中*/
+}
+.item-extra__info { /*标签内字体*/
+  height: 57px;
+  padding-left: 28rpx;
+  align-items: center;
+}
+$thumbSize: 110rpx;
+.at-list__item--thumb .item-thumb {
+  width: $thumbSize;
+  height: $thumbSize;
+}
