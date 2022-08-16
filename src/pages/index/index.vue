@@ -286,7 +286,7 @@ export default {
       tabs_body_class: "",
     }
   },
-  methods: {
+  methods:  {
     // 搜索框
     onChange(stateName, value) {
       this[stateName] = value;
