@@ -1,8 +1,8 @@
 import {myAxios} from "./myAxios";
 
-// 获取学校列表
+// 获取学校列表,ip
 export const getSchoolList = () => {
-  return myAxios("/GetschoolName");
+  return myAxios("/Getschools");
 }
 
 // 搜索

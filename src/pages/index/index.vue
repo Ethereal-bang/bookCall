@@ -17,10 +17,10 @@
         <view v-if="showState" @tap="choseWitchUniversity" class="universityList">
           <view
             v-for="uni in university"
-            :data-name="uni.name"
-            :data-title="uni.title"
+            :data-ip="uni.schoolIp"
+            :data-title="uni.schoolName"
           >
-            {{ uni.title }}
+            {{ uni.schoolName }}
           </view>
         </view>
       </view>
@@ -225,6 +225,7 @@ import {
 import './index.scss'
 import books from "../../mock/books.json";
 import Taro from "@tarojs/taro";
+import {getSchoolList} from "../../api/indexApi";
 const imgPaths = require("../../utils/base64");
 
 export default {
@@ -275,11 +276,7 @@ export default {
       /*校园认证：*/
       showState: false,
       isChosenUniversity: false,
-      university: [
-        {title: "重庆邮电大学", name: "cy"},
-        {title: "重庆工商大学", name: "gs"},
-        {title: "重庆交通大学", name: "cj"},
-      ],
+      university: [],
       chosenUniversity: "我的大学",
       imgPaths,
       isToastOpen: false,
@@ -325,7 +322,11 @@ export default {
       this.showState = !this.showState;
     },
     choseWitchUniversity(e) {
-      console.log(e.target.dataset);  // 获得选择的学校代号
+      // 缓存所选学校ip
+      Taro.setStorage({
+        key: "schoolIp",
+        data: e.target.dataset.ip,
+      });
       this.choseUniversity()// 选后关闭下拉单
       this.chosenUniversity = e.target.dataset.title; // 下拉单显示
       this.isChosenUniversity = true; // 换书广场显示（true则报错？？
@@ -372,6 +373,13 @@ export default {
         Taro.setStorageSync("userId", 1); // 暂时写死
       }
     })
+    // 获取学校列表
+    getSchoolList()
+      .then(res => {
+        this.university = res.data;
+        }, err => {
+        console.log(err)
+      })
   }
 }
 </script>
