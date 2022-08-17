@@ -1,28 +1,23 @@
 <template>
-  <AtList
-  >
+  <AtList>
     <AtListItem
-      v-for="book in []"
+      v-for="book in bookList"
       :key="book.id"
       :title="book.name"
       :note="book.words"
-      :thumb="imgPaths[book.img]"
       :extra-text="book.states"
       :on-click="bookDetailClick.bind(this, book.id)"
-      style="color:#57665e"
-      v-if="isChosenUniversity"
-      :class="(book.states === '可换') ? 'item_out' : 'item_in'"
     />
   </AtList>
 </template>
 
 <script>
-import {AtList, AtListItem} from "taro-ui-vue";
+import { AtList, AtListItem } from 'taro-ui-vue';
 import Taro from "@tarojs/taro";
-const imgPaths = require("../../utils/base64");
+import BookList from "../../components/bookList/BookList";
 
 export default {
-  name: "BookList",
+  name: "Books",
   props: {
     bookList: Array,
     title: String,  // 页面标题
@@ -30,6 +25,7 @@ export default {
   components: {
     AtList,
     AtListItem,
+    BookList,
   },
   data() {
     return {
@@ -38,7 +34,6 @@ export default {
   },
   methods: {
     bookDetailClick(key) {
-      console.log(key)
       Taro.navigateTo({
         url: `../../pages/bookDetail/bookDetail?key=${key}`,
       })

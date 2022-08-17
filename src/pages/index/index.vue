@@ -139,21 +139,10 @@
             :current="currentTab"
             :index="0"
           >
+            <BookList :book-list=bookList />
             <AtList
               :class="tabs_body_class"
             >
-              <AtListItem
-                v-for="book in bookList"
-                :key="book.id"
-                :title="book.name"
-                :note="book.words"
-                :thumb="imgPaths[book.img]"
-                :extra-text="book.states"
-                :on-click="bookDetailClick.bind(this, book.id)"
-                style="color:#57665e"
-                v-if="isChosenUniversity"
-                :class="(book.states === '可换') ? 'item_out' : 'item_in'"
-              />
               <AtListItem
                 v-if="!isChosenUniversity"
                 note="选择你所在的大学后，才能查看书籍动态以及发布书籍哦~（点击左上角立即选择）"
@@ -220,16 +209,17 @@ import {
   AtListItem,
   AtGrid,
   AtTag,
-  AtToast
+  AtToast,
 } from 'taro-ui-vue'
 import './index.scss'
-import books from "../../mock/books.json";
 import Taro from "@tarojs/taro";
-import {getSchoolList} from "../../api/indexApi";
+import {getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
+import BookList from "../../components/bookList/BookList";
 const imgPaths = require("../../utils/base64");
 
 export default {
   components: {
+    BookList,
     AtNavBar,
     AtTabBar,
     AtSearchBar,
@@ -262,7 +252,7 @@ export default {
         {title: 'Ta想要'}
       ],
 
-      bookList: books,
+      bookList: [],
       /*分类换书*/
       tags: [
         {key: 1, name: "novel", title: "小说", src: imgPaths.genre1},
@@ -295,10 +285,20 @@ export default {
     onSearch() {
       if (!this.judgeUniversity())
         return;
-      Taro.navigateTo({
-        url: "/pages/searchRes/searchRes?keyword=" + this.searchValue,
-      })
-
+      Taro.getStorage({
+        key: "schoolIp",
+        success: res => {
+          searchBook(res.data, options.keyword)
+            .then(res => {
+              const list = res.data;
+              // Taro.navigateTo({
+                // url: "/pages/bookList/bookList",,
+              // })
+            }, err => {
+              console.log(err)
+            })
+        }
+      });
     },
     clickTab(value) {
       this.currentTab = value
@@ -308,12 +308,24 @@ export default {
         return;
       const genre = e.target.dataset
       console.log(genre)
-      Taro.navigateTo({
-        url: `../../pages/bookGenreList/bookGenreList?tag=${genre}`,
+      getGenreBooks(3).then(res => {
+        Taro.navigateTo({
+          url: `../../pages/books/books?title=` + genre,
+          events: {
+            success: res => {
+              // 向被打开页面传送数据
+              res.eventChannel.emit("acceptDataFromOpenerPage", {
+                data: res.data,
+              })
+            }
+          }
+        })
+        console.log(res.data)
+      }, err => {
+        console.log(err)
       })
     },
     bookDetailClick(key) {
-      console.log(key)
       Taro.navigateTo({
         url: `../../pages/bookDetail/bookDetail?key=${key}`,
       })
