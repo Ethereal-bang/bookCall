@@ -2,7 +2,7 @@
   <AtList
   >
     <AtListItem
-      v-for="book in []"
+      v-for="book in list"
       :key="book.id"
       :title="book.name"
       :note="book.words"
@@ -10,7 +10,6 @@
       :extra-text="book.states"
       :on-click="bookDetailClick.bind(this, book.id)"
       style="color:#57665e"
-      v-if="isChosenUniversity"
       :class="(book.states === '可换') ? 'item_out' : 'item_in'"
     />
   </AtList>
@@ -24,31 +23,22 @@ const imgPaths = require("../../utils/base64");
 export default {
   name: "BookList",
   props: {
-    bookList: Array,
-    title: String,  // 页面标题
+    list: Array,
   },
   components: {
     AtList,
     AtListItem,
   },
   data() {
-    return {
-      isChosenUniversity: true
-    }
+    return {}
   },
   methods: {
     bookDetailClick(key) {
-      console.log(key)
       Taro.navigateTo({
         url: `../../pages/bookDetail/bookDetail?key=${key}`,
       })
     },
   },
-  onLoad(options) {
-    Taro.setNavigationBarTitle({
-      title: options.title,
-    })
-  }
 }
 </script>
 

@@ -1,14 +1,5 @@
 <template>
-  <AtList>
-    <AtListItem
-      v-for="book in list"
-      :key="book.id"
-      :title="book.name"
-      :note="book.words"
-      :extra-text="book.states"
-      :on-click="bookDetailClick.bind(this, book.id)"
-    />
-  </AtList>
+  <BookList :book-list="list" />
 </template>
 
 <script>

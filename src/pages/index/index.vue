@@ -278,28 +278,27 @@ export default {
     }
   },
   methods:  {
-    // 搜索框
+    // 搜索框内容改变
     onChange(stateName, value) {
       this[stateName] = value;
     },
     // 搜索
     onSearch() {
-      if (!this.judgeUniversity())
-        return;
-      Taro.getStorage({
-        key: "schoolIp",
-        success: res => {
-          searchBook(res.data, options.keyword)
-            .then(res => {
-              const list = res.data;
-              // Taro.navigateTo({
-                // url: "/pages/bookList/bookList",,
-              // })
-            }, err => {
-              console.log(err)
-            })
-        }
-      });
+      if (!this.judgeUniversity())  return;
+      searchBook(this.searchValue)
+        .then(res => {
+          const list = res.data;
+          Taro.navigateTo({
+            url: "/pages/books/books?title=搜索结果",
+            success: res => {
+              res.eventChannel.emit("sendData", {
+                list,
+              })
+            }
+          })
+        }, err => {
+          console.log(err)
+        })
     },
     clickTab(value) {
       this.currentTab = value
