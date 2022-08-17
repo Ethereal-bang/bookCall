@@ -1,7 +1,7 @@
 <template>
   <AtList>
     <AtListItem
-      v-for="book in bookList"
+      v-for="book in list"
       :key="book.id"
       :title="book.name"
       :note="book.words"
@@ -18,10 +18,6 @@ import BookList from "../../components/bookList/BookList";
 
 export default {
   name: "Books",
-  props: {
-    bookList: Array,
-    title: String,  // 页面标题
-  },
   components: {
     AtList,
     AtListItem,
@@ -29,7 +25,7 @@ export default {
   },
   data() {
     return {
-      isChosenUniversity: true
+      list: [],
     }
   },
   methods: {
@@ -40,9 +36,16 @@ export default {
     },
   },
   onLoad(options) {
-    // 设置标题
+    // 获取标题并设置
     Taro.setNavigationBarTitle({
       title: options.title,
+    })
+    // 获取书籍列表
+    const pages = Taro.getCurrentPages(),
+      current = pages[pages.length - 1];  // 堆栈中获取当前页
+    const eventChannel = current.getOpenerEventChannel();  // 页面间事件通信通道
+    eventChannel.on("acceptDataFromOpenerPage", data => {
+      this.list = data.list;
     })
   }
 }

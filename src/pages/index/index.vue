@@ -308,19 +308,16 @@ export default {
       if (!this.judgeUniversity()) return;
       const genreCode = genreMap[genre],
         name = genreMap2[genre];
-      getGenreBooks(genreCode).then(res => {
+      getGenreBooks(genreCode).then(response => {
         Taro.navigateTo({
           url: `../../pages/books/books?title=` + name,
-          events: {
-            success: res => {
-              // 向被打开页面传送数据
-              res.eventChannel.emit("acceptDataFromOpenerPage", {
-                data: res.data,
-              })
-            }
+          success: res => {
+            // 向被打开页面传送数据
+            res.eventChannel.emit("acceptDataFromOpenerPage", {
+              list: response.data,
+            })
           }
         })
-        console.log(res.data)
       }, err => {
         console.log(err)
       })
