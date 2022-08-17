@@ -40,6 +40,7 @@ export default {
     },
   },
   onLoad(options) {
+    // 设置标题
     Taro.setNavigationBarTitle({
       title: options.title,
     })

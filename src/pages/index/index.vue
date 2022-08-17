@@ -103,7 +103,7 @@
             :name="genre.name"
             class="scroll-item"
             :data-name="genre.name"
-            @tap="genreClick"
+            @tap="() => genreClick(genre.name)"
           >
             <view>
               <image
@@ -215,6 +215,7 @@ import './index.scss'
 import Taro from "@tarojs/taro";
 import {getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
 import BookList from "../../components/bookList/BookList";
+import {genreMap, genreMap2} from "../../data/map";
 const imgPaths = require("../../utils/base64");
 
 export default {
@@ -303,14 +304,13 @@ export default {
     clickTab(value) {
       this.currentTab = value
     },
-    genreClick(e) {
-      if (!this.judgeUniversity())
-        return;
-      const genre = e.target.dataset
-      console.log(genre)
-      getGenreBooks(3).then(res => {
+    genreClick(genre) {
+      if (!this.judgeUniversity()) return;
+      const genreCode = genreMap[genre],
+        name = genreMap2[genre];
+      getGenreBooks(genreCode).then(res => {
         Taro.navigateTo({
-          url: `../../pages/books/books?title=` + genre,
+          url: `../../pages/books/books?title=` + name,
           events: {
             success: res => {
               // 向被打开页面传送数据
@@ -366,25 +366,25 @@ export default {
   },
   onLoad() {
     // 登录（需后端
-    Taro.login({
-      success: (res) => {
-        if (res.code) {
-          // 发起网络请求
-          // ...
-          // console.log(res.code)
-        } else {
-          console.log("登录失败：" + res.errMsg);
-        }
-      }
-    })
+    // Taro.login({
+    //   success: (res) => {
+    //     if (res.code) {
+    //       // 发起网络请求
+    //       // ...
+    //       // console.log(res.code)
+    //     } else {
+    //       console.log("登录失败：" + res.errMsg);
+    //     }
+    //   }
+    // })
     // 获取用户信息
-    Taro.getUserInfo({
-      success: (res) => {
-        const { userInfo } = res;
-        Taro.setStorageSync("userInfo", userInfo);
-        Taro.setStorageSync("userId", 1); // 暂时写死
-      }
-    })
+    // Taro.getUserInfo({
+    //   success: (res) => {
+    //     const { userInfo } = res;
+    //     Taro.setStorageSync("userInfo", userInfo);
+    //     Taro.setStorageSync("userId", 1); // 暂时写死
+    //   }
+    // })
     // 获取学校列表
     getSchoolList()
       .then(res => {
