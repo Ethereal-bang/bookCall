@@ -83,14 +83,9 @@
           <view class="at-col category titleText">
             分类换书
           </view>
-          <view class="at-col category titleText">
-            <navigator class="atAll"
-                       url="/pages/bookList/bookList"
-                       open-type="navigate"
-            >
-              &nbsp&nbsp全部书籍&nbsp◇&nbsp
-            </navigator>
-          </view>
+          <AtButton class="at-col category titleText atAll" :on-click="clickToAllBooks">
+            全部书籍◇
+          </AtButton>
         </view>
         <scroll-view
           class="scroll-tag"
@@ -210,10 +205,11 @@ import {
   AtGrid,
   AtTag,
   AtToast,
+  AtButton,
 } from 'taro-ui-vue'
 import './index.scss'
 import Taro from "@tarojs/taro";
-import {getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
+import {getAllBooks, getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
 import BookList from "../../components/bookList/BookList";
 import {genreMap, genreMap2} from "../../data/map";
 const imgPaths = require("../../utils/base64");
@@ -231,6 +227,7 @@ export default {
     AtListItem,
     AtGrid,
     AtToast,
+    AtButton,
   },
   data() {
     return {
@@ -245,14 +242,12 @@ export default {
         {imgPath: imgPaths.banner1, navigatePath: "/pages/index/index"},
         {imgPath: imgPaths.banner2, navigatePath: "/pages/changeRules/changeRules"},
       ],
-
       currentTab: 0,
       tabList: [
         {title: '推荐'},
         {title: '等你换'},
         {title: 'Ta想要'}
       ],
-
       bookList: [],
       /*分类换书*/
       tags: [
@@ -346,6 +341,18 @@ export default {
         return false;
       }
       return true;
+    },
+    clickToAllBooks() {
+      getAllBooks().then(response => {
+        Taro.navigateTo({
+          url: "/pages/books/books?title=" + "全部书籍",
+          success: res => {
+            res.eventChannel.emit("acceptDataFromOpenerPage", {
+              list: response.data,
+            })
+          }
+        })
+      }, err => console.log(err))
     }
   },
   onPageScroll(scroll) {  // 监测页面滚动值

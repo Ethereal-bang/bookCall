@@ -30,3 +30,12 @@ export const getGenreBooks = (genreCode) => {
     data,
   })
 }
+
+// 获取全部书籍
+export const getAllBooks = () => {
+    return myAxios("/books/GetBooksBySchool", {
+      data: {
+        schoolIp: getSchoolIp(),
+      }
+    })
+}

@@ -13,3 +13,8 @@ myAxios.interceptors.request.use(
     return Promise.reject(err);
   }
 )
+
+myAxios.interceptors.response.use(response => {
+  console.log(response)
+  return response;
+})
