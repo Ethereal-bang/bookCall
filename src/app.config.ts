@@ -3,6 +3,7 @@ export default {
     /*主Tab:*/
     'pages/index/index',
     'pages/publish/publish',
+    "pages/news/news",
     "pages/person/person",
     /*其他页面:*/
     "pages/books/books",  // 书籍列表展示页
@@ -23,6 +24,12 @@ export default {
       }, {
         pagePath: 'pages/publish/publish',
         text: "发布",
+        selectedColor:'##ffcf4d',
+        iconPath:"./publish.png",
+        selectedIconPath:"./publish.png"
+      }, {
+        pagePath: 'pages/news/news',
+        text: "消息",
         selectedColor:'##ffcf4d',
         iconPath:"./publish.png",
         selectedIconPath:"./publish.png"
