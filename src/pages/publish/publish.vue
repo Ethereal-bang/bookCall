@@ -1,5 +1,6 @@
 <template>
   <view class="publish">
+    <!--发布目的-->
     <view>
       <view class="title">
         <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
@@ -14,6 +15,7 @@
       </view>
     </view>
 
+    <!--书籍图片-->
     <view>
       <view class="title">
         <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
@@ -60,6 +62,7 @@
       </view>
     </view>
 
+    <!--书籍名称/ISBN-->
     <view class="at-row title">
       <image class="inputicon icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
 
@@ -82,7 +85,6 @@
             mode="aspectFit"
             style="height: 37rpx; display: inline"
           />
-
         </view>
       </view>
 
@@ -233,8 +235,8 @@ export default {
     return {
       picUrls,
       upload_img: picUrls.upload,
-      inputName: "",
-      inputWords: "",
+      inputName: "",   // 书籍名称/isbn
+      inputWords: "", // 寄语
       isGenreListOpen: false,
       chooseGenre: [
         {value: "novel", label: "小说"},
@@ -329,8 +331,7 @@ export default {
     },
     choosePurpose(e) {
       // 设置目的
-      this.purpose = e.target.dataset.purpose;
-      console.log("purpose: ", this.purpose)
+      this.purpose = e.target.dataset.purpose === "out" ? 1 : 0;  // 0为收1为售
       // 点击节点变色
       this.outBGC = "background-color: " + ((this.purpose === "out") ? "#FFCA4E" : "#F5F5F5");
       this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
