@@ -1,9 +1,5 @@
 import {myAxios} from "./myAxios";
-import Taro from "@tarojs/taro";
-
-function getSchoolIp() {
-  return Taro.getStorageSync("schoolIp");
-}
+import schoolIpGetter from "../utils/schoolIpGetter";
 
 // 获取学校列表,ip
 export const getSchoolList = () => {
@@ -14,7 +10,7 @@ export const getSchoolList = () => {
 export const searchBook = (keyword) => {
   return myAxios("/books/GetBooksBySearch", {
     data: {
-      schoolIp: getSchoolIp(),
+      schoolIp: schoolIpGetter(),
       name: '%' + keyword + '%',
     },
   });
@@ -23,7 +19,7 @@ export const searchBook = (keyword) => {
 // 根据分类获取书籍
 export const getGenreBooks = (genreCode) => {
   const data = {
-    schoolIp: getSchoolIp(),
+    schoolIp: schoolIpGetter(),
     category: genreCode,
   }
   return myAxios("/books/GetBooksBycategory", {
@@ -35,7 +31,7 @@ export const getGenreBooks = (genreCode) => {
 export const getAllBooks = () => {
     return myAxios("/books/GetBooksBySchool", {
       data: {
-        schoolIp: getSchoolIp(),
+        schoolIp: schoolIpGetter(),
       }
     })
 }
