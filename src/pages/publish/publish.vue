@@ -68,11 +68,11 @@
 
       <AtInput
         class="at-col input title "
-        type="text"
+        type="number"
         :border="false"
-        placeholder="请填写书籍名称/扫一扫ISBN码"
-        :value="inputName"
-        @change="onInputNameChange"
+        placeholder="请填写/扫一扫ISBN码"
+        :value="inputISBN"
+        @change="onInputISBNChange"
       />
       <view class="at-col at-col-3 scan">
         <view class="at-row">
@@ -90,6 +90,7 @@
 
     </view>
 
+    <!--换书寄语-->
     <view>
       <view class="title">
 
@@ -105,6 +106,7 @@
       />
     </view>
 
+    <!--标签选择-->
     <view class="title">
       <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
       <text>标签选择</text>
@@ -141,29 +143,6 @@
       </view>
     </view>
 
-    <view>
-      <view class="title">
-        <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
-        <text>预留联系方式</text>
-        <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
-      </view>
-      <text class="title text1">请选择并填写你的一种联系方式，方便他人联系你进行换书</text>
-      <AtRadio
-      class="choise"
-        :options="contactOptions"
-        :value="contactValue"
-        :on-click="chooseContact"
-      />
-      <AtInput
-      class="number"
-        type="number"
-        placeholder="留下你的联系方式~"
-        :value="inputContact"
-        :on-change="onInputContactChange"
-      />
-      <text class="title text1">下次发布书籍时，无需再次填写，可去“我的->联系方式“查看或修改~</text>
-    </view>
-
     <AtButton
       type="primary"
       :on-click="post"
@@ -186,6 +165,7 @@
 import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast, AtModal} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
+import {genreMap} from "../../data/map";
 const picUrls = require("../../utils/base64");
 
 const labelMap = {  // 通过映射关系将所选label渲染到标题
@@ -235,7 +215,7 @@ export default {
     return {
       picUrls,
       upload_img: picUrls.upload,
-      inputName: "",   // 书籍名称/isbn
+      inputISBN: "",   // 书籍名称/isbn
       inputWords: "", // 寄语
       isGenreListOpen: false,
       chooseGenre: [
@@ -252,12 +232,6 @@ export default {
       chooseOld: outOld,
       chosenOld: "",
       oldTitle: "新旧程度",
-      contactOptions: [
-        {label: "手机号", value: "phone",},
-        {label: "微信号", value: "wx"},
-      ],
-      contactValue: "",
-      inputContact: "",
       purpose: "",  // 发布目的
       outBGC: "background-color: #F5F5F5",
       inBGC: "background-color: #F5F5F5",
@@ -278,8 +252,8 @@ export default {
         })
       })
     },
-    onInputNameChange(val) {
-      this.inputName = val;
+    onInputISBNChange(val) {
+      this.inputISBN = val;
     },
     onInputWordsChange(val) {
       this.inputWords = val;
@@ -291,7 +265,6 @@ export default {
       this.openGenreList(false);  // 关闭菜单
       this.genreTitle = labelMap[val];  // 更新标题为所选项
       this.chosenGenre = val;
-      console.log(this.chosenGenre)
     },
     openOldList(val) {
       this.isOldListOpen = val;
@@ -302,28 +275,21 @@ export default {
       this.chosenOld = val;
       console.log(this.chosenOld)
     },
-    chooseContact(val) {
-      this.contactValue = val;
-      console.log(this.contactValue)
-    },
-    onInputContactChange(val) {
-      this.inputContact = val;
-    },
     post() {
       const info = {
         purpose: this.purpose,
         img: this.upload_img, // 路径是本地！要修改
-        bookName: this.inputName,
+        isbn: this.inputISBN,
         words: this.inputWords,
-        genre: this.chosenGenre,
+        genre: genreMap[this.chosenGenre],  // 种类代号
         old: this.chosenOld,
-        contact: this.inputContact,
+        contact: "SRF939847757",  // 先写死后期获取信息改!
       }
       // 提交失败
-      if (!info.contact) {
-        this.isToastOpen = true;
-        return;
-      }
+      // if (!info.contact) {
+      //   this.isToastOpen = true;
+      //   return;
+      // }
       // 成功提交
       console.log(info)
       this.isToastOpen = false;
@@ -331,13 +297,14 @@ export default {
     },
     choosePurpose(e) {
       // 设置目的
-      this.purpose = e.target.dataset.purpose === "out" ? 1 : 0;  // 0为收1为售
+      this.purpose = e.target.dataset.purpose;  // 0为收1为售
       // 点击节点变色
       this.outBGC = "background-color: " + ((this.purpose === "out") ? "#FFCA4E" : "#F5F5F5");
       this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
       this.chooseOld = (this.purpose === "out") ? outOld : inOld; // 根据所选目的切换表单选项
     },
     onModalConfirm() {
+      this.isModalOpen = false;
       Taro.switchTab({
         url: `../../pages/index/index`,
       })
