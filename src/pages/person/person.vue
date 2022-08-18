@@ -15,11 +15,11 @@
         />
     <view id="have_sign" class="signpage">
       <view>
-        
+
         <view>
           <AtAvatar class="head" circle image='https://jdc.jd.com/img/200'></AtAvatar>
           <view class="username">用户名<image class="change" src="./change.png" style="height: 24rpx; width: 24rpx;  display: inline-block" /></view>
-          
+
           <AtTextarea
             placeholder="点击添加换书宣言，让换书更有吸引力~~~"
             :value="inputWords"
@@ -32,11 +32,6 @@
             <view @tap="toPublish">
               <image class="img1 img" src="./info_publish.png" style="height: 30px; width: 30px; display: inline-block" />
               <text class="text">我的发布</text>
-              <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />
-            </view>
-            <view @tap="toContact">
-              <image class="img2 img" src="./info_contact.png" style="height: 30px; width: 30px; display: inline-block" />
-              <text class="text">联系方式</text>
               <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />
             </view>
             <view @tap="toRules">
@@ -79,10 +74,6 @@ export default {
         url: "/pages/personalPublish/personalPublish",
       })
     },
-    toContact() { // 打开联系方式
-      Taro.navigateTo({
-        url: "/pages/personalContact/personalContact",
-      })},
     toRules() { // 打开交换规则
       Taro.navigateTo({
         url: "/pages/changeRules/changeRules",
@@ -97,6 +88,6 @@ export default {
   }
   #no_sign {
     display: none;  /*暂定已登录*/
-    
+
   }
 </style>

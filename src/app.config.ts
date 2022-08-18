@@ -8,7 +8,6 @@ export default {
     "pages/books/books",  // 书籍列表展示页
     "pages/bookDetail/bookDetail", // 书籍详情
     "pages/personalPublish/personalPublish",  // 个人发布
-    "pages/personalContact/personalContact",  // 联系方式
     "pages/changeRules/changeRules",  // 换书规则
   ],
   tabBar: {
