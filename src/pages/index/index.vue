@@ -3,11 +3,6 @@
     <view class="index">
       <!--校园认证-->
       <view>
-<!--        <image-->
-<!--          :src=imgPaths.location-->
-<!--          mode="aspectFit"-->
-<!--          style="height: 39rpx; width: 39rpx; display: inline-block ;padding-top:3rpx"-->
-<!--        />-->
         <view
           @tap="choseUniversity"
           style="display: inline-block"
@@ -33,20 +28,6 @@
         :on-change="onChange.bind(this, 'searchValue')"
         :on-action-click="onSearch"
       />
-      <view class="at-row">
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          程序设计
-        </AtTag>
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          高数
-        </AtTag>
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          大学物理
-        </AtTag>
-        <AtTag class="tag at-col" name="tag-1" type="primary" circle size="small">
-          科技
-        </AtTag>
-      </view>
 
       <!--轮播图-->
       <swiper
@@ -69,11 +50,7 @@
             open-type="navigate"
             style="height: 100%"
           >
-<!--            <image-->
-<!--              :src="item.imgPath"-->
-<!--              mode="aspectFit"-->
-<!--              style="height: 100%"-->
-<!--            />-->
+            <view>图标</view>
           </navigator>
         </swiper-item>
       </swiper>
@@ -117,11 +94,11 @@
       <!--换书广场-->
       <view
         style="border-radius: 2% 2% 2% 2%;background-color: #ffffff;"
-        :class="square_class"
+        class="square_class"
       >
         <view
           style="padding-left: 13rpx;"
-          :class="square_title_class"
+          class="square_title_class"
         >
           换书广场
         </view>
@@ -135,7 +112,6 @@
             :index="0"
           >
             <BookList :book-list=bookList />
-            <button @tap="login">授权登录</button>
             <AtList
               :class="tabs_body_class"
             >
@@ -158,7 +134,6 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
-                :thumb="http://photo.chaoxing.com/photo_80.jpg"
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -179,7 +154,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
-                :thumb="http://photo.chaoxing.com/photo_80.jpg"
+                thumb="http://photo.chaoxing.com/photo_80.jpg"
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -251,13 +226,13 @@ export default {
       bookList: [],
       /*分类换书*/
       tags: [
-        {key: 1, name: "novel", title: "小说", src: "http://photo.chaoxing.com/photo_80.jpg"},
-        {key: 2, name: "literature", title: "文学", src: "http://photo.chaoxing.com/photo_80.jpg"},
-        {key: 3, name: "internet", title: "互联网", src: "http://photo.chaoxing.com/photo_80.jpg"},
-        {key: 4, name: "technology", title: "科技", src: "http://photo.chaoxing.com/photo_80.jpg"},
-        {key: 5, name: "psychology", title: "心理学", src: "http://photo.chaoxing.com/photo_80.jpg"},
-        {key: 6, name: "teaching", title: "教材教辅", src: "http://photo.chaoxing.com/photo_80.jpg"},
-        {key: 7, name: "other", title: "其他", src: "http://photo.chaoxing.com/photo_80.jpg"},
+        {key: 1, name: "novel", title: "小说", src: ""},
+        {key: 2, name: "literature", title: "文学", src: ""},
+        {key: 3, name: "internet", title: "互联网", src: ""},
+        {key: 4, name: "technology", title: "科技", src: ""},
+        {key: 5, name: "psychology", title: "心理学", src: ""},
+        {key: 6, name: "teaching", title: "教材教辅", src: ""},
+        {key: 7, name: "other", title: "其他", src: ""},
       ],
       /*校园认证：*/
       showState: false,
