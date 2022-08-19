@@ -1,10 +1,10 @@
 export default {
   pages: [
     /*主Tab:*/
-    "pages/person/person",
     'pages/index/index',
     'pages/publish/publish',
     "pages/news/news",
+    "pages/person/person",
     /*其他页面:*/
     "pages/books/books",  // 书籍列表展示页
     "pages/bookDetail/bookDetail", // 书籍详情
@@ -18,25 +18,21 @@ export default {
       {
         pagePath: "pages/index/index",
         text: "首页",
-        selectedColor:'#ffcf4d',
         iconPath:"./index.png",
         selectedIconPath:"./index_.png"
       }, {
         pagePath: 'pages/publish/publish',
         text: "发布",
-        selectedColor:'##ffcf4d',
         iconPath:"./publish.png",
         selectedIconPath:"./publish.png"
       }, {
         pagePath: 'pages/news/news',
         text: "消息",
-        selectedColor:'##ffcf4d',
         iconPath:"./publish.png",
         selectedIconPath:"./publish.png"
       }, {
         pagePath: "pages/person/person",
         text: "我的",
-        selectedColor:'#ffcf4d',
         iconPath:"./mine.png",
         selectedIconPath:"./mine_.png"
       },
@@ -47,7 +43,6 @@ export default {
     navigationBarBackgroundColor: '#81cea2',
     backgroundColor: "#81cea2",
     navigationBarTextStyle: 'white',
-    // navigationStyle:'custom'
   },
   "lazyCodeLoading": "requiredComponents",
 }
