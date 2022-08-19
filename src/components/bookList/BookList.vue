@@ -6,7 +6,6 @@
       :key="book.id"
       :title="book.name"
       :note="book.words"
-      :thumb="imgPaths[book.img]"
       :extra-text="book.states"
       :on-click="bookDetailClick.bind(this, book.id)"
       style="color:#57665e"
@@ -18,7 +17,7 @@
 <script>
 import {AtList, AtListItem} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
-const imgPaths = require("../../utils/base64");
+// const imgPaths = require("../../utils/base64");
 
 export default {
   name: "BookList",

@@ -166,7 +166,6 @@ import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast, AtM
 import Taro from "@tarojs/taro";
 import './publish.scss'
 import {genreMap} from "../../data/map";
-const picUrls = require("../../utils/base64");
 
 const labelMap = {  // 通过映射关系将所选label渲染到标题
   novel: "小说",

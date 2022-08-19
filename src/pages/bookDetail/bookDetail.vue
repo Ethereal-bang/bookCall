@@ -6,11 +6,11 @@
       :avatar-url="bookData.img"
     />
 
-    <image
-      :src="imgPaths[bookData.img]"
-      class="bookimg"
-      mode="aspectFit"
-    />
+<!--    <image-->
+<!--      :src="imgPaths[bookData.img]"-->
+<!--      class="bookimg"-->
+<!--      mode="aspectFit"-->
+<!--    />-->
   <view class="bookmes">
     <view class="bookname">{{ bookData.name }}</view>
 
@@ -85,9 +85,7 @@ import PersonalBar from "../../components/personBar/PersonalBar";
 import { AtTag } from 'taro-ui-vue';
 import Taro from "@tarojs/taro";
 import './bookDetail.scss';
-const imgPaths = require("../../utils/base64");
-const books = require("../../mock/books.json");
-const users = require("../../mock/users.json");
+// const imgPaths = require("../../utils/base64");
 
 export default {
   name: "BookDetail",
@@ -113,7 +111,6 @@ export default {
         "words": "",
         "contact": undefined,
       }, // 书籍所有者信息
-      imgPaths,
     }
   },
   components: {

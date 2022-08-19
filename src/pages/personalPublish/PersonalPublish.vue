@@ -19,7 +19,7 @@
             :title="book.name"
             :note="book.words"
             :on-click="bookDetailClick.bind(this, book.id)"
-            :thumb="imgPaths[book.img]"
+            :thumb="http://photo.chaoxing.com/photo_80.jpg"
           />
         </AtList>
       </AtTabsPane>
@@ -64,8 +64,6 @@
 <script>
 import {AtTabs, AtTabsPane, AtList, AtListItem, AtDivider, AtNoticebar} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
-const imgPaths = require("../../utils/base64");
-const users = require("../../mock/users.json");
 
 export default {
   name: "PersonalPublish",
@@ -87,7 +85,6 @@ export default {
       ],
       key: undefined,
       personPublic: [],
-      imgPaths,
     }
   },
   methods: {
@@ -103,11 +100,11 @@ export default {
   },
   onLoad(options) {
     const id = Taro.getStorageSync("userId")  // 标识用户
-    users.map(user => {
-      if (user.id === id) {
-        this.personPublic = user.public;
-      }
-    })
+    // users.map(user => {
+    //   if (user.id === id) {
+    //     this.personPublic = user.public;
+    //   }
+    // })
   },
 }
 </script>

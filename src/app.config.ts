@@ -1,10 +1,10 @@
 export default {
   pages: [
     /*主Tab:*/
+    "pages/person/person",
     'pages/index/index',
     'pages/publish/publish',
     "pages/news/news",
-    "pages/person/person",
     /*其他页面:*/
     "pages/books/books",  // 书籍列表展示页
     "pages/bookDetail/bookDetail", // 书籍详情
@@ -49,4 +49,5 @@ export default {
     navigationBarTextStyle: 'white',
     // navigationStyle:'custom'
   },
+  "lazyCodeLoading": "requiredComponents",
 }

@@ -3,11 +3,11 @@
     <view class="index">
       <!--校园认证-->
       <view>
-        <image
-          :src=imgPaths.location
-          mode="aspectFit"
-          style="height: 39rpx; width: 39rpx; display: inline-block ;padding-top:3rpx"
-        />
+<!--        <image-->
+<!--          :src=imgPaths.location-->
+<!--          mode="aspectFit"-->
+<!--          style="height: 39rpx; width: 39rpx; display: inline-block ;padding-top:3rpx"-->
+<!--        />-->
         <view
           @tap="choseUniversity"
           style="display: inline-block"
@@ -69,11 +69,11 @@
             open-type="navigate"
             style="height: 100%"
           >
-            <image
-              :src="item.imgPath"
-              mode="aspectFit"
-              style="height: 100%"
-            />
+<!--            <image-->
+<!--              :src="item.imgPath"-->
+<!--              mode="aspectFit"-->
+<!--              style="height: 100%"-->
+<!--            />-->
           </navigator>
         </swiper-item>
       </swiper>
@@ -135,6 +135,7 @@
             :index="0"
           >
             <BookList :book-list=bookList />
+            <button @tap="login">授权登录</button>
             <AtList
               :class="tabs_body_class"
             >
@@ -157,7 +158,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
-                :thumb="imgPaths[book.img]"
+                :thumb="http://photo.chaoxing.com/photo_80.jpg"
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -178,7 +179,7 @@
                 :key="book.id"
                 :title="book.name"
                 :note="book.words"
-                :thumb="imgPaths[book.img]"
+                :thumb="http://photo.chaoxing.com/photo_80.jpg"
                 :extra-text="book.states"
                 :on-click="bookDetailClick.bind(this, book.id)"
                 style="color:#57665e"
@@ -212,7 +213,6 @@ import Taro from "@tarojs/taro";
 import {getAllBooks, getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
 import BookList from "../../components/bookList/BookList";
 import {genreMap, genreMap2} from "../../data/map";
-const imgPaths = require("../../utils/base64");
 
 export default {
   components: {
@@ -239,8 +239,8 @@ export default {
       isAutoplay: true,
       hasIndicatorDots: true,
       banners: [
-        {imgPath: imgPaths.banner1, navigatePath: "/pages/index/index"},
-        {imgPath: imgPaths.banner2, navigatePath: "/pages/changeRules/changeRules"},
+        {imgPath: "https://jdc.jd.com/img/200", navigatePath: "/pages/index/index"},
+        {imgPath: "https://jdc.jd.com/img/200", navigatePath: "/pages/changeRules/changeRules"},
       ],
       currentTab: 0,
       tabList: [
@@ -251,20 +251,19 @@ export default {
       bookList: [],
       /*分类换书*/
       tags: [
-        {key: 1, name: "novel", title: "小说", src: imgPaths.genre1},
-        {key: 2, name: "literature", title: "文学", src: imgPaths.genre2},
-        {key: 3, name: "internet", title: "互联网", src: imgPaths.genre3},
-        {key: 4, name: "technology", title: "科技", src: imgPaths.genre4},
-        {key: 5, name: "psychology", title: "心理学", src: imgPaths.genre5},
-        {key: 6, name: "teaching", title: "教材教辅", src: imgPaths.genre6},
-        {key: 7, name: "other", title: "其他", src: imgPaths.genre7},
+        {key: 1, name: "novel", title: "小说", src: "http://photo.chaoxing.com/photo_80.jpg"},
+        {key: 2, name: "literature", title: "文学", src: "http://photo.chaoxing.com/photo_80.jpg"},
+        {key: 3, name: "internet", title: "互联网", src: "http://photo.chaoxing.com/photo_80.jpg"},
+        {key: 4, name: "technology", title: "科技", src: "http://photo.chaoxing.com/photo_80.jpg"},
+        {key: 5, name: "psychology", title: "心理学", src: "http://photo.chaoxing.com/photo_80.jpg"},
+        {key: 6, name: "teaching", title: "教材教辅", src: "http://photo.chaoxing.com/photo_80.jpg"},
+        {key: 7, name: "other", title: "其他", src: "http://photo.chaoxing.com/photo_80.jpg"},
       ],
       /*校园认证：*/
       showState: false,
       isChosenUniversity: false,
       university: [],
       chosenUniversity: "我的大学",
-      imgPaths,
       isToastOpen: false,
       /*换书广场页面滚动*/
       square_class: "",
@@ -353,6 +352,8 @@ export default {
           }
         })
       }, err => console.log(err))
+    },
+    login() {
     }
   },
   onPageScroll(scroll) {  // 监测页面滚动值
@@ -369,7 +370,7 @@ export default {
   },
   onLoad() {
     // 登录（需后端
-    // Taro.login({
+    // Taro.login({ // 获取登录凭证
     //   success: (res) => {
     //     if (res.code) {
     //       // 发起网络请求
