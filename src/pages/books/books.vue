@@ -35,7 +35,7 @@ export default {
     const pages = Taro.getCurrentPages(),
       current = pages[pages.length - 1];  // 堆栈中获取当前页
     const eventChannel = current.getOpenerEventChannel();  // 页面间事件通信通道
-    eventChannel.on("acceptDataFromOpenerPage", data => {
+    eventChannel.on("sendData", data => {
       this.list = data.list;
     })
   }
