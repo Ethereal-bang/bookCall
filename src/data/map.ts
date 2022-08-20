@@ -43,3 +43,15 @@ export const outOldDegree = {
   10: "10成新",
   5: "5成新及以下",
 }
+
+// 换出/换入 code-name
+export const inOrOut = {
+  0: "in",
+  1: "out",
+}
+
+// 换出/换入 code-名称
+export const inOrOut2 = {
+  0: "求换",
+  1: "可换",
+}
