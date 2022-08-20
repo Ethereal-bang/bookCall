@@ -344,26 +344,19 @@ export default {
     }
   },
   onLoad() {
-    // 登录（需后端
-    // Taro.login({ // 获取登录凭证
-    //   success: (res) => {
-    //     if (res.code) {
-    //       // 发起网络请求
-    //       // ...
-    //       // console.log(res.code)
-    //     } else {
-    //       console.log("登录失败：" + res.errMsg);
-    //     }
-    //   }
-    // })
-    // 获取用户信息
-    // Taro.getUserInfo({
-    //   success: (res) => {
-    //     const { userInfo } = res;
-    //     Taro.setStorageSync("userInfo", userInfo);
-    //     Taro.setStorageSync("userId", 1); // 暂时写死
-    //   }
-    // })
+    // 获取登录凭证code（需后端
+    Taro.login({ // 获取登录凭证
+      success: (res) => {
+        const {code} = res;
+        if (code) {
+          // 发起网络请求
+          // ...
+          // console.log(res.code)
+        } else {
+          console.log("登录失败：" + res.errMsg);
+        }
+      }
+    })
     // 获取学校列表
     getSchoolList()
       .then(res => {
