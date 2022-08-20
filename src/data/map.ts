@@ -19,3 +19,27 @@ export const genreMap2 = {
   teaching: "教材教辅",
   other: "其他",
 }
+
+// 换入新旧程度 value-code
+export const inOldDegree = {
+  new: 2,
+  almostNew: 1,
+  any: 0,
+}
+
+// 换入新旧程度 value-名称
+export const inOldDegree2 = {
+  new: "全新",
+  almostNew: '较新',
+  any: "无所谓",
+}
+
+// 换成新旧程度 value-名称
+export const outOldDegree = {
+  6: "6成新",
+  7: "7成新",
+  8: "8成新",
+  9: "9成新",
+  10: "10成新",
+  5: "5成新及以下",
+}

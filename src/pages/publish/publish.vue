@@ -3,9 +3,9 @@
     <!--发布目的-->
     <view>
       <view class="title">
-        <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
+        <image class="icon_x" style=" width: 17rpx; height: 17rpx; display: inline-block"/>
         <text>发布目的</text>
-        <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
+        <image class="icon_g" style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       </view>
       <view
         @tap="choosePurpose"
@@ -15,56 +15,9 @@
       </view>
     </view>
 
-    <!--书籍图片-->
-    <view>
-      <view class="title">
-        <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
-        <text>书籍图片(封面必填)</text>
-        <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
-      </view>
-      <view class="at-row">
-        <view
-          class="at-col at-col-3"
-          style="width: 92px;
-          height: 92px;
-          border-radius: 12px 12px 12px 12px;
-          opacity: 1;
-          background: #F0F0F0;
-          display: inline-block;"
-        >
-          <image :src=upload_img
-                 mode="aspectFit"
-                 style="height: 26px; display: inline"
-          />
-        </view>
-        <view
-          class="at-col at-col-3"
-          style="width: 92px;
-          height: 92px;
-          border-radius: 12px 12px 12px 12px;
-          opacity: 1;
-          border: 1px solid #E6E6E6;
-          display: inline-block;"
-        >
-          <view
-            @tap="uploadPic"
-            style="
-            font-size: 50px;
-            color: #CCCCCC;
-            border-radius: 1px 1px 1px 1px;
-            opacity: 1;
-            margin-left: 30px;
-            margin-top: 10px;"
-          >
-            +
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <!--书籍名称/ISBN-->
+    <!--ISBN-->
     <view class="at-row title">
-      <image class="inputicon icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
+<!--      <image class="inputicon icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>-->
 
       <AtInput
         class="at-col input title "
@@ -79,12 +32,12 @@
           <text>
             扫码
           </text>
-          <image
-            class="at-col scanicon"
-            src="./scan.png"
-            mode="aspectFit"
-            style="height: 37rpx; display: inline"
-          />
+<!--          <image-->
+<!--            class="at-col scanicon"-->
+<!--            src="./scan.png"-->
+<!--            mode="aspectFit"-->
+<!--            style="height: 37rpx; display: inline"-->
+<!--          />-->
         </view>
       </view>
 
@@ -93,9 +46,8 @@
     <!--换书寄语-->
     <view>
       <view class="title">
-
         <text class="jiyu">换书寄语</text>
-        <image class="jiyug icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
+<!--        <image class="jiyug icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>-->
       </view>
       <AtTextarea
         :value="inputWords"
@@ -108,9 +60,9 @@
 
     <!--标签选择-->
     <view class="title">
-      <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>
+<!--      <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>-->
       <text>标签选择</text>
-      <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>
+<!--      <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>-->
       <view class="at-row at-row__justify--center">
         <AtAccordion
           class="at-col-4"
@@ -165,7 +117,8 @@
 import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast, AtModal} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
-import {genreMap} from "../../data/map";
+import {genreMap, inOldDegree, inOldDegree2, outOldDegree} from "../../data/map";
+import {addBook} from "../../api/bookApi";
 
 const labelMap = {  // 通过映射关系将所选label渲染到标题
   novel: "小说",
@@ -184,19 +137,8 @@ const labelMap = {  // 通过映射关系将所选label渲染到标题
   almostNew: "较新",
   any: "无所谓",
 }
-const outOld = [
-  {value: "6", label: "6成新",},
-  {value: "7", label: "7成新",},
-  {value: "8", label: "8成新",},
-  {value: "9", label: "9成新",},
-  {value: "10", label: "全新",},
-  {value: "5", label: "5成新及以下",},
-];
-const inOld = [
-  {value: "new", label: "全新",},
-  {value: "almostNew", label: "较新",},
-  {value: "any", label: "无所谓",},
-];
+const outOld = ["6", "7", "8", "9", "10", "5"];
+const inOld = ["new", "almostNew", "any"]
 
 export default {
   name: "Publish",
@@ -212,8 +154,6 @@ export default {
   },
   data() {
     return {
-      picUrls,
-      upload_img: picUrls.upload,
       inputISBN: "",   // 书籍名称/isbn
       inputWords: "", // 寄语
       isGenreListOpen: false,
@@ -239,18 +179,6 @@ export default {
     }
   },
   methods: {
-    uploadPic(e) {  // 上传本地图片
-      Taro.chooseImage({
-        count: 1, // 限定只上传一张
-        success: (res) => {
-          console.log(res)
-          this.upload_img = res.tempFilePaths;
-        },
-        fail: (res => {
-          console.log(res)
-        })
-      })
-    },
     onInputISBNChange(val) {
       this.inputISBN = val;
     },
@@ -276,23 +204,31 @@ export default {
     },
     post() {
       const info = {
-        purpose: this.purpose,
-        img: this.upload_img, // 路径是本地！要修改
+        purpose: this.purpose === "out" ? '1' : '0',
         isbn: this.inputISBN,
         words: this.inputWords,
         genre: genreMap[this.chosenGenre],  // 种类代号
-        old: this.chosenOld,
-        contact: "SRF939847757",  // 先写死后期获取信息改!
+        old: this.purpose === "out" ? this.chosenOld : inOldDegree[this.chosenOld], // 新旧程度代号
       }
-      // 提交失败
-      // if (!info.contact) {
-      //   this.isToastOpen = true;
-      //   return;
-      // }
+      // 有信息没填
+      for (let key in info) {
+        if (!info.key || info.key.length < 1) {
+          this.isToastOpen = true;
+          return;
+        }
+      }
       // 成功提交
-      console.log(info)
+      // console.log(info)
+      addBook(info.isbn, info.purpose, info.genre, info.words, info.old)
+        .then(res => {
+          if (res.data === "success") {
+            this.isModalOpen = true;  // 打开模态框
+          } else {  // 添加失败
+          }
+        }, err => {
+          console.log(err)
+        })
       this.isToastOpen = false;
-      this.isModalOpen = true;  // 打开模态框
     },
     choosePurpose(e) {
       // 设置目的
@@ -300,7 +236,14 @@ export default {
       // 点击节点变色
       this.outBGC = "background-color: " + ((this.purpose === "out") ? "#FFCA4E" : "#F5F5F5");
       this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
-      this.chooseOld = (this.purpose === "out") ? outOld : inOld; // 根据所选目的切换表单选项
+      // 根据所选目的切换新旧程度选项
+      this.chooseOld = (this.purpose === "out")
+        ? outOld.map(val => {
+            return {label: outOldDegree[val], value: val}
+          })
+        : inOld.map(val => {
+          return {label: inOldDegree2[val], value: val}
+        });
     },
     onModalConfirm() {
       this.isModalOpen = false;

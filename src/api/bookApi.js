@@ -2,19 +2,19 @@ import {myAxios} from "./myAxios";
 import schoolIpGetter from "../utils/schoolIpGetter";
 
 // 发布书籍
-export const addBook = (bookName, isbn, flagToGet, category,
-                        message, label, phone, wx,) => {
+export const addBook = (isbn, flagToGet, category, message, old) => {
   return myAxios("/books/AddBook", {
     data: {
       schoolIp: schoolIpGetter(),
-      name: bookName,
       isbn,
       getOrSale: flagToGet, // 0为想要1为售卖
       category,
       message,
-      label,
-      changePhone, phone,
-      thisWx: wx,
+      label: old,  // 几成新
+      changePhone:"15086866", // 不需要这几个参数,等接口改过来!
+      name: "", //
+      changeWx:"srf939847757",
+      thisWx:"srf939847757",
     }
   })
 }
