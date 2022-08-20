@@ -19,7 +19,7 @@
             :title="book.name"
             :note="book.words"
             :on-click="bookDetailClick.bind(this, book.id)"
-            :thumb="http://photo.chaoxing.com/photo_80.jpg"
+            thumb="http://photo.chaoxing.com/photo_80.jpg"
           />
         </AtList>
       </AtTabsPane>
