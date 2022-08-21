@@ -25,7 +25,7 @@
         :border="false"
         placeholder="请填写/扫一扫ISBN码"
         :value="inputISBN"
-        @change="onInputISBNChange"
+        :on-change="(val) => this.inputISBN = val"
       />
       <view class="at-col at-col-3 scan">
         <view class="at-row">
@@ -51,7 +51,7 @@
       </view>
       <AtTextarea
         :value="inputWords"
-        :on-change="onInputWordsChange"
+        :on-change="(val) => this.inputWords = val"
         placeholder="想说的话都可以留下来哦~~"
         :count="false"
         class="mesg"
@@ -69,7 +69,7 @@
           style="margin-left: -20px"
           :title="genreTitle"
           :open="isGenreListOpen"
-          :on-click="openGenreList"
+          :on-click="(val) => this.isGenreListOpen = val"
           :hasBorder="false"
         >
           <AtRadio
@@ -83,7 +83,7 @@
           style="margin-left: 20px"
           :title="oldTitle"
           :open="isOldListOpen"
-          :on-click="openOldList"
+          :on-click="(val) => this.isOldListOpen = val"
           :hasBorder="false"
         >
           <AtRadio
@@ -106,9 +106,11 @@
     <AtModal
       :is-opened="isModalOpen"
       title="发布成功"
-      content="发布的书籍可以在 '我的->个人发布' 里面找到哦"
-      confirm-text="确认"
-      :on-confirm="onModalConfirm"
+      content="可去 '我的->管理书籍' 里面查看和管理书籍"
+      confirm-text="继续发布"
+      :on-confirm="continuePost"
+      cancel-text="查看详情"
+      :on-cancel="toDetail"
     />
   </view>
 </template>
@@ -176,43 +178,52 @@ export default {
       inBGC: "background-color: #F5F5F5",
       isToastOpen: false,
       isModalOpen: false,
+      bookId: "", // 刚发布书籍的id
     }
   },
   methods: {
-    onInputISBNChange(val) {
-      this.inputISBN = val;
-    },
-    onInputWordsChange(val) {
-      this.inputWords = val;
-    },
-    openGenreList(val) {
-      this.isGenreListOpen = val;
+    choosePurpose(e) {
+      // 设置目的
+      this.purpose = e.target.dataset.purpose;  // 0为收1为售
+      // 点击节点变色
+      this.outBGC = "background-color: " + ((this.purpose === "out") ? "#FFCA4E" : "#F5F5F5");
+      this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
+      // 根据所选目的切换新旧程度选项
+      this.chooseOld = (this.purpose === "out")
+        ? outOld.map(val => {
+          return {label: outOldDegree[val], value: val}
+        })
+        : inOld.map(val => {
+          return {label: inOldDegree2[val], value: val}
+        });
     },
     clickGenre(val) {
-      this.openGenreList(false);  // 关闭菜单
+      this.isGenreListOpen = false;  // 关闭菜单
       this.genreTitle = labelMap[val];  // 更新标题为所选项
       this.chosenGenre = val;
     },
-    openOldList(val) {
-      this.isOldListOpen = val;
-    },
     clickOld(val) {
-      this.openOldList(false);
+      this.isOldListOpen = false;
       this.oldTitle = labelMap[val];
       this.chosenOld = val;
-      console.log(this.chosenOld)
     },
     post() {
       const info = {
-        purpose: this.purpose === "out" ? '1' : '0',
+        purpose: undefined,
         isbn: this.inputISBN,
         words: this.inputWords,
         genre: genreMap[this.chosenGenre],  // 种类代号
         old: this.purpose === "out" ? this.chosenOld : inOldDegree[this.chosenOld], // 新旧程度代号
       }
+      if (this.purpose === "out") {
+        info.purpose = '1';
+      } else if (this.purpose === "in") {
+        info.purpose = '0';
+      }
       // 有信息没填
       for (let key in info) {
-        if (!info.key || info.key.length < 1) {
+        console.log(key, info[key])
+        if (info[key] === undefined || info[key].length < 1) {
           this.isToastOpen = true;
           return;
         }
@@ -223,6 +234,7 @@ export default {
         .then(res => {
           if (res.data === "success") {
             this.isModalOpen = true;  // 打开模态框
+            // 更新bookId
           } else {  // 添加失败
           }
         }, err => {
@@ -230,25 +242,19 @@ export default {
         })
       this.isToastOpen = false;
     },
-    choosePurpose(e) {
-      // 设置目的
-      this.purpose = e.target.dataset.purpose;  // 0为收1为售
-      // 点击节点变色
-      this.outBGC = "background-color: " + ((this.purpose === "out") ? "#FFCA4E" : "#F5F5F5");
-      this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
-      // 根据所选目的切换新旧程度选项
-      this.chooseOld = (this.purpose === "out")
-        ? outOld.map(val => {
-            return {label: outOldDegree[val], value: val}
-          })
-        : inOld.map(val => {
-          return {label: inOldDegree2[val], value: val}
-        });
+    continuePost() {
+      this.isModalOpen = false;
+      // 表单项重置
+      this.purpose = "";
+      this.inputISBN = "";
+      this.inputWords = "";
+      this.chosenGenre = "";
+      this.chosenOld = "";
     },
-    onModalConfirm() {
+    toDetail() {
       this.isModalOpen = false;
       Taro.switchTab({
-        url: `../../pages/index/index`,
+        url: `/pages/detail/detail?key=` + this.bookId,
       })
     }
   }
