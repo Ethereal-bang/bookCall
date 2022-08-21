@@ -18,3 +18,8 @@ export const addBook = (isbn, flagToGet, category, message, old) => {
     }
   })
 }
+
+// 我的发布
+export const personPublish = () => {
+  // 等后端api更改!
+}

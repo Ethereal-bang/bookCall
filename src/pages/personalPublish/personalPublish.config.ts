@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '我的发布',
+  navigationBarTitleText: '管理书籍',
 }

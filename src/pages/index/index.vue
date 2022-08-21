@@ -105,7 +105,7 @@
         <AtTabs
           :current="currentTab"
           :tab-list="tabList"
-          :on-click="clickTab"
+          :on-click="value => this.currentTab = value"
         >
           <AtTabsPane
             :current="currentTab"
@@ -187,7 +187,8 @@ import './index.scss'
 import Taro from "@tarojs/taro";
 import {getAllBooks, getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
 import BookList from "../../components/bookList/BookList";
-import {genreMap, genreMap2} from "../../data/map";
+import {schoolMap, genreMap, genreMap2} from "../../data/map";
+import getSchoolIp from "../../utils/schoolIpGetter";
 
 export default {
   components: {
@@ -269,9 +270,6 @@ export default {
           console.log(err)
         })
     },
-    clickTab(value) {
-      this.currentTab = value
-    },
     genreClick(genre) {
       if (!this.judgeUniversity()) return;
       const genreCode = genreMap[genre],
@@ -306,7 +304,7 @@ export default {
       });
       this.choseUniversity()// 选后关闭下拉单
       this.chosenUniversity = e.target.dataset.title; // 下拉单显示
-      this.isChosenUniversity = true; // 换书广场显示（true则报错？？
+      this.isChosenUniversity = true; // 换书广场显示
       this.isToastOpen = false;
     },
     judgeUniversity() { // 交互时判断是否选择大学
@@ -357,13 +355,19 @@ export default {
         }
       }
     })
-    // 获取学校列表
-    getSchoolList()
-      .then(res => {
-        this.university = res.data;
+    // 学校
+    const memoIp = getSchoolIp();
+    if (memoIp) { // 已经选择过学校
+      this.chosenUniversity = schoolMap[memoIp];
+      this.isChosenUniversity = true; // 换书广场显示
+    } else {  // 获取学校列表
+      getSchoolList()
+        .then(res => {
+          this.university = res.data;
         }, err => {
-        console.log(err)
-      })
+          console.log(err)
+        })
+    }
   }
 }
 </script>

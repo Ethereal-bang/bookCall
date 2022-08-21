@@ -1,3 +1,9 @@
+// 学校列表 ip-name
+export const schoolMap = {
+  0: "重庆邮电大学",
+  1: "重庆大学",
+}
+
 // 种类 name-code
 export const genreMap = {
   novel: 0,
