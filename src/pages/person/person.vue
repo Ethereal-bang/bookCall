@@ -25,27 +25,28 @@
         <image class="change" src="./change.png" style="height: 24rpx; width: 24rpx;  display: inline-block" />
       </view>
       <input type="nickname" placeholder="请输入昵称"/>
+      <button>我的主页</button>
 
-<!--          <AtTextarea-->
-<!--            placeholder="点击添加换书宣言，让换书更有吸引力~~~"-->
-<!--            :value="inputWords"-->
-<!--            :on-change="onInputWordsChange"-->
-<!--            :count="false"-->
-<!--            class="mesg"-->
-<!--          />-->
+      <AtTextarea
+            placeholder="点击添加换书宣言，让换书更有吸引力~~~"
+            :value="inputWords"
+            :on-change="(val) => this.inputWords = val"
+            :count="false"
+            class="mesg"
+          />
 
-<!--          <view id="mine">-->
-<!--            <view @tap="toPublish">-->
-<!--              <image class="img1 img" src="./info_publish.png" style="height: 30px; width: 30px; display: inline-block" />-->
-<!--              <text class="text">管理书籍</text>-->
-<!--              <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
-<!--            </view>-->
-<!--            <view @tap="toRules">-->
-<!--              <image class="img3 img" src="./info_rule.png" style="height: 30px; width: 30px; display: inline-block" />-->
-<!--              <text class="text">交换规则</text>-->
-<!--              <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
-<!--            </view>-->
-<!--          </view>-->
+      <view id="mine">
+        <navigator url="/pages/personalPublish/personalPublish" open-type="navigate">
+          <!--          <image class="img1 img" src="./info_publish.png" style="height: 30px; width: 30px; display: inline-block" />-->
+          <text class="text">管理书籍</text>
+          <!--          <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
+        </navigator>
+        <navigator url="/pages/changeRules/changeRules" open-type="navigate">
+          <!--          <image class="img3 img" src="./info_rule.png" style="height: 30px; width: 30px; display: inline-block" />-->
+          <text class="text">交换规则</text>
+          <!--          <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
+        </navigator>
+      </view>
     </view>
 
     <AtDivider  class="welcome" content="欢迎来到书唤~" fontColor='#bdbdbd' fontSize='22' />
@@ -70,18 +71,7 @@ export default {
     }
   },
   methods: {
-    onInputWordsChange(val) {
-      this.inputWords = val;
-    },
-    toPublish() { // 跳转到“我的发布”
-      Taro.navigateTo({
-        url: "/pages/personalPublish/personalPublish",
-      })
-    },
-    toRules() { // 打开交换规则
-      Taro.navigateTo({
-        url: "/pages/changeRules/changeRules",
-      })},
+
   }
 }
 </script>
