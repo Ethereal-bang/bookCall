@@ -253,7 +253,7 @@ export default {
     },
     toDetail() {
       this.isModalOpen = false;
-      Taro.switchTab({
+      Taro.navigateTo({
         url: `/pages/detail/detail?key=` + this.bookId,
       })
     }
