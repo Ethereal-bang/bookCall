@@ -25,7 +25,7 @@
         input-type="text"
         placeholder="搜索书籍名称"
         :value="searchValue"
-        :on-change="onChange.bind(this, 'searchValue')"
+        :on-change="val => this.searchValue = val"
         :on-action-click="onSearch"
       />
 
@@ -34,12 +34,12 @@
         indicator-color="#f0f2f5"
         indicator-active-color="#999999"
         current="current"
-        :duration="duration"
-        :interval="interval"
-        :circular="isCircular"
-        :autoplay="isAutoplay"
-        :speed="3500"
-        :indicator-dots="hasIndicatorDots"
+        duration="500"
+        interval="2000"
+        circular="true"
+        autoplay="true"
+        speed="3500"
+        indicator-dots="true"
       >
         <swiper-item
           v-for="(item, idx) in banners"
@@ -111,7 +111,7 @@
             :current="currentTab"
             :index="0"
           >
-            <BookList :book-list=bookList />
+            <BookList :list=bookList :class="tabs_body_class" />
             <AtList
               :class="tabs_body_class"
             >
@@ -125,42 +125,19 @@
             :current="currentTab"
             :index="1"
           >
-            <AtList
+            <BookList
+              :list="bookList.filter(book => book.getOrSale === '1')"
               :class="tabs_body_class"
-            >
-              <AtListItem
-                v-for="book in bookList"
-                v-if="book.states === '可换'"
-                :key="book.id"
-                :title="book.name"
-                :note="book.words"
-                :extra-text="book.states"
-                :on-click="bookDetailClick.bind(this, book.id)"
-                style="color:#57665e"
-                :class="(book.states === '可换') ? 'item_out' : 'item_in'"
-              />
-            </AtList>
+            />
           </AtTabsPane>
           <AtTabsPane
             :current="currentTab"
             :index="2"
           >
-            <AtList
+            <BookList
+              :list="bookList.filter(book => book.getOrSale === '0')"
               :class="tabs_body_class"
-            >
-              <AtListItem
-                v-for="book in bookList"
-                v-if="book.states === '求换'"
-                :key="book.id"
-                :title="book.name"
-                :note="book.words"
-                thumb="http://photo.chaoxing.com/photo_80.jpg"
-                :extra-text="book.states"
-                :on-click="bookDetailClick.bind(this, book.id)"
-                style="color:#57665e"
-                :class="(book.states === '可换') ? 'item_out' : 'item_in'"
-              />
-            </AtList>
+            />
           </AtTabsPane>
         </AtTabs>
       </view>
@@ -209,11 +186,6 @@ export default {
     return {
       searchValue: '',
       current: 1,
-      interval: 2000,// 切换事件
-      duration: 500,
-      isCircular: true,// 衔接滑动
-      isAutoplay: true,
-      hasIndicatorDots: true,
       banners: [
         {imgPath: "https://jdc.jd.com/img/200", navigatePath: "/pages/index/index"},
         {imgPath: "https://jdc.jd.com/img/200", navigatePath: "/pages/changeRules/changeRules"},
@@ -248,11 +220,6 @@ export default {
     }
   },
   methods:  {
-    // 搜索框内容改变
-    onChange(stateName, value) {
-      this[stateName] = value;
-    },
-    // 搜索
     onSearch() {
       if (!this.judgeUniversity())  return;
       searchBook(this.searchValue)
@@ -297,6 +264,7 @@ export default {
       this.showState = !this.showState;
     },
     choseWitchUniversity(e) {
+      this.requestBooks();  // 请求书籍列表
       // 缓存所选学校ip
       Taro.setStorage({
         key: "schoolIp",
@@ -315,15 +283,19 @@ export default {
       return true;
     },
     clickToAllBooks() {
+      Taro.navigateTo({
+        url: "/pages/books/books?title=" + "全部书籍",
+        success: res => {
+          res.eventChannel.emit("sendData", {
+            list: this.bookList,
+          })
+        }
+      })
+    },
+    // 选择学校后请求书籍列表
+    requestBooks() {
       getAllBooks().then(response => {
-        Taro.navigateTo({
-          url: "/pages/books/books?title=" + "全部书籍",
-          success: res => {
-            res.eventChannel.emit("acceptDataFromOpenerPage", {
-              list: response.data,
-            })
-          }
-        })
+        this.bookList = response.data;
       }, err => console.log(err))
     },
     login() {
@@ -358,6 +330,7 @@ export default {
     // 学校
     const memoIp = getSchoolIp();
     if (memoIp) { // 已经选择过学校
+      this.requestBooks();
       this.chosenUniversity = schoolMap[memoIp];
       this.isChosenUniversity = true; // 换书广场显示
     } else {  // 获取学校列表

@@ -37,6 +37,7 @@ export default {
     const eventChannel = current.getOpenerEventChannel();  // 页面间事件通信通道
     eventChannel.on("sendData", data => {
       this.list = data.list;
+      console.log(this.list)
     })
   }
 }
