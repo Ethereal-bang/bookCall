@@ -2,9 +2,8 @@
   <view class="bookDetail">
     <!--用户信息栏-->
     <PersonalBar
-      :user-name="bookData.username"
+      :user-name="userData.username"
       :user-id="userData.id"
-      :avatar-url="bookData.img"
     />
 
     <!--书籍封面-->
@@ -140,11 +139,10 @@ export default {
     AtTag,
   },
   onLoad: function (options) {
-    console.log(options)
     this.key = options.key;
     // 请求书籍信息;
     // ...获取对应用户信息
-    console.log(this.bookData, this.userData)
+    // console.log(this.bookData, this.userData)
     // ...是否属于本人
   },
   methods: {

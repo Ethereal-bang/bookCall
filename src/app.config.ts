@@ -8,6 +8,7 @@ export default {
     /*其他页面:*/
     "pages/books/books",  // 书籍列表展示页
     "pages/bookDetail/bookDetail", // 书籍详情
+    "pages/personalHomepage/personalHomepage",  // 个人主页
     "pages/personalPublish/personalPublish",  // 个人发布
     "pages/changeRules/changeRules",  // 换书规则
   ],
