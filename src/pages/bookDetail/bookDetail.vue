@@ -77,19 +77,30 @@
 
     </view>
 
-    <button
-      v-if="!userData.isOwn"
-      @tap="handle"
-      class="button"
-    >
-      找Ta换
-    </button>
-    <button
-      v-if="userData.isOwn"
-      class="button"
-    >
-      下架
-    </button>
+    <!--三种按钮-->
+    <view>
+      <button
+        v-if='!userData.isOwn && bookData.states === "求换"'
+        @tap="handle"
+        class="button"
+      >
+        找Ta换
+      </button>
+      <button
+        v-if='!userData.isOwn && bookData.states === "可换"'
+        @tap="handle"
+        class="button"
+      >
+        我有，换给Ta
+      </button>
+      <button
+        v-if="userData.isOwn"
+        @tap="handle"
+        class="button"
+      >
+        下架书籍
+      </button>
+    </view>
   </view>
 </template>
 
@@ -97,6 +108,7 @@
 import PersonalBar from "../../components/personBar/PersonalBar";
 import {AtTag} from 'taro-ui-vue';
 import './bookDetail.scss';
+import {bookOff} from "../../api/bookApi";
 
 export default {
   name: "BookDetail",
@@ -140,6 +152,19 @@ export default {
       const info = document.querySelector("#info");
       info.removeAttribute("class");
       info.setAttribute("class", "show")
+      // 判断属于三种情况中哪种
+      switch (this.userData.isOwn) {
+        case true:  // 下架书籍
+          bookOff()
+          break;
+        case false: // 跳转消息框页_主动联系
+          switch (this.bookData.states) {
+            case "求换":  // 找ta换
+              break;
+            case "可换":  // 换给ta
+              break;
+          }
+      }
     },
   }
 }

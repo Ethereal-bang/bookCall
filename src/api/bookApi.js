@@ -19,7 +19,7 @@ export const addBook = (isbn, flagToGet, category, message, old) => {
   })
 }
 
-// 我的发布
-export const personPublish = () => {
-  // 等后端api更改!
+// 下架书籍(等后端修改!
+export const bookOff = () => {
+
 }
