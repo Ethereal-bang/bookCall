@@ -246,7 +246,7 @@ export default {
           url: `../../pages/books/books?title=` + name,
           success: res => {
             // 向被打开页面传送数据
-            res.eventChannel.emit("acceptDataFromOpenerPage", {
+            res.eventChannel.emit("sendData", {
               list: response.data,
             })
           }
