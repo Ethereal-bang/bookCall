@@ -25,7 +25,11 @@
         <image class="change" src="./change.png" style="height: 24rpx; width: 24rpx;  display: inline-block" />
       </view>
       <input type="nickname" placeholder="请输入昵称"/>
-      <button>我的主页</button>
+      <navigator
+        :url="'/pages/personalHomepage/personalHomepage?userId=' + userId"
+      >
+        我的主页
+      </navigator>
 
       <AtTextarea
             placeholder="点击添加换书宣言，让换书更有吸引力~~~"
@@ -68,7 +72,11 @@ export default {
   data() {
     return {
       inputWords: "",
+      userId: "",
     }
+  },
+  onLoad() {
+    // ...获取userId
   },
   methods: {
 
