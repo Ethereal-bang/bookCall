@@ -22,10 +22,8 @@
       <AtAvatar class="head" circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
       <input
         :value="username" placeholder="请输入昵称"
-        type="nickname" @blur="onUsernameChange" />
-      <navigator
-        :url="'/pages/personalHomepage/personalHomepage?userId=' + userId"
-      >
+        type="nickname" @change="onUsernameChange" />
+      <navigator url="/pages/personalHomepage/personalHomepage">
         我的主页
       </navigator>
 
@@ -71,17 +69,15 @@ export default {
   data() {
     return {
       inputWords: "",
-      userId: "",
       username: "",
     }
   },
   onLoad() {
-    // ...获取userId
     // ...获取昵称
 
   },
   methods: {
-    onUsernameChange(val) { // bug:开发工具不触发
+    onUsernameChange(val) { // bug:开发工具不触发; ...防抖
       this.username = val;
       modifyUsername(this.username)
     },
