@@ -15,7 +15,7 @@ export const modifyUsername = (name) =>  {
 export const getUserInfo = () => {
   return myAxios("/myInfo/GetInfo", {
     data: {
-      openid: getOpenid,
+      openid: getOpenid(),
     }
   })
 }
@@ -25,7 +25,7 @@ export const getUserBooks = () => {
   return myAxios("/books/GetBooksByopenid", {
     data: {
       schoolIp: getSchoolIp(),
-      openid: getOpenid, // 先写死!
+      openid: getOpenid(), // 先写死!
     }
   })
 }

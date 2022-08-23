@@ -1,6 +1,15 @@
 import {myAxios} from "./myAxios";
 import {getSchoolIp} from "../utils/storageGetter";
 
+// 登录获取openid
+export const login = (code) => {
+  return myAxios("/myInfo/jscode2session", {
+    data: {
+      code,
+    }
+  })
+}
+
 // 获取学校列表,ip
 export const getSchoolList = () => {
   return myAxios.get("/Getschools");

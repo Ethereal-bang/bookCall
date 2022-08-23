@@ -162,7 +162,7 @@ import {
 } from 'taro-ui-vue'
 import './index.scss'
 import Taro from "@tarojs/taro";
-import {getAllBooks, getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
+import {getAllBooks, getGenreBooks, getSchoolList, login, searchBook} from "../../api/indexApi";
 import BookList from "../../components/bookList/BookList";
 import {schoolMap, genreMap, genreMap2} from "../../data/map";
 import {getSchoolIp} from "../../utils/storageGetter";
@@ -298,8 +298,6 @@ export default {
         this.bookList = response.data;
       }, err => console.log(err))
     },
-    login() {
-    }
   },
   onPageScroll(scroll) {  // 监测页面滚动值
     // console.log(scroll)
@@ -319,9 +317,13 @@ export default {
       success: (res) => {
         const {code} = res;
         if (code) {
-          // 发起网络请求
-          // ...
-          // console.log(res.code)
+          // 获取openid并存储
+          login(code).then(res => {
+            let openid = res.data;
+            console.log(openid)
+            openid = openid.slice(1).slice(0, -2);
+            Taro.setStorageSync("openid", openid)
+          })
         } else {
           console.log("登录失败：" + res.errMsg);
         }
