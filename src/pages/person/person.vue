@@ -20,11 +20,9 @@
     <!--登录页-->
     <view id="have_sign" class="signpage">
       <AtAvatar class="head" circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
-      <view class="username">
-        用户名
-        <image class="change" src="./change.png" style="height: 24rpx; width: 24rpx;  display: inline-block" />
-      </view>
-      <input type="nickname" placeholder="请输入昵称"/>
+      <input
+        :value="username" placeholder="请输入昵称"
+        type="nickname" @blur="onUsernameChange" />
       <navigator
         :url="'/pages/personalHomepage/personalHomepage?userId=' + userId"
       >
@@ -61,6 +59,7 @@
 import { AtAvatar, AtTextarea, AtDivider } from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './person.scss'
+import {modifyUsername} from "../../api/personApi";
 
 export default {
   name: "Person",
@@ -73,13 +72,19 @@ export default {
     return {
       inputWords: "",
       userId: "",
+      username: "",
     }
   },
   onLoad() {
     // ...获取userId
+    // ...获取昵称
+
   },
   methods: {
-
+    onUsernameChange(val) { // bug:开发工具不触发
+      this.username = val;
+      modifyUsername(this.username)
+    },
   }
 }
 </script>
