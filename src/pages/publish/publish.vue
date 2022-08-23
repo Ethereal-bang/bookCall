@@ -222,14 +222,13 @@ export default {
       }
       // 有信息没填
       for (let key in info) {
-        console.log(key, info[key])
         if (info[key] === undefined || info[key].length < 1) {
           this.isToastOpen = true;
           return;
         }
       }
       // 成功提交
-      // console.log(info)
+      console.log(info)
       addBook(info.isbn, info.purpose, info.genre, info.words, info.old)
         .then(res => {
           if (res.data === "success") {

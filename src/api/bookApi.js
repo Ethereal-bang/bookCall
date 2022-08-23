@@ -1,20 +1,17 @@
 import {myAxios} from "./myAxios";
 import schoolIpGetter from "../utils/schoolIpGetter";
 
-// 发布书籍
+// 发布书籍(待后端修改参数!
 export const addBook = (isbn, flagToGet, category, message, old) => {
   return myAxios("/books/AddBook", {
     data: {
       schoolIp: schoolIpGetter(),
-      isbn,
+      openid:"",
       getOrSale: flagToGet, // 0为想要1为售卖
-      category,
+      isbn,
       message,
+      category,
       label: old,  // 几成新
-      changePhone:"15086866", // 不需要这几个参数,等接口改过来!
-      name: "", //
-      changeWx:"srf939847757",
-      thisWx:"srf939847757",
     }
   })
 }
