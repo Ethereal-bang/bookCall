@@ -16,7 +16,11 @@ export const addBook = (isbn, flagToGet, category, message, old) => {
   })
 }
 
-// 下架书籍(等后端修改!
-export const bookOff = () => {
-
+// 下架书籍
+export const bookOff = (bookId) => {
+  return myAxios.delete("/books/BookOff", {
+    data: {
+      id: bookId,
+    }
+  })
 }

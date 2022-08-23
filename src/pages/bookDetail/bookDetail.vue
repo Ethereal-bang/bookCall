@@ -153,7 +153,9 @@ export default {
       // 判断属于三种情况中哪种
       switch (this.userData.isOwn) {
         case true:  // 下架书籍
-          bookOff()
+          bookOff(this.bookData.id).then(res => {
+
+          }, err => {console.log(err)})
           break;
         case false: // 跳转消息框页_主动联系
           switch (this.bookData.states) {

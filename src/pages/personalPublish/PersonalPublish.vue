@@ -92,7 +92,6 @@ export default {
       this.currentTab = value
     },
     bookDetailClick(key) {
-      console.log(key)
       Taro.navigateTo({
         url: `../../pages/bookDetail/bookDetail?key=${key}`,
       })
