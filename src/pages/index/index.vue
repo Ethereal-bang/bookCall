@@ -165,7 +165,7 @@ import Taro from "@tarojs/taro";
 import {getAllBooks, getGenreBooks, getSchoolList, searchBook} from "../../api/indexApi";
 import BookList from "../../components/bookList/BookList";
 import {schoolMap, genreMap, genreMap2} from "../../data/map";
-import getSchoolIp from "../../utils/schoolIpGetter";
+import {getSchoolIp} from "../../utils/storageGetter";
 
 export default {
   components: {

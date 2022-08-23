@@ -1,23 +1,21 @@
 import {myAxios} from "./myAxios";
-import getSchoolIp from "../utils/schoolIpGetter";
-
-// 我的发布
-export const personPublish = () => {
-  // 等后端api更改!
-}
+import {getSchoolIp, getOpenid} from "../utils/storageGetter";
 
 // 获取用户资料
-export const getUserInfo = (userId) => {
-  // 等登录实现后!
+export const getUserInfo = () => {
+  return myAxios("/myInfo/GetInfo", {
+    data: {
+      openid: getOpenid,
+    }
+  })
 }
 
 // 获取用户书籍列表
-export const getUserBooks = (userId) => {
-  // 后端修改返回方式!
-  return myAxios("/books/GetBooksBythisWx", {
+export const getUserBooks = () => {
+  return myAxios("/books/GetBooksByopenid", {
     data: {
       schoolIp: getSchoolIp(),
-      thisWx: "srf939847757", // 先写死!
+      openid: getOpenid, // 先写死!
     }
   })
 }

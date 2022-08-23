@@ -78,12 +78,11 @@ export default {
       }
     }
   },
-  onLoad(options) {
-    const userId = options.userId;
+  onLoad() {
     // 获取用户信息_this.userInfo
-    getUserInfo(userId)
+    getUserInfo()
     // 获取用户书籍列表_this.bookList
-    getUserBooks(userId).then(res => {
+    getUserBooks().then(res => {
       this.bookList.in = res.data;
       this.bookList.out = res.data;
       this.bookList.off = res.data;

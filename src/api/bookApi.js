@@ -1,5 +1,5 @@
 import {myAxios} from "./myAxios";
-import schoolIpGetter from "../utils/schoolIpGetter";
+import schoolIpGetter from "../utils/storageGetter";
 
 // 发布书籍(待后端修改参数!
 export const addBook = (isbn, flagToGet, category, message, old) => {

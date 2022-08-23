@@ -1,5 +1,5 @@
 import {myAxios} from "./myAxios";
-import schoolIpGetter from "../utils/schoolIpGetter";
+import {getSchoolIp} from "../utils/storageGetter";
 
 // 获取学校列表,ip
 export const getSchoolList = () => {
@@ -10,7 +10,7 @@ export const getSchoolList = () => {
 export const searchBook = (keyword) => {
   return myAxios("/books/GetBooksBySearch", {
     data: {
-      schoolIp: schoolIpGetter(),
+      schoolIp: getSchoolIp(),
       name: '%' + keyword + '%',
     },
   });
@@ -19,7 +19,7 @@ export const searchBook = (keyword) => {
 // 根据分类获取书籍
 export const getGenreBooks = (genreCode) => {
   const data = {
-    schoolIp: schoolIpGetter(),
+    schoolIp: getSchoolIp(),
     category: genreCode,
   }
   return myAxios("/books/GetBooksBycategory", {
@@ -31,7 +31,7 @@ export const getGenreBooks = (genreCode) => {
 export const getAllBooks = () => {
     return myAxios("/books/GetBooksBySchool", {
       data: {
-        schoolIp: schoolIpGetter(),
+        schoolIp: getSchoolIp(),
       }
     })
 }
