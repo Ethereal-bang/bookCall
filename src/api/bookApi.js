@@ -16,6 +16,15 @@ export const addBook = (isbn, flagToGet, category, message, old) => {
   })
 }
 
+// 书籍详情
+export const getBookDetail = (bookId) => {
+  return myAxios("/books/GetBookByid", {
+    data: {
+      id: bookId,
+    },
+  })
+}
+
 // 下架书籍
 export const bookOff = (bookId) => {
   return myAxios.delete("/books/BookOff", {

@@ -107,7 +107,7 @@
 import PersonalBar from "../../components/personBar/PersonalBar";
 import {AtTag} from 'taro-ui-vue';
 import './bookDetail.scss';
-import {bookOff} from "../../api/bookApi";
+import {bookOff, getBookDetail} from "../../api/bookApi";
 
 export default {
   name: "BookDetail",
@@ -141,6 +141,9 @@ export default {
   onLoad: function (options) {
     this.key = options.key;
     // 请求书籍信息;
+    getBookDetail(this.key).then(res => {
+      this.bookData = res.data;
+    }, err => {console.log(err)})
     // ...获取对应用户信息
     // console.log(this.bookData, this.userData)
     // ...是否属于本人
