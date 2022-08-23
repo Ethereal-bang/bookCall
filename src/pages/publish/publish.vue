@@ -228,13 +228,12 @@ export default {
         }
       }
       // 成功提交
-      console.log(info)
       addBook(info.isbn, info.purpose, info.genre, info.words, info.old)
         .then(res => {
-          if (res.data === "success") {
+          if (res.data === "faied") { // 添加失败
+          } else {
+            this.bookId = res.data;   // 更新bookId
             this.isModalOpen = true;  // 打开模态框
-            // 更新bookId
-          } else {  // 添加失败
           }
         }, err => {
           console.log(err)
