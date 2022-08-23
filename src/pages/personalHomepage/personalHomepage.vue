@@ -83,9 +83,10 @@ export default {
     getUserInfo()
     // 获取用户书籍列表_this.bookList
     getUserBooks().then(res => {
-      this.bookList.in = res.data;
-      this.bookList.out = res.data;
-      this.bookList.off = res.data;
+      const {get, sale, history} = res.data;
+      this.bookList.in = get;
+      this.bookList.out = sale;
+      this.bookList.off = history;
     })
   }
 }
