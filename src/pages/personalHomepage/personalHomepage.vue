@@ -55,7 +55,7 @@
           </navigator>
         </view>
       </AtTabsPane>
-3      <AtTabsPane
+      <AtTabsPane
         :current="currentTab"
         :index="2"
       >

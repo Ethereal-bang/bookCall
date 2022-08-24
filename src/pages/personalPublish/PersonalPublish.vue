@@ -1,7 +1,8 @@
 <template>
   <view>
+    <AtNoticebar>当书籍交换成功后，记得及时点击书籍进入详情页下架，避免其他唤友频繁联系你哦~</AtNoticebar>
     <AtTabs
-      :on-click="handleClick"
+      :on-click="value => this.currentTab = value"
       :current="currentTab"
       :swipeable="true"
       :tab-list="tabList"
@@ -10,70 +11,64 @@
         :current="currentTab"
         :index="0"
       >
-        <AtNoticebar>当书籍交换成功后，记得及时点击书籍进入详情页下架，避免其他唤友频繁联系你哦~</AtNoticebar>
-        <AtList>
-          <AtListItem
-            v-for="book in personPublic"
-            :key="book.id"
-            v-if="book.states === '可换'"
-            :title="book.name"
-            :note="book.words"
-            :on-click="bookDetailClick.bind(this, book.id)"
-            thumb="http://photo.chaoxing.com/photo_80.jpg"
-          />
-        </AtList>
+        <BookList :list="personPublic.out" />
+        <!--边界情况:-->
+        <view v-if="personPublic.out.length === 0">
+          <AtNoticebar>
+            你还没有发布任何书籍哦！
+          </AtNoticebar>
+          <navigator url="/pages/publish/publish">
+            <AtButton>去发布</AtButton>
+          </navigator>
+        </view>
       </AtTabsPane>
 
       <AtTabsPane
         :current="currentTab"
         :index="1"
       >
-        <AtNoticebar>当书籍交换成功后，记得及时下架对应书籍，避免其他唤友频繁联系你哦~</AtNoticebar>
-        <AtList>
-          <AtListItem
-            v-for="book in personPublic"
-            :key="book.id"
-            v-if="book.states === '求换'"
-            :title="book.name"
-            :note="book.words"
-            :on-click="bookDetailClick.bind(this, book.id)"
-          />
-        </AtList>
+        <BookList :list="personPublic.in" />
+        <!--边界情况:-->
+        <view v-if="personPublic.in.length === 0">
+          <AtNoticebar>
+            你还没有发布任何书籍哦！
+          </AtNoticebar>
+          <navigator url="/pages/publish/publish">
+            <AtButton>去发布</AtButton>
+          </navigator>
+        </view>
       </AtTabsPane>
 
       <AtTabsPane
         :current="currentTab"
         :index="2"
       >
-        <AtNoticebar>下架后的书籍如果最终没有交换成功，可重新上架哦~</AtNoticebar>
-        <AtList>
-          <AtListItem
-            v-for="book in personPublic"
-            :key="book.id"
-            v-if="book.states === '下架'"
-            :title="book.name"
-            :note="book.words"
-            :on-click="bookDetailClick.bind(this, book.id)"
-          />
-        </AtList>
+        <BookList :list="personPublic.off" />
+        <!--边界情况:-->
+        <AtNoticebar v-if="personPublic.off.length === 0">
+          你还没有下架任何书籍哦！
+        </AtNoticebar>
       </AtTabsPane>
     </AtTabs>
   </view>
 </template>
 
 <script>
-import {AtTabs, AtTabsPane, AtList, AtListItem, AtDivider, AtNoticebar} from "taro-ui-vue";
+import {AtTabs, AtTabsPane, AtList, AtListItem, AtDivider, AtNoticebar, AtButton} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
+import BookList from "../../components/bookList/BookList";
 
 export default {
   name: "PersonalPublish",
   components: {
+    BookList,
     AtTabs,
     AtTabsPane,
     AtList,
     AtListItem,
     AtDivider,
     AtNoticebar,  // 通告栏
+    AtButton,
   },
   data() {
     return {
@@ -83,27 +78,22 @@ export default {
         {title: '求换'},
         {title: '已下架'},
       ],
-      key: undefined,
-      personPublic: [],
+      personPublic: {
+        out: [],
+        in: [],
+        off: [],
+      },
     }
   },
   methods: {
-    handleClick(value) {
-      this.currentTab = value
-    },
     bookDetailClick(key) {
       Taro.navigateTo({
         url: `../../pages/bookDetail/bookDetail?key=${key}`,
       })
     },
   },
-  onLoad(options) {
-    const id = Taro.getStorageSync("userId")  // 标识用户
-    // users.map(user => {
-    //   if (user.id === id) {
-    //     this.personPublic = user.public;
-    //   }
-    // })
+  onLoad() {
+    // openid请求个人发布
   },
 }
 </script>
