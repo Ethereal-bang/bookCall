@@ -7,36 +7,18 @@
     />
 
     <!--书籍封面-->
-    <!--    <image-->
-    <!--      :src="imgPaths[bookData.img]"-->
-    <!--      class="bookimg"-->
-    <!--      mode="aspectFit"-->
-    <!--    />-->
+    <image
+      :src="bookData.photoPath"
+      class="bookimg"
+      mode="aspectFit"
+    />
 
     <!--书籍信息-->
     <view class="bookmes">
       <view class="bookname">{{ bookData.name }}</view>
       <!--Label-->
       <view>
-        <AtTag class="booktag" size="small"
-               v-if="bookData.state === '可换'"
-               :active="true"
-        >
-          {{bookData}}
-        </AtTag>
-        <AtTag class="booktag" size="small"
-               v-if="bookData.state === '可换'"
-               :active="true"
-        >
-          可换
-        </AtTag>
-        <AtTag
-          v-if="bookData.state === '求换'" size="small"
-          :active="true"
-          class="booktag"
-        >
-          求换
-        </AtTag>
+        <AtTag class="booktag" size="small">{{bookData.state}}</AtTag>
 
         <AtTag size="small"
                :active="true"
@@ -71,7 +53,7 @@
       <!--简介-->
       <view>
         <text>图书简介</text>
-        <text>{{ bookData.bookIntroduction }}</text>
+        <view>{{ bookData.bookIntroduction }}</view>
       </view>
 
       <!--寄语-->
@@ -85,18 +67,11 @@
     <!--三种按钮-->
     <view>
       <button
-        v-if='!userData.isOwn && bookData.state === "求换"'
+        v-if='!userData.isOwn'
         @tap="handle"
         class="button"
       >
-        找Ta换
-      </button>
-      <button
-        v-if='!userData.isOwn && bookData.state === "可换"'
-        @tap="handle"
-        class="button"
-      >
-        我有，换给Ta
+        {{bookData.state === "求换" ? "我有，换给Ta" : "找Ta换"}}
       </button>
       <button
         v-if="userData.isOwn"
@@ -125,7 +100,7 @@ export default {
         id: undefined,
         name: "Loading",
         photoPath: "",
-        state: "Loading", // 通过接收到的getOrSale转换
+        "state": "Loading", // 通过接收到的getOrSale转换
         message: "",
         "genre": "",  // 通过接收到的category转换
         "old": undefined, // 通过接收到的label转换
@@ -157,6 +132,7 @@ export default {
         genre: genreMap3[info.category],
         old: oldDegreeMap[info.label],
       }
+      this.userData.id = info.openid; // 获取用户id
     }, err => {console.log(err)})
     // ...获取对应用户信息
     // console.log(this.bookData, this.userData)
