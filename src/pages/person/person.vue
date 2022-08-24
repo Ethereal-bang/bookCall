@@ -38,12 +38,12 @@
       <view id="mine">
         <navigator url="/pages/personalPublish/personalPublish" open-type="navigate">
           <!--          <image class="img1 img" src="./info_publish.png" style="height: 30px; width: 30px; display: inline-block" />-->
-          <text class="text">管理书籍</text>
+          <view class="text">管理书籍</view>
           <!--          <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
         </navigator>
         <navigator url="/pages/changeRules/changeRules" open-type="navigate">
           <!--          <image class="img3 img" src="./info_rule.png" style="height: 30px; width: 30px; display: inline-block" />-->
-          <text class="text">交换规则</text>
+          <view class="text">交换规则</view>
           <!--          <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
         </navigator>
       </view>
