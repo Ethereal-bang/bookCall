@@ -21,11 +21,11 @@ export const getUserInfo = (openid = getOpenid()) => {
 }
 
 // 获取用户书籍列表(因为users数据库目前没有该openid所以500
-export const getUserBooks = () => {
+export const getUserBooks = (openid = getOpenid()) => {
   return myAxios("/books/GetBooksByopenid", {
     data: {
       schoolIp: getSchoolIp(),
-      openid: getOpenid(), // 先写死!
+      openid,
     }
   })
 }
