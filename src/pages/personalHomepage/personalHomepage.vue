@@ -30,25 +30,47 @@
         :index="0"
       >
         <BookList :list=bookList.out />
+        <!--边界情况:-->
+        <view v-if="bookList.in.length === 0 && userInfo.isOwn">
+          <AtNoticebar v-if="bookList.out.length === 0 && userInfo.isOwn">
+            你还没有发布任何书籍哦！
+          </AtNoticebar>
+          <navigator url="/pages/publish/publish" open-type="switchTab">
+            <AtButton>去发布</AtButton>
+          </navigator>
+        </view>
       </AtTabsPane>
       <AtTabsPane
         :current="currentTab"
         :index="1"
       >
         <BookList :list="bookList.in" />
+        <!--边界情况:-->
+        <view v-if="bookList.in.length === 0 && userInfo.isOwn">
+          <AtNoticebar>
+            你还没有发布任何书籍哦！
+          </AtNoticebar>
+          <navigator url="/pages/publish/publish">
+            <AtButton>去发布</AtButton>
+          </navigator>
+        </view>
       </AtTabsPane>
-      <AtTabsPane
+3      <AtTabsPane
         :current="currentTab"
         :index="2"
       >
         <BookList :list="bookList.off" />
+        <!--边界情况:-->
+        <AtNoticebar v-if="bookList.off.length === 0 && userInfo.isOwn">
+          你还没有下架任何书籍哦！
+        </AtNoticebar>
       </AtTabsPane>
     </AtTabs>
   </view>
 </template>
 
 <script>
-import {AtAvatar, AtTabs, AtTabsPane, AtNoticebar, AtTextarea} from "taro-ui-vue";
+import {AtAvatar, AtTabs, AtTabsPane, AtNoticebar, AtTextarea, AtButton} from "taro-ui-vue";
 import {getUserBooks, getUserInfo} from "../../api/personApi";
 import BookList from "../../components/bookList/bookList";
 
@@ -61,6 +83,7 @@ export default {
     BookList,
     AtNoticebar,
     AtTextarea,
+    AtButton,
   },
   data() {
     return {
