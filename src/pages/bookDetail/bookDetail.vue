@@ -90,12 +90,13 @@ import {AtTag} from 'taro-ui-vue';
 import './bookDetail.scss';
 import {bookOff, getBookDetail} from "../../api/bookApi";
 import {genreMap3, inOrOut2, oldDegreeMap} from "../../data/map";
+import {getUserInfo} from "../../api/personApi";
+import {getOpenid} from "../../utils/storageGetter";
 
 export default {
   name: "BookDetail",
   data() {
     return {
-      key: "",  // 书籍编号
       bookData: {
         id: undefined,
         name: "Loading",
@@ -110,7 +111,7 @@ export default {
         bookIntroduction: "",  // 图书简介
       },
       userData: {
-        id: undefined,
+        id: undefined,  // 书籍编号
         username: "Loading",
         isOwn: false,   // 是否为本人
       }, // 书籍所有者信息
@@ -121,9 +122,8 @@ export default {
     AtTag,
   },
   onLoad: function (options) {
-    this.key = options.key;
     // 请求书籍信息;
-    getBookDetail(this.key).then(res => {
+    getBookDetail(options.key).then(res => {
       if (res.data.length === 0) return;
       const info = res.data[0];
       this.bookData = {
@@ -135,8 +135,12 @@ export default {
       this.userData.id = info.openid; // 获取用户id
     }, err => {console.log(err)})
     // ...获取对应用户信息
-    // console.log(this.bookData, this.userData)
-    // ...是否属于本人
+    getUserInfo(this.userData.id).then(res => {
+      this.userData = {
+        ...this.userData,
+        isOwn: this.userData.id === getOpenid(),  // 该书对应用户id与本地openid比较
+      }
+    }, err => console.log(err));
   },
   methods: {
     handle() {

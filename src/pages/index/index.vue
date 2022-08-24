@@ -320,7 +320,6 @@ export default {
           // 获取openid并存储
           login(code).then(res => {
             let openid = res.data;
-            console.log(openid)
             openid = openid.slice(1).slice(0, -2);
             Taro.setStorageSync("openid", openid)
           })

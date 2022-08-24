@@ -20,7 +20,7 @@ export default {
   },
   props: {
     userName: String,
-    userId: Number,
+    userId: Number | String,
   }
 }
 </script>

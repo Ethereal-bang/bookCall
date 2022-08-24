@@ -11,16 +11,16 @@ export const modifyUsername = (name) =>  {
   })
 }
 
-// 获取用户资料
-export const getUserInfo = () => {
+// 获取用户资料(待后端把用户注册写好!
+export const getUserInfo = (openid = getOpenid()) => {
   return myAxios("/myInfo/GetInfo", {
     data: {
-      openid: getOpenid(),
+      openid: openid,
     }
   })
 }
 
-// 获取用户书籍列表
+// 获取用户书籍列表(因为users数据库目前没有该openid所以500
 export const getUserBooks = () => {
   return myAxios("/books/GetBooksByopenid", {
     data: {
