@@ -26,6 +26,17 @@ export const genreMap2 = {
   other: "其他",
 }
 
+// 种类 code-名称
+export const genreMap3 = {
+  0: "小说",
+  1: "文学",
+  2: "互联网",
+  3: "科技",
+  4: "心理学",
+  5: "教材教辅",
+  6: "其他",
+}
+
 // 换入新旧程度 value-code
 export const inOldDegree = {
   new: 2,
@@ -41,13 +52,16 @@ export const inOldDegree2 = {
 }
 
 // 换成新旧程度 value-名称
-export const outOldDegree = {
+export const oldDegreeMap = {
   6: "6成新",
   7: "7成新",
   8: "8成新",
   9: "9成新",
   10: "10成新",
   5: "5成新及以下",
+  2: "全新",
+  1: "较新",
+  0: "无所谓",
 }
 
 // 换出/换入 code-name

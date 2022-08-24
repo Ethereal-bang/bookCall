@@ -19,13 +19,19 @@
       <!--Label-->
       <view>
         <AtTag class="booktag" size="small"
-               v-if="bookData.states === '可换'"
+               v-if="bookData.state === '可换'"
+               :active="true"
+        >
+          {{bookData}}
+        </AtTag>
+        <AtTag class="booktag" size="small"
+               v-if="bookData.state === '可换'"
                :active="true"
         >
           可换
         </AtTag>
         <AtTag
-          v-if="bookData.states === '求换'" size="small"
+          v-if="bookData.state === '求换'" size="small"
           :active="true"
           class="booktag"
         >
@@ -59,19 +65,19 @@
       <!--出版社-->
       <view>
         <text>出版时间</text>
-        <text>{{ bookData.publishTime }}</text>
+        <text>{{ bookData.publishingTime }}</text>
       </view>
 
       <!--简介-->
       <view>
         <text>图书简介</text>
-        <text>{{ bookData.description }}</text>
+        <text>{{ bookData.bookIntroduction }}</text>
       </view>
 
       <!--寄语-->
       <view>
         <text>换书寄语：</text>
-        <text>{{ bookData.words }}</text>
+        <text>{{ bookData.message }}</text>
       </view>
 
     </view>
@@ -79,14 +85,14 @@
     <!--三种按钮-->
     <view>
       <button
-        v-if='!userData.isOwn && bookData.states === "求换"'
+        v-if='!userData.isOwn && bookData.state === "求换"'
         @tap="handle"
         class="button"
       >
         找Ta换
       </button>
       <button
-        v-if='!userData.isOwn && bookData.states === "可换"'
+        v-if='!userData.isOwn && bookData.state === "可换"'
         @tap="handle"
         class="button"
       >
@@ -108,6 +114,7 @@ import PersonalBar from "../../components/personBar/PersonalBar";
 import {AtTag} from 'taro-ui-vue';
 import './bookDetail.scss';
 import {bookOff, getBookDetail} from "../../api/bookApi";
+import {genreMap3, inOrOut2, oldDegreeMap} from "../../data/map";
 
 export default {
   name: "BookDetail",
@@ -115,17 +122,17 @@ export default {
     return {
       key: "",  // 书籍编号
       bookData: {
-        "id": undefined,
-        "name": "Loading",
-        "img": "",
-        "states": "Loading",
-        "words": "",
-        "genre": "",
-        "old": undefined,
-        "author": "",
+        id: undefined,
+        name: "Loading",
+        photoPath: "",
+        state: "Loading", // 通过接收到的getOrSale转换
+        message: "",
+        "genre": "",  // 通过接收到的category转换
+        "old": undefined, // 通过接收到的label转换
+        author: "",
         press: "Loading", // 出版社
-        publishTime: "",  // 出版时间
-        description: "",  // 图书简介
+        publishingTime: "",  // 出版时间
+        bookIntroduction: "",  // 图书简介
       },
       userData: {
         id: undefined,
@@ -142,7 +149,14 @@ export default {
     this.key = options.key;
     // 请求书籍信息;
     getBookDetail(this.key).then(res => {
-      this.bookData = res.data;
+      if (res.data.length === 0) return;
+      const info = res.data[0];
+      this.bookData = {
+        ...info,
+        state: inOrOut2[info.getOrSale],
+        genre: genreMap3[info.category],
+        old: oldDegreeMap[info.label],
+      }
     }, err => {console.log(err)})
     // ...获取对应用户信息
     // console.log(this.bookData, this.userData)
@@ -161,7 +175,7 @@ export default {
           }, err => {console.log(err)})
           break;
         case false: // 跳转消息框页_主动联系
-          switch (this.bookData.states) {
+          switch (this.bookData.state) {
             case "求换":  // 找ta换
               break;
             case "可换":  // 换给ta

@@ -1,12 +1,12 @@
 import {myAxios} from "./myAxios";
-import {getSchoolIp} from "../utils/storageGetter";
+import {getOpenid, getSchoolIp} from "../utils/storageGetter";
 
 // 发布书籍
 export const addBook = (isbn, flagToGet, category, message, old) => {
   return myAxios("/books/AddBook", {
     data: {
       schoolIp: getSchoolIp(),
-      openid:"",
+      openid: getOpenid(),
       getOrSale: flagToGet, // 0为想要1为售卖
       isbn,
       message,

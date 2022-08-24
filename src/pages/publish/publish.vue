@@ -119,7 +119,7 @@
 import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast, AtModal} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
-import {genreMap, inOldDegree, inOldDegree2, outOldDegree} from "../../data/map";
+import {genreMap, inOldDegree, inOldDegree2, oldDegreeMap} from "../../data/map";
 import {addBook} from "../../api/bookApi";
 
 const labelMap = {  // 通过映射关系将所选label渲染到标题
@@ -191,7 +191,7 @@ export default {
       // 根据所选目的切换新旧程度选项
       this.chooseOld = (this.purpose === "out")
         ? outOld.map(val => {
-          return {label: outOldDegree[val], value: val}
+          return {label: oldDegreeMap[val], value: val}
         })
         : inOld.map(val => {
           return {label: inOldDegree2[val], value: val}
