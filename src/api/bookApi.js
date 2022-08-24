@@ -1,7 +1,7 @@
 import {myAxios} from "./myAxios";
 import {getSchoolIp} from "../utils/storageGetter";
 
-// 发布书籍(待后端修改参数!
+// 发布书籍
 export const addBook = (isbn, flagToGet, category, message, old) => {
   return myAxios("/books/AddBook", {
     data: {

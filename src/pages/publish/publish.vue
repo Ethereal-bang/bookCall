@@ -223,7 +223,7 @@ export default {
       // 有信息没填
       for (let key in info) {
         if (info[key] === undefined || info[key].length < 1) {
-          this.isToastOpen = true;
+          this.isToastOpen = true;  // Bug:二次触发时不能正常显示!
           return;
         }
       }
@@ -252,7 +252,7 @@ export default {
     toDetail() {
       this.isModalOpen = false;
       Taro.navigateTo({
-        url: `/pages/detail/detail?key=` + this.bookId,
+        url: `/pages/bookDetail/bookDetail?key=` + this.bookId,
       })
     }
   }
