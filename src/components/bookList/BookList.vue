@@ -5,6 +5,7 @@
       :key="book.id"
       :title="book.name"
       :note="book.message"
+      :thumb="book.photoPath"
       :extra-text="inOrOut2[book.getOrSale]"
       :on-click="bookDetailClick.bind(this, book.id)"
       style="color:#57665e"
