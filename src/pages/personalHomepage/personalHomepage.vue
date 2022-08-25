@@ -5,8 +5,8 @@
       <AtAvatar :image="this.userInfo.avatar" circle />
       <view>{{userInfo.name}}</view>
       <AtTextarea
-        :value="this.userInfo.words"
-        :on-change="(val) => this.userInfo.words = val"
+        :value="this.userInfo.declaration"
+        :on-change="(val) => this.userInfo.declaration = val"
         :count="false"
         :disabled="!this.userInfo.isOwn"
       />
@@ -41,9 +41,9 @@ export default {
   data() {
     return {
       userInfo: {
-        avatar: "http://photo.chaoxing.com/photo_80.jpg",
+        avatar: "",
         name: "用户名",
-        words: "点击添加换书宣言，让换书更有吸引力",
+        declaration: "点击添加换书宣言，让换书更有吸引力",
         isOwn: true,  // 是否本人
       },
       currentTab: 0,
@@ -58,16 +58,22 @@ export default {
     // ta人主页传值,我的主页undefined 请求时使用默认本机openid
     let openid = options.userId;
     if (openid) {
+      this.userInfo.isOwn = false;
       openid = openid === getOpenid() ? undefined : openid;
       Taro.setNavigationBarTitle({
         title: "Ta的主页",
       })
     }
     // 获取用户信息_this.userInfo
-    getUserInfo(openid)
+    getUserInfo(openid).then(res => {
+      this.userInfo = {
+        ...this.userInfo,
+        ...res.data[0],
+      }
+    })
     // 获取用户书籍列表_this.bookList
     getUserBooks(openid).then(res => {
-      const {get, sale, history} = res.data;
+      const {get, sale, history} = res.data.bookList;
       this.bookList.in = get;
       this.bookList.out = sale;
       this.bookList.off = history;
