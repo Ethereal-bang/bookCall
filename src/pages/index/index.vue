@@ -319,9 +319,7 @@ export default {
         if (code) {
           // 获取openid并存储
           login(code).then(res => {
-            let openid = res.data;
-            openid = openid.slice(1).slice(0, -2);
-            Taro.setStorageSync("openid", openid)
+            Taro.setStorageSync("openid", res.data)
           })
         } else {
           console.log("登录失败：" + res.errMsg);
