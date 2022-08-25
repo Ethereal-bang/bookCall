@@ -11,7 +11,7 @@ export const modifyUsername = (name) =>  {
   })
 }
 
-// 获取用户资料(待后端把用户注册写好!
+// 获取用户资料
 export const getUserInfo = (openid = getOpenid()) => {
   return myAxios("/myInfo/GetInfo", {
     data: {
@@ -20,7 +20,7 @@ export const getUserInfo = (openid = getOpenid()) => {
   })
 }
 
-// 获取用户书籍列表(因为users数据库目前没有该openid所以500
+// 获取用户书籍列表+资料
 export const getUserBooks = (openid = getOpenid()) => {
   return myAxios("/books/GetBooksByopenid", {
     data: {

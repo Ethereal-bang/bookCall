@@ -5,7 +5,7 @@
   >
     <AtAvatar class="uimg" circle text="U" />
     <text class="uname">{{ $props.userName }}</text>
-    <text class="uindex">Ta的主页</text>
+    <text class="uindex">{{(isOwn ? '我' : 'Ta') + "的主页"}}</text>
     <image class="right" src="./right.png" />
   </navigator>
 </template>
@@ -20,7 +20,9 @@ export default {
   },
   props: {
     userName: String,
-    userId: Number | String,
+    userId: String,
+    avatar: String,
+    isOwn: Boolean,
   }
 }
 </script>

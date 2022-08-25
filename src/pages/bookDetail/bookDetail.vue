@@ -2,8 +2,10 @@
   <view class="bookDetail">
     <!--用户信息栏-->
     <PersonalBar
-      :user-name="userData.username"
-      :user-id="userData.id"
+      :user-name="userData.name"
+      :user-id="userData.openid"
+      :avatar="userData.avatar"
+      :is-own="userData.isOwn"
     />
 
     <!--书籍封面-->
@@ -111,8 +113,9 @@ export default {
         bookIntroduction: "",  // 图书简介
       },
       userData: {
-        id: undefined,  // 书籍编号
-        username: "Loading",
+        openid: "",  // openid
+        name: "Loading",
+        avatar: "",
         isOwn: false,   // 是否为本人
       }, // 书籍所有者信息
     }
@@ -132,16 +135,15 @@ export default {
         genre: genreMap3[info.category],
         old: oldDegreeMap[info.label],
       }
-      this.userData.id = info.openid; // 获取用户id
+      // ...获取对应用户信息
+      getUserInfo(info.openid).then(res => {
+        this.userData = {
+          ...res.data[0],
+          isOwn: this.userData.openid === getOpenid(),  // 该书对应用户id与本地openid比较
+        }
+      }, err => console.log(err));
     }, err => {console.log(err)})
-    // ...获取对应用户信息
-    getUserInfo(this.userData.id).then(res => {
-      this.userData = {
-        ...this.userData,
-        isOwn: this.userData.id === getOpenid(),  // 该书对应用户id与本地openid比较
-      }
-    }, err => console.log(err));
-  },
+    },
   methods: {
     handle() {
       const info = document.querySelector("#info");
