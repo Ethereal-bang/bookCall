@@ -29,8 +29,9 @@
 
       <AtTextarea
             placeholder="点击添加换书宣言，让换书更有吸引力~~~"
-            :value="inputWords"
-            :on-change="(val) => this.inputWords = val"
+            :value="declaration"
+            :on-change="(val) => this.declaration = val"
+            :on-blur="onDeclareChange"
             :count="false"
             class="mesg"
           />
@@ -57,7 +58,7 @@
 import { AtAvatar, AtTextarea, AtDivider } from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './person.scss'
-import {modifyUsername} from "../../api/personApi";
+import {getUserInfo, modifyDeclaration, modifyUsername} from "../../api/personApi";
 
 export default {
   name: "Person",
@@ -68,19 +69,30 @@ export default {
   },
   data() {
     return {
-      inputWords: "",
-      username: "",
+      name: "Loading",
+      declaration: "点击添加换书宣言，让换书更有吸引力",
+      avatar: "",
     }
   },
   onLoad() {
     // ...获取昵称
-
+    getUserInfo().then(res => {
+      const info = res.data[0];
+      this.name = info.name;
+      this.avatar = info.avatar;
+      this.declaration = info.declaration;
+    })
   },
   methods: {
-    onUsernameChange(val) { // bug:开发工具不触发; ...防抖
-      this.username = val;
-      modifyUsername(this.username)
+    onUsernameChange(val) { // bug:开发工具不触发+真机预览也没触发; ...防抖
+      this.name = val;
+      console.log("modify: " + this.name)
+      modifyUsername(this.name)
     },
+    // blur后修改换书宣言
+    onDeclareChange() {
+      modifyDeclaration(this.declaration)
+    }
   }
 }
 </script>
