@@ -7,9 +7,9 @@
     <AtTabs
       :current="currentTab"
       :tab-list="[
-        {title: '推荐'},
-        {title: '等你换'},
-        {title: 'Ta想要'},
+        {title: '可换'},
+        {title: '求换'},
+        {title: '已下架'},
       ]"
       :on-click="value => this.currentTab = value"
     >
