@@ -20,9 +20,10 @@
     <!--登录页-->
     <view id="have_sign" class="signpage">
       <AtAvatar class="head" circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
-      <input
-        :value="username" placeholder="请输入昵称"
-        type="nickname" @change="onUsernameChange" />
+      <AtInput
+        type="nickname" placeholder="请输入昵称"
+        :value="name" :on-blur="onUsernameChange"
+      />
       <navigator url="/pages/personalHomepage/personalHomepage">
         我的主页
       </navigator>
@@ -55,8 +56,7 @@
 </template>
 
 <script>
-import { AtAvatar, AtTextarea, AtDivider } from "taro-ui-vue";
-import Taro from "@tarojs/taro";
+import { AtAvatar, AtTextarea, AtDivider, AtInput } from "taro-ui-vue";
 import './person.scss'
 import {getUserInfo, modifyDeclaration, modifyUsername} from "../../api/personApi";
 
@@ -66,6 +66,7 @@ export default {
     AtAvatar,
     AtTextarea, // 多行文本框
     AtDivider,  // 分割线
+    AtInput,
   },
   data() {
     return {
@@ -84,10 +85,8 @@ export default {
     })
   },
   methods: {
-    onUsernameChange(val) { // bug:开发工具不触发+真机预览也没触发; ...防抖
-      this.name = val;
-      console.log("modify: " + this.name)
-      modifyUsername(this.name)
+    onUsernameChange(val) { // bug:开发工具选择微信名不触发(真机预览触发
+      modifyUsername(val)
     },
     // blur后修改换书宣言
     onDeclareChange() {
