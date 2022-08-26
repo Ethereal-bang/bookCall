@@ -94,6 +94,7 @@ import {bookOff, getBookDetail} from "../../api/bookApi";
 import {genreMap3, inOrOut2, oldDegreeMap} from "../../data/map";
 import {getUserInfo} from "../../api/personApi";
 import {getOpenid} from "../../utils/storageGetter";
+import Taro from "@tarojs/taro";
 
 export default {
   name: "BookDetail",
@@ -146,15 +147,15 @@ export default {
     },
   methods: {
     handle() {
-      const info = document.querySelector("#info");
-      info.removeAttribute("class");
-      info.setAttribute("class", "show")
       // 判断属于三种情况中哪种
       switch (this.userData.isOwn) {
         case true:  // 下架书籍
-          bookOff(this.bookData.id).then(res => {
-
-          }, err => {console.log(err)})
+          bookOff(this.bookData.id).then(() => {
+            Taro.showToast({title: "下架成功"})
+            Taro.navigateTo({url: "/pages/personalPublish/personalPublish"})
+          }, () => {
+            Taro.showToast({title: "下架失败", icon: "error"})
+          })
           break;
         case false: // 跳转消息框页_主动联系
           switch (this.bookData.state) {
