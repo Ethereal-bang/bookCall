@@ -39,3 +39,11 @@ export const getUserBooks = (openid = getOpenid()) => {
     }
   })
 }
+
+// 获取与该用户聊天记录(待api更新
+export const getCommunication = (openid) => {
+  return myAxios("/dialogue/GetDialogue", {
+    data: {
+    },
+  })
+}

@@ -30,6 +30,13 @@ export default {
   components: {
     AtCard,
   },
+  onLoad(options) {
+    // 接收书籍id，对方id
+    this.changer.openid = options.openid;
+    this.changer.isDriver = options.isDriver;
+    this.book.id = options.bookId;
+    // 请求与对方聊天记录
+  },
   data() {
     return {
       book: {

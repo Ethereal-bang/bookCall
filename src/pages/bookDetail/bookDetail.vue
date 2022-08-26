@@ -163,9 +163,12 @@ export default {
         case false: // 跳转消息框页_主动联系
           switch (this.bookData.state) {
             case "求换":  // 找ta换
-              break;
             case "可换":  // 换给ta
-              break;
+              Taro.navigateTo({
+                url: "/pages/communicate/communicate"
+                  + "?openid=" + this.userData.openid
+                  + "&bookId=" + this.bookData.id
+              })
           }
       }
     },

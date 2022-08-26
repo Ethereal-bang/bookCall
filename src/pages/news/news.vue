@@ -9,7 +9,11 @@
 
     <!--消息列表-->
     <view>什么消息也没有~</view>
-    <navigator url="/pages/communicate/communicate">测试-跳转聊天</navigator>
+    <navigator
+      :url="'/pages/communicate/communicate'
+        + '?openid=' + ''
+        + '&bookId=' + ''"
+    >测试-跳转聊天</navigator>
   </view>
 </template>
 
