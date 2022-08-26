@@ -59,6 +59,7 @@
 import { AtAvatar, AtTextarea, AtDivider, AtInput } from "taro-ui-vue";
 import './person.scss'
 import {getUserInfo, modifyDeclaration, modifyUsername} from "../../api/personApi";
+import Taro from "@tarojs/taro";
 
 export default {
   name: "Person",
@@ -85,12 +86,14 @@ export default {
     })
   },
   methods: {
-    onUsernameChange(val) { // bug:开发工具选择微信名不触发(真机预览触发
-      modifyUsername(val)
+    async onUsernameChange(val) { // bug:开发工具选择微信名不触发(真机预览触发
+      await modifyUsername(val)
+      await Taro.showToast({title: "修改成功"})
     },
     // blur后修改换书宣言
-    onDeclareChange() {
-      modifyDeclaration(this.declaration)
+    async onDeclareChange() {
+      await modifyDeclaration(this.declaration)
+      await Taro.showToast({title: "修改成功"})
     }
   }
 }
