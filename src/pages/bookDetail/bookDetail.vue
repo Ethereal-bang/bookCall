@@ -139,7 +139,7 @@ export default {
       getUserInfo(info.openid).then(res => {
         this.userData = {
           ...res.data[0],
-          isOwn: this.userData.openid === getOpenid(),  // 该书对应用户id与本地openid比较
+          isOwn: info.openid === getOpenid(),  // 该书对应用户id与本地openid比较
         }
       }, err => console.log(err));
     }, err => {console.log(err)})

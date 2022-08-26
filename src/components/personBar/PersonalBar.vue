@@ -3,7 +3,7 @@
   <navigator
     :url="'/pages/personalHomepage/personalHomepage?userid=' + this.userId"
   >
-    <AtAvatar class="uimg" circle text="U" />
+    <AtAvatar class="uimg" circle :image="avatar" />
     <text class="uname">{{ $props.userName }}</text>
     <text class="uindex">{{(isOwn ? '我' : 'Ta') + "的主页"}}</text>
     <image class="right" src="./right.png" />
