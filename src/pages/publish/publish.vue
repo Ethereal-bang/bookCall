@@ -102,7 +102,6 @@
     >
       发布
     </AtButton>
-    <AtToast :isOpened="isToastOpen" text="请填完所有必选项" />
     <AtModal
       :is-opened="isModalOpen"
       title="发布成功"
@@ -176,7 +175,6 @@ export default {
       purpose: "",  // 发布目的
       outBGC: "background-color: #F5F5F5",
       inBGC: "background-color: #F5F5F5",
-      isToastOpen: false,
       isModalOpen: false,
       bookId: "", // 刚发布书籍的id
     }
@@ -223,7 +221,10 @@ export default {
       // 有信息没填
       for (let key in info) {
         if (info[key] === undefined || info[key].length < 1) {
-          this.isToastOpen = true;  // Bug:二次触发时不能正常显示!
+          Taro.showToast({
+            title: "请填完所有必填项",
+            icon: "none",
+          })
           return;
         }
       }
@@ -238,12 +239,15 @@ export default {
         }, err => {
           console.log(err)
         })
-      this.isToastOpen = false;
     },
     continuePost() {
       this.isModalOpen = false;
+      // UI重置
+      this.outBGC = "background-color: #F5F5F5";
+      this.inBGC = "background-color: #F5F5F5";
+      this.genreTitle = "书籍类别";
+      this.oldTitle = "新旧程度";
       // 表单项重置
-      this.purpose = "";
       this.inputISBN = "";
       this.inputWords = "";
       this.chosenGenre = "";
