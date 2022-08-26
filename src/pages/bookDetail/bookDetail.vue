@@ -151,8 +151,11 @@ export default {
       switch (this.userData.isOwn) {
         case true:  // 下架书籍
           bookOff(this.bookData.id).then(() => {
+            // 提示语显示一秒后跳转
             Taro.showToast({title: "下架成功"})
-            Taro.navigateTo({url: "/pages/personalPublish/personalPublish"})
+            setTimeout(() => {
+              Taro.navigateTo({url: "/pages/personalPublish/personalPublish"})
+            }, 1000)
           }, () => {
             Taro.showToast({title: "下架失败", icon: "error"})
           })

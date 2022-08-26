@@ -27,7 +27,7 @@ export const getBookDetail = (bookId) => {
 
 // 下架书籍
 export const bookOff = (bookId) => {
-  return myAxios.delete("/books/BookOff", {
+  return myAxios("/books/BookOff", {
     data: {
       id: bookId,
     }
