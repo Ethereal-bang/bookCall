@@ -1,16 +1,5 @@
 <template>
   <view class="personpage">
-    <!--未登录页-->
-    <view id="no_sign" class="signpage">
-      <AtAvatar circle image='https://jdc.jd.com/img/200'></AtAvatar>
-      <view>未登录（点击登录）</view>
-      <view>
-        <view>交换规则 ></view>
-        <view>意见反馈 ></view>
-      </view>
-      <view>登录后才能查看更多内容哦~</view>
-    </view>
-
     <!--背景-->
 <!--    <image-->
 <!--          src="./personBG.png"-->
@@ -18,7 +7,7 @@
 <!--    />-->
 
     <!--登录页-->
-    <view id="have_sign" class="signpage">
+    <view class="signpage">
       <AtAvatar class="head" circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
       <AtInput
         type="nickname" placeholder="请输入昵称"
@@ -30,7 +19,7 @@
 
       <AtTextarea
             placeholder="点击添加换书宣言，让换书更有吸引力~~~"
-            :value="declaration"
+            :value="declaration === '' ? undefined : declaration"
             :on-change="(val) => this.declaration = val"
             :on-blur="onDeclareChange"
             :count="false"
@@ -100,10 +89,4 @@ export default {
 </script>
 
 <style>
-  #have_sign {
-  }
-  #no_sign {
-    display: none;  /*暂定未登录*/
-
-  }
 </style>

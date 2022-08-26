@@ -5,8 +5,10 @@
       <AtAvatar :image="this.userInfo.avatar" circle />
       <view>{{userInfo.name}}</view>
       <AtTextarea
-        :value="this.userInfo.declaration"
-        :on-change="(val) => this.userInfo.declaration = val"
+        placeholder="点击添加换书宣言，让换书更有吸引力~~~"
+        :value="this.userInfo.declaration === '' ? undefined : this.userInfo.declaration"
+        :on-change="(val) => this.declaration = val"
+        :on-blur="onDeclareChange"
         :count="false"
         :disabled="!this.userInfo.isOwn"
       />
@@ -20,7 +22,7 @@
 
 <script>
 import {AtAvatar, AtTabs, AtTabsPane, AtNoticebar, AtTextarea, AtButton} from "taro-ui-vue";
-import {getUserBooks, getUserInfo} from "../../api/personApi";
+import {getUserBooks, getUserInfo, modifyDeclaration} from "../../api/personApi";
 import BookList from "../../components/bookList/bookList";
 import PersonPublish from "../../components/personPublish/personPublish";
 import Taro from "@tarojs/taro";
@@ -52,6 +54,13 @@ export default {
         in: [], // 求换
         off: [],  // 已下架
       }
+    }
+  },
+  methods: {
+    // blur后修改换书宣言
+    async onDeclareChange() {
+      await modifyDeclaration(this.userInfo.declaration)
+      await Taro.showToast({title: "修改成功"})
     }
   },
   onLoad(options) {
