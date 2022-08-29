@@ -40,10 +40,33 @@ export const getUserBooks = (openid = getOpenid()) => {
   })
 }
 
-// 获取与该用户聊天记录(待api更新
-export const getCommunication = (openid) => {
+// 获取与该用户聊天记录(待api修改
+export const getCommunication = (askId, bookId) => {
   return myAxios("/dialogue/GetDialogue", {
     data: {
+      bookId,
+      Askopenid: askId, // 发起聊天者id
     },
+  })
+}
+
+// 发送消息(待api修改
+export const sendMsg = (bookId, message, userId) => {
+  return myAxios("/dialogue/AddDialogue", {
+    data: {
+      bookId,
+      message,
+      Sendopenid: getOpenid(),
+      Getopenid: userId,  // 消息接收者id
+    }
+  })
+}
+
+// 获取消息列表
+export const getNewsList = () => {
+  return myAxios("/dialogue/GetNews", {
+    data: {
+      myopenid: getOpenid(),
+    }
   })
 }
