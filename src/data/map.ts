@@ -37,31 +37,17 @@ export const genreMap3 = {
   6: "其他",
 }
 
-// 换入新旧程度 value-code
-export const inOldDegree = {
-  new: 2,
-  almostNew: 1,
-  any: 0,
-}
-
-// 换入新旧程度 value-名称
-export const inOldDegree2 = {
-  new: "全新",
-  almostNew: '较新',
-  any: "无所谓",
-}
-
-// 换成新旧程度 value-名称
+// 换出新旧程度 value-名称
 export const oldDegreeMap = {
+  5: "5成新及以下",
   6: "6成新",
   7: "7成新",
   8: "8成新",
   9: "9成新",
-  10: "10成新",
-  5: "5成新及以下",
-  2: "全新",
-  1: "较新",
-  0: "无所谓",
+  10: "其他",
+  4: "全新",
+  3: "较新",
+  2: "无所谓",
 }
 
 // 换出/换入 code-name

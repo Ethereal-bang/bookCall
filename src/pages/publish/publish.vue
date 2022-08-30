@@ -10,38 +10,83 @@
       <view
         @tap="choosePurpose"
       >
-        <AtTag class="tag" id="out" data-purpose="out" :style="outBGC">换出</AtTag>
-        <AtTag class="tag" id="in" data-purpose="in" :style="inBGC">换入</AtTag>
+        <AtTag class="tag" id="out" data-purpose="1" :style="this.outBGC">换出</AtTag>
+        <AtTag class="tag" id="in" data-purpose="0" :style="this.inBGC">换入</AtTag>
       </view>
     </view>
 
-    <!--ISBN-->
-    <view class="at-row title">
-<!--      <image class="inputicon icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>-->
-
-      <AtInput
-        class="at-col input title "
-        type="number"
-        :border="false"
-        placeholder="请填写/扫一扫ISBN码"
-        :value="inputISBN"
-        :on-change="(val) => this.inputISBN = val"
-      />
-      <view class="at-col at-col-3 scan">
-        <view class="at-row">
-          <text>
-            扫码
-          </text>
-<!--          <image-->
-<!--            class="at-col scanicon"-->
-<!--            src="./scan.png"-->
-<!--            mode="aspectFit"-->
-<!--            style="height: 37rpx; display: inline"-->
-<!--          />-->
+    <!--新旧程度-->
+    <view>
+      <view class="title">
+        <!--这里插入icon-->
+        <text>新旧程度</text>
+      </view>
+      <view @tap="clickOld">
+        <view>
+          <AtTag
+            v-for="degree in (purpose === '0' ? degreeList.slice(0, 3) : degreeList.slice(3))"
+            :data-degree="degree.code"
+            :style="degree.isSelected ? SELECTED_BGC : BLANK_BGC"
+          >
+            {{ oldDegreeMap[degree.code] }}
+          </AtTag>
         </view>
       </view>
-
     </view>
+
+    <!--书籍类别-->
+    <view>
+      <view class="title">
+        <!--这里插入icon-->
+        <text>书籍类别</text>
+      </view>
+      <view @tap="clickGenre">
+        <view>
+          <AtTag
+            v-for="genre in genreList"
+            :data-genre="genre.code"
+            :style="genre.isSelected ? SELECTED_BGC : BLANK_BGC"
+          >
+            {{ genreMap3[genre.code] }}
+          </AtTag>
+        </view>
+      </view>
+    </view>
+
+    <!--书籍信息-ISBN-->
+    <view>
+      <view class="title">
+        <!--这里插入icon-->
+        <text>书籍信息</text>
+      </view>
+      <view>选择扫码或输入ISBN码，快速完善书籍信息</view>
+      <view>
+        <AtButton>直接扫码</AtButton>
+        <AtButton
+          :on-click="() => this.isISBNModalOpen = true"
+        >
+          手动输入ISBN码
+        </AtButton>
+        <AtModal
+          :is-opened="isISBNModalOpen"
+        >
+          <AtModalHeader>手动输入</AtModalHeader>
+          <AtModalContent>
+            <view>请输入ISBN条码</view>
+            <!--这里插入ISBN图片-->
+            <AtInput
+              :border="false"
+              placeholder="在这输入..."
+              :value="inputISBN"
+              :on-change="(val) => this.inputISBN = val"
+            />
+          </AtModalContent>
+          <AtModalAction>
+            <AtButton :on-click="() => this.isISBNModalOpen = false">确定</AtButton>
+          </AtModalAction>
+        </AtModal>
+      </view>
+      </view>
 
     <!--换书寄语-->
     <view>
@@ -56,43 +101,6 @@
         :count="false"
         class="mesg"
       />
-    </view>
-
-    <!--标签选择-->
-    <view class="title">
-<!--      <image class="icon_x" :src=picUrls.icon_x style=" width: 17rpx; height: 17rpx; display: inline-block"/>-->
-      <text>标签选择</text>
-<!--      <image class="icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>-->
-      <view class="at-row at-row__justify--center">
-        <AtAccordion
-          class="at-col-4"
-          style="margin-left: -20px"
-          :title="genreTitle"
-          :open="isGenreListOpen"
-          :on-click="(val) => this.isGenreListOpen = val"
-          :hasBorder="false"
-        >
-          <AtRadio
-            :options="chooseGenre"
-            :value="chosenGenre"
-            :on-click="clickGenre"
-          />
-        </AtAccordion>
-        <AtAccordion
-          class="at-col-4"
-          style="margin-left: 20px"
-          :title="oldTitle"
-          :open="isOldListOpen"
-          :on-click="(val) => this.isOldListOpen = val"
-          :hasBorder="false"
-        >
-          <AtRadio
-            :options="chooseOld"
-            :value="chosenOld"
-            :on-click="clickOld"
-          />
-        </AtAccordion>
-      </view>
     </view>
 
     <AtButton
@@ -115,10 +123,11 @@
 </template>
 
 <script>
-import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast, AtModal} from "taro-ui-vue";
+import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast,
+  AtModal, AtModalContent, AtModalHeader, AtModalAction} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
-import {genreMap, inOldDegree, inOldDegree2, oldDegreeMap} from "../../data/map";
+import {genreMap, oldDegreeMap, genreMap3} from "../../data/map";
 import {addBook} from "../../api/bookApi";
 
 const labelMap = {  // 通过映射关系将所选label渲染到标题
@@ -138,8 +147,8 @@ const labelMap = {  // 通过映射关系将所选label渲染到标题
   almostNew: "较新",
   any: "无所谓",
 }
-const outOld = ["6", "7", "8", "9", "10", "5"];
-const inOld = ["new", "almostNew", "any"]
+const SELECTED_BGC = "background-color: #FFCA4E",
+  BLANK_BGC = "background-color: #F5F5F5";
 
 export default {
   name: "Publish",
@@ -152,71 +161,89 @@ export default {
     AtButton,
     AtToast,  // 轻提示
     AtModal,  // 模态框
+    AtModalContent,
+    AtModalHeader,
+    AtModalAction,
   },
   data() {
     return {
-      inputISBN: "",   // 书籍名称/isbn
-      inputWords: "", // 寄语
-      isGenreListOpen: false,
-      chooseGenre: [
-        {value: "novel", label: "小说"},
-        {value: "literature", label: "文学"},
-        {value: "internet", label: "互联网"},
-        {value: "technology", label: "科技"},
-        {value: "psychology", label: "心理学"},
-        {value: "other", label: "其他"},
-      ],
+      // 选中/未选中 tag的BGC
+      SELECTED_BGC,
+      BLANK_BGC,
+      // 发布目的
+      purpose: "",  // 发布目的 0换入/1换出
+      outBGC: this.BLANK_BGC,
+      inBGC: this.BLANK_BGC,
+      // 新旧程度
+      degreeList: [],
+      oldDegreeMap,
+      chosenOld: "",  // 新旧程度数字代号
+      // 书籍类别
+      genreList: [],
+      genreMap3,
       chosenGenre: "",
-      genreTitle: "书籍类别",
-      isOldListOpen: false,
-      chooseOld: outOld,
-      chosenOld: "",
-      oldTitle: "新旧程度",
-      purpose: "",  // 发布目的
-      outBGC: "background-color: #F5F5F5",
-      inBGC: "background-color: #F5F5F5",
+      // 书籍信息
+      inputISBN: "",
+      isISBNModalOpen: false,
+      // 换书寄语
+      inputWords: "", // 寄语
+      // 跳转用
       isModalOpen: false,
       bookId: "", // 刚发布书籍的id
     }
+  },
+  onLoad() {
+    this.resetOldList();
+    this.resetGenreList();
   },
   methods: {
     choosePurpose(e) {
       // 设置目的
       this.purpose = e.target.dataset.purpose;  // 0为收1为售
       // 点击节点变色
-      this.outBGC = "background-color: " + ((this.purpose === "out") ? "#FFCA4E" : "#F5F5F5");
-      this.inBGC = "background-color: " + ((this.purpose === "in") ? "#FFCA4E" : "#F5F5F5");
-      // 根据所选目的切换新旧程度选项
-      this.chooseOld = (this.purpose === "out")
-        ? outOld.map(val => {
-          return {label: oldDegreeMap[val], value: val}
+      this.outBGC = (this.purpose === "1") ? SELECTED_BGC : BLANK_BGC;
+      this.inBGC = (this.purpose === "0") ? SELECTED_BGC : BLANK_BGC;
+    },
+    resetOldList() {  // 重置
+      const degreeList = [];
+      for (let i = 2; i <= 10; i++) {
+        degreeList.push({
+          code: i,
+          isSelected: false,
         })
-        : inOld.map(val => {
-          return {label: inOldDegree2[val], value: val}
-        });
+      }
+      this.degreeList = degreeList;
     },
-    clickGenre(val) {
-      this.isGenreListOpen = false;  // 关闭菜单
-      this.genreTitle = labelMap[val];  // 更新标题为所选项
-      this.chosenGenre = val;
+    clickOld(e) {
+      const degreeCode = e.target.dataset.degree;
+      this.resetOldList();  // 重置被选中项
+      this.degreeList[degreeCode - 2].isSelected = true;
+      this.chosenOld = degreeCode;
+
     },
-    clickOld(val) {
-      this.isOldListOpen = false;
-      this.oldTitle = labelMap[val];
-      this.chosenOld = val;
+    resetGenreList() {
+      const list = [];
+      for (let g of Object.keys(genreMap3)) {
+        list.push({
+          code: g,
+          isSelected: false,
+        })
+      }
+      this.genreList = list;
+    },
+    clickGenre(e) {
+      const genreCode = e.target.dataset.genre;
+      this.resetGenreList();
+      this.genreList[genreCode].isSelected = true;
+      this.chosenGenre = genreCode;
     },
     post() {
       const info = {
-        purpose: undefined,
+        purpose: this.purpose,
         isbn: this.inputISBN,
         words: this.inputWords,
-        genre: genreMap[this.chosenGenre],  // 种类代号
-        old: this.purpose === "out" ? this.chosenOld : inOldDegree[this.chosenOld], // 新旧程度代号
-      }
-      if (this.purpose === "out") {
-        info.purpose = '1';
-      } else if (this.purpose === "in") {
-        info.purpose = '0';
+        genre: this.chosenGenre,  // 种类代号
+        old: this.chosenOld, // 新旧程度代号
       }
       // 有信息没填
       for (let key in info) {
@@ -243,15 +270,15 @@ export default {
     continuePost() {
       this.isModalOpen = false;
       // UI重置
-      this.outBGC = "background-color: #F5F5F5";
-      this.inBGC = "background-color: #F5F5F5";
-      this.genreTitle = "书籍类别";
-      this.oldTitle = "新旧程度";
+      this.outBGC = BLANK_BGC;
+      this.inBGC = BLANK_BGC;
+      this.resetOldList();
+      this.resetGenreList();
       // 表单项重置
+      this.chosenOld = "";
+      this.chosenGenre = "";
       this.inputISBN = "";
       this.inputWords = "";
-      this.chosenGenre = "";
-      this.chosenOld = "";
     },
     toDetail() {
       this.isModalOpen = false;
@@ -264,11 +291,6 @@ export default {
 </script>
 
 <style>
-.at-accordion__content {
-  position: absolute;
-  z-index: 2; /*让其显示在后文的上方*/
-  width: 30%;
-}
 .at-modal__content {
   min-height: 10rpx;
 }
