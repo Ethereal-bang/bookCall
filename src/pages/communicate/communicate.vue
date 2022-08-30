@@ -80,6 +80,10 @@ export default {
       avatar: user.avatar,
     }
     await Taro.setNavigationBarTitle({title: this.changer.name})
+    // 获取本人信息
+    getUserInfo(curOpenid).then(res => {
+      this.user = res.data[0];
+    })
   },
   methods: {
     sendMsg: function (val) {
@@ -91,6 +95,7 @@ export default {
         dialogueMap: {
           Sendopenid: this.user.openid,
           Getopenid: this.changer.openid,
+          message: val,
         },
       })
     },
