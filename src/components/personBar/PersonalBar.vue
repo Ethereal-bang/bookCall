@@ -1,7 +1,7 @@
 <template>
   <!--跳转到个人主页-->
   <navigator
-    :url="'/pages/personalHomepage/personalHomepage?userid=' + this.userId"
+    :url="'/pages/personalHomepage/personalHomepage?userId=' + this.userId"
   >
     <AtAvatar class="uimg" circle :image="avatar" />
     <text class="uname">{{ $props.userName }}</text>
