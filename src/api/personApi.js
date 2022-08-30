@@ -40,7 +40,7 @@ export const getUserBooks = (openid = getOpenid()) => {
   })
 }
 
-// 获取与该用户聊天记录(待api修改
+// 获取与该用户聊天记录
 export const getCommunication = (askId, bookId) => {
   return myAxios("/dialogue/GetDialogue", {
     data: {
@@ -50,7 +50,7 @@ export const getCommunication = (askId, bookId) => {
   })
 }
 
-// 发送消息(待api修改
+// 发送消息
 export const sendMsg = (bookId, message, userId) => {
   return myAxios("/dialogue/AddDialogue", {
     data: {
