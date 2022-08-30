@@ -22,27 +22,38 @@
       <!--每条消息-->
       <view
         v-for="news in newsList"
-        :class="news.dialogueMap.Sendopenid === getOpenid() ? 'news_right' : 'news_left'"
+        :class="'news ' + (news.dialogueMap.Sendopenid === getOpenid() ? 'news_right' : 'news_left')"
       >
-        <AtAvatar circle :image="news.avatar" />
+        <AtAvatar circle :image="news.avatar" size="small" />
         <text>{{news.dialogueMap.message}}</text>
       </view>
     </view>
 
+    <!--输入框-->
+    <AtInput
+      confirmType="发送"
+      :on-confirm="sendMsg"
+      clear
+      class="input"
+    >
+<!--      <image src="https://aotu.io/img.png" />-->
+    </AtInput>
   </view>
 </template>
 
 <script>
-import {AtCard, AtAvatar} from "taro-ui-vue";
-import {getCommunication, getUserInfo} from "../../api/personApi";
+import {AtCard, AtAvatar, AtInput} from "taro-ui-vue";
+import {getCommunication, getUserInfo, sendMsg} from "../../api/personApi";
 import {getOpenid} from "../../utils/storageGetter";
 import Taro from "@tarojs/taro";
+import {inOrOut2} from "../../data/map";
 
 export default {
   name: "Communicate",
   components: {
     AtCard,
     AtAvatar,
+    AtInput,
   },
   async onLoad(options) {
     // 接收发起人id, bookId
@@ -52,7 +63,10 @@ export default {
     const data = (await getCommunication(this.senderId, this.book.id)).data;
     this.newsList = data.slice(0, 6).reverse();  // 暂定！最多显示6条消息
     this.senderId = data[0].askopenid;
-    // (待api返回格式修改)this.book =
+    this.book = {
+      ...data[0].book,
+      state: inOrOut2[data[0].book.getOrSale],
+    };
     // 请求对方信息
     const curOpenid = getOpenid();
     this.changer = {
@@ -67,6 +81,20 @@ export default {
     }
     await Taro.setNavigationBarTitle({title: this.changer.name})
   },
+  methods: {
+    sendMsg: function (val) {
+      sendMsg(this.book.id, val, this.changer.openid);
+      this.newsList.push({
+        name: this.user.name,
+        avatar: this.user.avatar,
+        openid: this.user.openid,
+        dialogueMap: {
+          Sendopenid: this.user.openid,
+          Getopenid: this.changer.openid,
+        },
+      })
+    },
+  },
   data() {
     return {
       getOpenid,
@@ -77,6 +105,11 @@ export default {
         state: "",  // 可换/求换
         photoPath: "",
         message: "",  // 换书寄语
+      },
+      user: { // 本用户信息
+        name: "Loading",
+        avatar: "",
+        openid: getOpenid(),
       },
       changer: {  // 对方用户
         // 由openid请求得到
@@ -104,11 +137,24 @@ export default {
 </script>
 
 <style>
-.news_left {  /*对方消息*/
-
+.news { /*每一条*/
+  height: 145px;
+  position: relative;
+  line-height: 81px;
+}
+.news_left>.at-avatar { /*头像*/
+  float: left;
 }
 .news_right {
+  float: right;
+  clear: both;
+}
+.news_right>.at-avatar {
+  float: right;
+  clear: both;
+}
+.input {  /*聊天输入框*/
   position: absolute;
-  right: 0;
+  bottom: 250px;
 }
 </style>
