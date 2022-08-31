@@ -2,14 +2,11 @@
   <view class="index_background">
     <view class="index">
       <!--校园认证-->
-      <view>
-        <view
-          @tap="choseUniversity"
-          style="display: inline-block"
-        >
+      <view class="school">
+        <view @tap="choseUniversity">
           {{ chosenUniversity }}
         </view>
-        <view v-if="showState" @tap="choseWitchUniversity" class="universityList">
+        <view v-if="showState" @tap="choseWitchUniversity" class="university_list">
           <view
             v-for="uni in university"
             :data-ip="uni.schoolIp"
@@ -19,7 +16,7 @@
           </view>
         </view>
       </view>
-      <AtToast :isOpened="isToastOpen" text="请先选择大学！"/>
+
       <!--搜索框-->
       <AtSearchBar
         input-type="text"
@@ -55,12 +52,12 @@
         </swiper-item>
       </swiper>
       <!--分类换书-->
-      <view class="divide">
+      <view class="divide area">
         <view class="at-row at-row__justify--between">
-          <view class="at-col category titleText">
+          <view class="at-col title">
             分类换书
           </view>
-          <AtButton class="at-col category titleText atAll" :on-click="clickToAllBooks">
+          <AtButton class="at-col atAll" :on-click="clickToAllBooks">
             全部书籍◇
           </AtButton>
         </view>
@@ -92,14 +89,8 @@
         </scroll-view>
       </view>
       <!--换书广场-->
-      <view
-        style="border-radius: 2% 2% 2% 2%;background-color: #ffffff;"
-        class="square_class"
-      >
-        <view
-          style="padding-left: 13rpx;"
-          class="square_title_class"
-        >
+      <view class="area square">
+        <view class="title">
           换书广场
         </view>
         <AtTabs
@@ -212,7 +203,6 @@ export default {
       isChosenUniversity: false,
       university: [],
       chosenUniversity: "我的大学",
-      isToastOpen: false,
       /*换书广场页面滚动*/
       square_class: "",
       square_title_class: "",
@@ -277,12 +267,16 @@ export default {
     },
     judgeUniversity() { // 交互时判断是否选择大学
       if (!this.isChosenUniversity) {
-        this.isToastOpen = true;
+        Taro.showToast({
+          title: "请先选择大学！",
+          icon: "error",
+        })
         return false;
       }
       return true;
     },
     clickToAllBooks() {
+      if (!this.judgeUniversity())  return;
       Taro.navigateTo({
         url: "/pages/books/books?title=" + "全部书籍",
         success: res => {
@@ -300,7 +294,6 @@ export default {
     },
   },
   onPageScroll(scroll) {  // 监测页面滚动值
-    // console.log(scroll)
     if (scroll.scrollTop >= 327) {
       this.square_class = "square_scroll";
       this.square_title_class = "title_scroll";
@@ -344,30 +337,7 @@ export default {
 }
 </script>
 <style>
-.index {
-  height: 100vh;
-}
-
-.scroll-tag {
-  white-space: nowrap;
-}
-
-.scroll-item {  /*分类换书*/
-  display: inline-block;
-  width: 25%;
-}
-
-.tab-content {
-  height: 10vh;
-  color: #a99b85;
-}
-
-.universityList {
-  position: absolute;
-  z-index: 1;
-  background-color: whitesmoke;
-}
-
+/*For页面滚动*/
 .square_scroll {
   height: 100vh;
 }
@@ -382,17 +352,5 @@ export default {
   /*top: 4vh;*/
   height: 85vh;
   overflow-y: scroll;
-}
-.at-list__item {/*列表项*/
-  height: 162rpx;
-
-}
-.item_out {
-  color: #f0ae2b;
-}
-.item_in {
-}
-.item-content__info-note{
-  font-size: small;
 }
 </style>

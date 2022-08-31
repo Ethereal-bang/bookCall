@@ -1,13 +1,22 @@
-.item_out {
+.book_list >.item_out {
   .item-extra__info {
-    background-color: #f0ae2b;
-    color:white;
+    color: #e16b1d;
+    border-color: #e16b1d;
   }
 }
-
-.item_in {
+.book_list >.item_in {
   .item-extra__info {
-    background-color: #81cea2;
-    color:white;
+    border-color: #f4c669;
+    color: #f4c669;
   }
+}
+.book_list .at-list__item .item-extra__info{
+  width: 118px;
+  height: 46px;
+  margin-top: -80px;
+  font-size: 24px;
+  font-weight: 600;
+  border-width: 3px;
+  border-style:solid;
+  border-radius: 16px;
 }

@@ -1,5 +1,5 @@
 <template>
-  <AtList>
+  <AtList class-name="book_list">
     <AtListItem
       v-for="book in list"
       :key="book.id"

@@ -1,108 +1,117 @@
-input {
-  width: 70%;
-  margin-left: 2vw;
-}
+// 页面主体
 .index {
-  padding: 0 7vw;
-  border-radius: 33rpx 33rpx 0 0;
-  background-color: #ffffff;
+  width: 750px;
+  height: 100vh;
+  padding: 0 23px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 23%, #F5F5F5 100%);
+  border-radius: 48px 48px 0 0;
+  font-size: 28px;
   color: #7b7b7b;
-  font-size: 28rpx;
 }
 // 主页背景，为了实现圆角
 .index_background{
   background-color: #81cea2;
+  .title {
+    margin-top: 17px;
+    margin-left: 12px;
+    font-weight: 500;
+    font-size: 35px;
+    color: #666666;
+  }
+}
+// 校园认证
+.school {
+  height: 57px;
+  // 标题
+  >view:nth-of-type(1) {
+    font-size: large;
+  }
+  // 展开列表
+  .university_list {
+    position: absolute;
+    z-index: 1;
+    background-color: whitesmoke;
+    // 列表项
+    >view {
+      height: 45px;
+      font-size: 27px;
+    }
+  }
+}
+// 搜索框
+.index_background .at-search-bar {
+  width: 704px;
+  height: 69px;
+  background: #f7f7f7;
+  border-radius: 35px 35px 35px 35px;
+  opacity: 1;
+  //搜索按钮
+  .at-search-bar__action{
+    color: #ffffff;
+    text-align: center;
+    background-color: #81cea2;
+    border-radius: 23px;
+
+  }
+}
+// 分类换书+换书广场板块
+.area {
+  width: 704px;
+  margin-top: 20px;
+  border-radius: 23px;
+  background-color: #ffffff;
+  opacity: 1;
 }
 //分类换书
 .divide{
-  border-radius: 2% 2% 2% 2%;
-  background-color: #ffffff;
-  color: #7b7b7b;
-  width: 648rpx;
-  height: 195rpx;
+  height: 250px;
+  .scroll-tag {
+    margin-top: 20px;
+    white-space: nowrap;
+    .scroll-item {
+      display: inline-block;
+      width: 25%;
+    }
+  }
 }
-.at-row__justify--between{
-  height: 40rpx;
-  margin-top: 8rpx;
-}
+// 全部书籍
 .atAll{
-  color: '#e4e3e3';
+  height: 40px;
+  padding: 0;
+  margin: 20px 10px 20px 280px;
+  color: #B8B7B7;
   font-size: 20px;
-  margin-left: 280rpx;
-  margin-top: 5rpx;
-  margin-right: 10rpx;
+  line-height: 37px;
   border:1px solid #cdcdcd;
-  border-radius: 25rpx;
-}
-.at-col{
-  background-color: #ffffff;
-
-}
-.tag{
-  width: 30rpx;
-  // height: 32rpx;
-  margin-left: 20rpx;
-}
-//可换
-.item_out {
-  .item-extra__info {
-    background-color: #f0ae2b;
-    color: white;
+  border-radius: 25px;
+  .at-button {
+    width: 200px;
   }
 }
-.item_in {
-  .item-extra__info {
-    background-color: #81cea2;
-    color: white;
+// 换书广场
+.square {
+  // Tab
+  .at-tabs__header{
+    height: 62px;
+    width: 400px;
+    margin: 10px auto;
+    background-color: #f1f1f1;
+    border-radius: 59px;
   }
-}
-.item-extra__info{
-  border-width: 3rpx;
-  border-style:solid;
-  border-radius: 16rpx;
-}
-.at-item-extra__info {
-  //max-width: 100rpx;
-}
-
-  //搜索按钮
-.at-search-bar__action{
-  color: #ffffff;
-  text-align: center;
-  background-color: #81cea2;
-  border-radius: 23rpx;
-
-}
-.at-tabs__header{
-  margin-top: 13rpx;
-  background-color: #f1f1f1;
-  height: 50rpx;
-  width: 400rpx;
-  margin-left: 150rpx;
-  border-radius: 59rpx;
-}
-.at-tabs__item
-{
-padding-bottom: 20rpx;
-color: #7b7b7b;
-border-style: none;
-padding-top: 6rpx;
-font-size: small;
-}
-.at-tabs__item--active
-{
-  background-color: #ffcf4d;
-  border-radius: 59rpx;
-  border-style: none;
-  border-bottom-color:#ffcf4d ;
-  color: #ffffff;
-}
-.at-tabs__item-underline{
-  background-color: #ffcf4d;
-}
-.item-content__info-title{
-  color: blanchedalmond;
-}
-._n_18{
-  margin-left: 30rpx;
+  .at-tabs__item {
+    color: #7b7b7b;
+    border-style: none;
+    font-size: small;
+    line-height: 23px;
+  }
+  .at-tabs__item--active {
+    background-color: #ffcf4d;
+    border-radius: 59px;
+    border-style: none;
+    border-bottom-color:#ffcf4d ;
+    color: #ffffff;
+  }
+  .at-tabs__item-underline {
+    background-color: #ffcf4d;
+  }
 }
