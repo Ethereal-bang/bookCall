@@ -130,23 +130,6 @@ import './publish.scss'
 import {genreMap, oldDegreeMap, genreMap3} from "../../data/map";
 import {addBook} from "../../api/bookApi";
 
-const labelMap = {  // 通过映射关系将所选label渲染到标题
-  novel: "小说",
-  literature: "文学",
-  internet: "互联网",
-  technology: "科技",
-  psychology: "心理学",
-  other: "其他",
-  6: "6成新",
-  7: "7成新",
-  8: "8成新",
-  9: "9成新",
-  10: "全新",
-  5: "5成新及以下",
-  new: "全新",
-  almostNew: "较新",
-  any: "无所谓",
-}
 const SELECTED_BGC = "background-color: #FFCA4E",
   BLANK_BGC = "background-color: #F5F5F5";
 

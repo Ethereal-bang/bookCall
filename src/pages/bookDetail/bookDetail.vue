@@ -34,6 +34,12 @@
         </AtTag>
       </view>
 
+      <!--寄语-->
+      <view style="color: #A3A3A3">
+        <text>换书寄语：</text>
+        <text>{{ bookData.message }}</text>
+      </view>
+
       <!--作者-->
       <view>
         <text>作者</text>
@@ -55,30 +61,23 @@
       <!--简介-->
       <view>
         <text>图书简介</text>
-        <view>{{ bookData.bookIntroduction }}</view>
+        <view class="info">{{ bookData.bookIntroduction }}</view>
       </view>
-
-      <!--寄语-->
-      <view>
-        <text>换书寄语：</text>
-        <text>{{ bookData.message }}</text>
-      </view>
-
     </view>
 
     <!--三种按钮-->
-    <view>
+    <view class="button">
       <button
         v-if='!userData.isOwn'
         @tap="handle"
-        class="button"
+        :style="bookData.state === '求换' ? 'background-color: #C72518' : 'background-color: #FFCA4E'"
       >
         {{bookData.state === "求换" ? "我有，换给Ta" : "找Ta换"}}
       </button>
       <button
         v-if="userData.isOwn"
         @tap="handle"
-        class="button"
+        style="background-color: #81CEA2"
       >
         下架书籍
       </button>
@@ -177,12 +176,5 @@ export default {
 </script>
 
 <style>
-.show {
-  display: block;
-}
-
-.hide {
-  display: none;
-}
 </style>
 
