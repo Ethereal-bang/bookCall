@@ -3,20 +3,19 @@
     <!--发布目的-->
     <view>
       <view class="title">
-        <image class="icon_x" style=" width: 17rpx; height: 17rpx; display: inline-block"/>
+<!--        <image class="icon_x" style=" width: 17rpx; height: 17rpx; display: inline-block"/>-->
         <text>发布目的</text>
-        <image class="icon_g" style=" width: 30rpx; height: 30rpx; display: inline-block"/>
       </view>
       <view
         @tap="choosePurpose"
       >
-        <AtTag class="tag" id="out" data-purpose="1" :style="this.outBGC">换出</AtTag>
-        <AtTag class="tag" id="in" data-purpose="0" :style="this.inBGC">换入</AtTag>
+        <AtTag data-purpose="1" :style="this.outBGC">换出</AtTag>
+        <AtTag data-purpose="0" :style="this.inBGC">换入</AtTag>
       </view>
     </view>
 
     <!--新旧程度-->
-    <view>
+    <view class="old">
       <view class="title">
         <!--这里插入icon-->
         <text>新旧程度</text>
@@ -54,7 +53,7 @@
     </view>
 
     <!--书籍信息-ISBN-->
-    <view>
+    <view class="isbn">
       <view class="title">
         <!--这里插入icon-->
         <text>书籍信息</text>
@@ -89,17 +88,15 @@
       </view>
 
     <!--换书寄语-->
-    <view>
+    <view class="words">
       <view class="title">
-        <text class="jiyu">换书寄语</text>
-<!--        <image class="jiyug icon_g" :src=picUrls.purpose style=" width: 30rpx; height: 30rpx; display: inline-block"/>-->
+        <text>换书寄语</text>
       </view>
       <AtTextarea
         :value="inputWords"
         :on-change="(val) => this.inputWords = val"
         placeholder="想说的话都可以留下来哦~~"
         :count="false"
-        class="mesg"
       />
     </view>
 

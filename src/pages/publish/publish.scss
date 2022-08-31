@@ -1,116 +1,92 @@
 .publish{
     background-color: #ffffff;
     color: #696969;
-    font-size: 30rpx;
+    font-size: 32px;
+    padding: 0 42px;
+    // 每个AtTag
+    .at-tag {
+      min-width: 115px;
+      padding: 0;
+      margin-right: 30px;
+      margin-bottom: 10px;
+    }
+    // 每一块选项
+    >view {
+      margin-bottom: 21px;
+    }
 }
 .title{
     position:relative;
-    left:42rpx;
-    top: 5rpx;
     border-style: solid;
     border-color: #ffffff;
+    // 必填项icon
+    .icon_x{
+      position: absolute;
+      //top:-3rpx;
+      left:9px;
+    }
 }
-.tag{
-    margin-left: 40rpx;
-    margin-top: 6rpx;
+// 新旧程度
+.old {
+  .at-tag {
+    font-size: 23px;
+    color: #FD973F;
+    border-color: #FD973F;
+  }
 }
-.at-col-3{
-    margin-left: 40rpx;
-    margin-top: 8rpx;
-    margin-bottom: 8rpx;
+// 书籍信息
+.isbn {
+  // 提示语
+  > view:nth-of-type(2) {
+    font-size: 27px;
+    color: #F97024;
+  }
+  // 两个按钮
+  >view:nth-of-type(3) {
+    display: flex;
+    justify-content: space-between;
+    >.at-button {
+      width: 303px;
+      height: 67px;
+      display: inline-block;
+      background-color: #D1FEBF;
+      line-height: 60px;
+      border: 1px #D1FEBF solid;
+      border-radius: 60px;
+    }
+  }
+  // 手动输入modal
+  .at-modal__content>view {
+    text-align: center;
+    color: #FD973F;
+  }
+  .at-modal__action {
+    height: 90px;
+    .at-button {
+      margin-top: 0;
+      margin-bottom: 0;
+      border: 0;
+    }
+  }
 }
-//.scan{
-//    width: 5rpx;
-//    height: 42rpx;
-//    background: #FFCA4E;
-//    border-radius: 10rpx 10rpx 10rpx 10rpx;
-//    position: relative;
-//    right: 24rpx;
-//    // left: 22rpx;
-//    top: 29rpx;
-//    z-index: 2; // 让其较input显示在顶层
-//}
-//.scanicon{
-//    position: relative;
-//    right: 53rpx;
-//    left: 20rpx;
-//    top: 5rpx;
-//}
-.inp{
-    width: 50rpx;
-    height: 22rpx;
-    position: relative;
-    background-color: aqua;
-    top: -20rpx;
-}
-
-.icon_x{
-    position:relative;
-    top:-3rpx;
-    right:9rpx;
-}
-.inputicon{
-    position:relative;
-    top:47rpx;
-}
-.icon_g{
-    position:relative;
-    top:4rpx;
-    right:-17rpx;
-}
-.input{
-    position:relative;
-    left: -15rpx;
-    top: -30;
-    // background-color: red;
-    // background-color: #f7f7f7;
-    border-radius: 2rpx;
-    // border-style: none;
-    width: 640rpx; height: 50rpx;
-}
-.jiyu{
-    position:relative;
-    left:17rpx;
-    top: 5rpx;
-}
-.jiyug{
-    position:relative;
-    left:34rpx;
-    top: 5rpx;
-
-}
-.mesg{
+// 换书寄语
+.words {
+  // 输入框
+  >.at-textarea {
+    width: 640px;
+    height: 100px;
     background-color: #f7f7f7;
-    border-radius: 12rpx;
+    border-radius: 12px;
     border-style: none;
-    width: 640rpx; height: 100rpx;
-    position:relative;
-    top: 5rpx;
-    left:50rpx;
+    }
 }
+// 发布按钮
 .button{
-
-        width: 301rpx;
-        height: 89rpx;
-        background: #FFCA4E;
-        border-radius: 14rpx 14rpx 14rpx 14rpx;
-        border-style: none;
-        position:relative;
-        top: 15rpx;
-}
-.text1{
-    width: 401rpx;
-    height: 89rpx;
-    font-size: 22rpx;
-    margin-top: 12rpx;
-    margin-bottom: 13rpx;
-        // background: #FFCA4E;
-}
-
-.choice{
-    width: 401rpx;
-    height: 89rpx;
-    font-size: 22rpx;
-    margin-top: 12rpx;
-    margin-bottom: 13rpx;
+  width: 301px;
+  height: 89px;
+  background: #FFCA4E;
+  border-radius: 14px 14px 14px 14px;
+  border-style: none;
+  position:relative;
+  top: 15px;
 }
