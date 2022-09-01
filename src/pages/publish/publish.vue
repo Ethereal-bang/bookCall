@@ -24,6 +24,7 @@
         <view>
           <AtTag
             v-for="degree in (purpose === '0' ? degreeList.slice(0, 3) : degreeList.slice(3))"
+            :key="degree.code"
             :data-degree="degree.code"
             :style="degree.isSelected ? SELECTED_BGC : BLANK_BGC"
           >
@@ -43,6 +44,7 @@
         <view>
           <AtTag
             v-for="genre in genreList"
+            :key="genre.code"
             :data-genre="genre.code"
             :style="genre.isSelected ? SELECTED_BGC : BLANK_BGC"
           >
