@@ -1,0 +1,52 @@
+// 页面
+.container {
+  height: 100vh;
+  background-color: #F5F5F5;
+}
+
+// 贴士
+.tips {
+  width: 86%;
+  margin: 40px auto 0;
+  padding: 40px 30px;
+  background-color: #D1FEBF;
+  /* "小贴士" */
+  >view:nth-of-type(1) {
+    font-size: larger;
+  }
+}
+
+// 无消息提示语
+.no_news {
+  position: absolute;
+  top: 70%;
+  left: 32%;
+}
+
+// 消息列表
+.news_list {
+  background-color: #FFFFFF;
+  // 每一项
+  .at-list__item {
+    padding: 27px 10px 27px 32px;
+    .at-list__item-thumb {
+      width: 90px;
+      height: 90px;
+      image {
+        border-radius: 50%;
+      }
+    }
+    .at-list__item-content {
+      // 用户ID
+      >view >view:nth-of-type(1) {
+        font-size: 32px;
+      }
+    }
+    .at-list__item-extra {
+      view {
+        padding: 0;
+        font-size: 25px;
+      }
+    }
+  }
+}

@@ -1,22 +1,22 @@
 <template>
-  <view>
+  <view class="container">
     <!--小贴士-->
-    <view>
+    <view class="tips">
       <view>小贴士：</view>
       <view>-可以尝试从对方主页中看看有没有你喜欢的书，以便更好的达成交换目的~</view>
       <view>-换书成功后即使下架书籍，沟通更高效~</view>
     </view>
 
     <!--消息列表-->
-    <view v-if="newsList.length === 0">什么消息也没有~</view>
-    <AtList>
+    <view class="no_news" v-if="newsList.length === 0">什么消息也没有~</view>
+    <AtList class-name="news_list">
       <AtListItem
         v-for="item in newsList"
         :key="item.id"
         :title="item.name"
         :note="item.dialogueMap.message"
         :thumb="item.avatar"
-        :extra-text="item.dialogueMap.time"
+        :extra-text="item.dialogueMap.time.slice(11, 16)"
         :on-click="() => toCommunicate(item.dialogueMap)"
       />
     </AtList>
@@ -27,6 +27,7 @@
 import {getNewsList} from "../../api/personApi";
 import {AtList, AtListItem} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
+import "./news.scss";
 
 export default {
   name: "News",
