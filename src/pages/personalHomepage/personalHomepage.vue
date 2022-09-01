@@ -23,7 +23,7 @@
 <script>
 import {AtAvatar, AtTabs, AtTabsPane, AtNoticebar, AtTextarea, AtButton} from "taro-ui-vue";
 import {getUserBooks, getUserInfo, modifyDeclaration} from "../../api/personApi";
-import BookList from "../../components/bookList/bookList";
+import BookList from "../../components/bookList/BookList";
 import PersonPublish from "../../components/personPublish/personPublish";
 import Taro from "@tarojs/taro";
 import {getOpenid} from "../../utils/storageGetter";

@@ -59,7 +59,7 @@
 
 <script>
 import {AtTabs, AtTabsPane, AtNoticebar, AtButton} from "taro-ui-vue";
-import BookList from "../../components/bookList/bookList";
+import BookList from "../../components/bookList/BookList";
 
 export default {
   name: "PersonPublish",

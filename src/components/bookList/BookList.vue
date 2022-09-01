@@ -18,7 +18,7 @@
 import {AtList, AtListItem} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 const {inOrOut, inOrOut2} = require("../../data/map");
-import "./bookList.scss";
+import "./BookList.scss";
 
 export default {
   name: "BookList",
