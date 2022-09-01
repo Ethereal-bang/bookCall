@@ -1,41 +1,43 @@
 <template>
-  <view class="personpage">
+  <view class="person">
     <!--背景-->
 <!--    <image-->
 <!--          src="./personBG.png"-->
 <!--          style="width: 100%;height: 190px"-->
 <!--    />-->
+    <navigator url="/pages/personalHomepage/personalHomepage">
+      我的主页
+    </navigator>
 
-    <!--登录页-->
-    <view class="signpage">
-      <AtAvatar class="head" circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
+    <view class="container">
+      <AtAvatar circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
       <AtInput
         type="nickname" placeholder="请输入昵称"
         :value="name" :on-blur="onUsernameChange"
       />
-      <navigator url="/pages/personalHomepage/personalHomepage">
-        我的主页
-      </navigator>
-
+      <!--换书宣言-->
       <AtTextarea
             placeholder="点击添加换书宣言，让换书更有吸引力~~~"
             :value="declaration === '' ? undefined : declaration"
             :on-change="(val) => this.declaration = val"
             :on-blur="onDeclareChange"
             :count="false"
-            class="mesg"
           />
 
-      <view id="mine">
-        <navigator class="text" url="/pages/personalPublish/personalPublish" open-type="navigate">
-          <!--          <image class="img1 img" src="./info_publish.png" style="height: 30px; width: 30px; display: inline-block" />-->
-          <view>管理书籍</view>
-          <!--          <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
+      <view class="bars">
+        <navigator url="/pages/personalPublish/personalPublish" open-type="navigate">
+          <view>
+            <image />
+            <view class="text">管理书籍</view>
+          </view>
+          <image />
         </navigator>
-        <navigator class="text" url="/pages/changeRules/changeRules" open-type="navigate">
-          <!--          <image class="img3 img" src="./info_rule.png" style="height: 30px; width: 30px; display: inline-block" />-->
-          <view>交换规则</view>
-          <!--          <image class="right" src="./right.png" style="height: 12px; width: 5px; display: inline-block" />-->
+        <navigator url="/pages/changeRules/changeRules" open-type="navigate">
+          <view>
+            <image />
+            <view class="text">换书规则</view>
+          </view>
+          <image />
         </navigator>
       </view>
     </view>
