@@ -1,52 +1,71 @@
 <template>
-  <view>
+  <view class="communicate">
     <!--书籍-->
-    <view>
-      <view>{{changer.isDriver ? "对方从这本书找到了你" : "你正在沟通Ta的这本书"}}</view>
+    <view class="book_area">
+      <!--书籍主人头像(对方-->
+      <AtAvatar
+        v-if="changer.isDriver"
+        class-name="avatar avatar_left"
+        circle
+        :image="this.changer.avatar"
+        size="small"
+      />
+      <!--书籍主人头像(自己-->
+      <AtAvatar
+        v-if="!changer.isDriver"
+        class-name="avatar avatar_right"
+        circle
+        :image="this.changer.avatar"
+        size="small"
+      />
       <!--书籍信息-->
-      <AtCard
-        :title="book.name"
-        :thumb="book.photoPath"
-        :extra="book.state"
-      >
-        <view>换书寄语：</view>
-        <view>{{book.message}}</view>
-      </AtCard>
-      <navigator :url="'/pages/bookDetail/bookDetail?key=' + book.id">
-        <button>已达成交换，去下架</button>
-      </navigator>
+      <view class="info">
+        <AtList class-name="book_list">
+          <AtListItem
+            :key="book.name"
+            :title="book.name"
+            :note="'换书寄语' + book.message"
+            :thumb="book.photoPath"
+            :extra-text="inOrOut[book.getOrSale]"
+          />
+        </AtList>
+        <navigator :url="'/pages/bookDetail/bookDetail?key=' + book.id">
+          <button>已达成交换，去下架</button>
+        </navigator>
+      </view>
     </view>
 
     <!--对话-->
-    <view>
+    <view class="news_area">
       <!--每条消息-->
       <view
         v-for="news in newsList"
         :class="'news ' + (news.dialogueMap.Sendopenid === getOpenid() ? 'news_right' : 'news_left')"
       >
-        <AtAvatar circle :image="news.avatar" size="small" />
-        <text>{{news.dialogueMap.message}}</text>
+        <AtAvatar class-name="avatar" circle :image="news.avatar" size="small"/>
+        <text>{{ news.dialogueMap.message }}</text>
       </view>
     </view>
 
-    <!--输入框-->
-    <AtInput
-      confirmType="发送"
-      :on-confirm="sendMsg"
-      clear
-      class="input"
-    >
-<!--      <image src="https://aotu.io/img.png" />-->
-    </AtInput>
+    <!--输入框bar-->
+    <view class="send">
+      <AtInput
+        confirmType="发送"
+        :on-confirm="sendMsg"
+        clear
+      />
+      <AtAvatar text="十" circle />
+    </view>
   </view>
 </template>
 
 <script>
-import {AtCard, AtAvatar, AtInput} from "taro-ui-vue";
+import {AtCard, AtAvatar, AtInput, AtList, AtListItem} from "taro-ui-vue";
 import {getCommunication, getUserInfo, sendMsg} from "../../api/personApi";
 import {getOpenid} from "../../utils/storageGetter";
 import Taro from "@tarojs/taro";
-import {inOrOut2} from "../../data/map";
+import {inOrOut, inOrOut2} from "../../data/map";
+import "./communicate.scss";
 
 export default {
   name: "Communicate",
@@ -54,6 +73,8 @@ export default {
     AtCard,
     AtAvatar,
     AtInput,
+    AtList,
+    AtListItem,
   },
   async onLoad(options) {
     // 接收发起人id, bookId
@@ -107,7 +128,7 @@ export default {
       book: {
         id: "",
         name: "Loading",
-        state: "",  // 可换/求换
+        getOrSale: "",  // 0/1
         photoPath: "",
         message: "",  // 换书寄语
       },
@@ -136,30 +157,11 @@ export default {
           message: "",
         },
       }],
+      inOrOut
     }
   }
 }
 </script>
 
 <style>
-.news { /*每一条*/
-  height: 145px;
-  position: relative;
-  line-height: 81px;
-}
-.news_left>.at-avatar { /*头像*/
-  float: left;
-}
-.news_right {
-  float: right;
-  clear: both;
-}
-.news_right>.at-avatar {
-  float: right;
-  clear: both;
-}
-.input {  /*聊天输入框*/
-  position: absolute;
-  bottom: 250px;
-}
 </style>

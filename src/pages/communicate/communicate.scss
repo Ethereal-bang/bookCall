@@ -1,0 +1,84 @@
+.communicate {
+  height: 100vh;
+  background-color: #F5F5F5;
+}
+.book_area, .news_area {
+  margin: 30px 16px;
+}
+
+.book_area {
+  margin-bottom: 50px;
+  .info {
+    width: 78%;
+    height: 242px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    button {
+      width: 40%;
+      margin-top: 10px;
+      padding: 0;
+      float: right;
+      background-color: #FFCA4E;
+      font-size: 22px;
+    }
+  }
+  .avatar_left {
+    float: left;
+  }
+  .avatar_right {
+    float: right;
+  }
+}
+
+/*每一条*/
+.news {
+  height: 145px;
+  position: relative;
+  line-height: 81px;
+  >.at-avatar {
+    float: left;
+  }
+  >text { // 消息文本
+    display: inline-block;
+    padding: 0 24px;
+    background-color: #FFFFFF;
+    border-radius: 32px;
+  }
+}
+.news_left >.at-avatar {
+  margin-right: 30px;
+}
+.news_right {
+  float: right;
+  clear: both;
+  >.at-avatar {
+    float: right;
+    clear: both;
+    margin-left: 30px;
+  }
+}
+
+// 输入bar
+.send {
+  width: 100vw;
+  padding: 20px 30px 20px 8px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  background-color: #FFFFFF;
+  .at-input {
+    width: 72%;
+    padding: 24px 14px;
+    background-color: #ECECEC;
+    border-radius: 42px;
+  }
+  // ＋号
+  .at-avatar {
+    margin-right: 30px;
+    .at-avatar__text {
+      color: black;
+    }
+  }
+}
