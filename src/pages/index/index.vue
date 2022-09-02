@@ -47,7 +47,7 @@
             open-type="navigate"
             style="height: 100%"
           >
-            <view>图标</view>
+            <image :src="item.imgPath" mode="aspectFit" />
           </navigator>
         </swiper-item>
       </swiper>
@@ -157,6 +157,8 @@ import {getAllBooks, getGenreBooks, getSchoolList, login, searchBook} from "../.
 import BookList from "../../components/bookList/BookList";
 import {schoolMap, genreMap, genreMap2} from "../../data/map";
 import {getSchoolIp} from "../../utils/storageGetter";
+import banner1 from "../../assets/banner1.png";
+import banner2 from "../../assets/banner2.png";
 
 export default {
   components: {
@@ -178,8 +180,8 @@ export default {
       searchValue: '',
       current: 1,
       banners: [
-        {imgPath: "https://jdc.jd.com/img/200", navigatePath: "/pages/index/index"},
-        {imgPath: "https://jdc.jd.com/img/200", navigatePath: "/pages/changeRules/changeRules"},
+        {imgPath: banner1, navigatePath: "/pages/index/index"},
+        {imgPath: banner2, navigatePath: "/pages/changeRules/changeRules"},
       ],
       currentTab: 0,
       tabList: [
