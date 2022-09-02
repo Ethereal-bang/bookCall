@@ -5,6 +5,13 @@
   background-color: #F5F5F5;
  }
 
+// 背景
+.person>image {
+  width: 100%;
+  position: absolute;
+  top: -55px;
+}
+
 // "我的主页"
 .person >navigator {
   width: 200px;
