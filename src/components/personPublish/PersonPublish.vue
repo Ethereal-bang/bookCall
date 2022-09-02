@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="person_publish">
     <!--提示-->
     <AtNoticebar v-if="isOwn">当书籍交换成功后，记得及时点击书籍进入详情页下架，避免其他唤友频繁联系你哦~</AtNoticebar>
 
@@ -19,10 +19,9 @@
       >
         <BookList :list=bookList.out />
         <!--边界情况:-->
-        <view v-if="bookList.in.length === 0 && isOwn">
-          <AtNoticebar v-if="bookList.out.length === 0 && isOwn">
-            你还没有发布任何书籍哦！
-          </AtNoticebar>
+        <view class="none_publish" v-if="bookList.out.length === 0 && isOwn">
+          <image :src="nonePublishIcon" />
+          <view>你还没有发布任何书籍哦！</view>
           <navigator url="/pages/publish/publish" open-type="switchTab">
             <AtButton>去发布</AtButton>
           </navigator>
@@ -34,10 +33,9 @@
       >
         <BookList :list="bookList.in" />
         <!--边界情况:-->
-        <view v-if="bookList.in.length === 0 && isOwn">
-          <AtNoticebar>
-            你还没有发布任何书籍哦！
-          </AtNoticebar>
+        <view class="none_publish" v-if="bookList.in.length === 0 && isOwn">
+          <image :src="nonePublishIcon" />
+          <view>你还没有发布任何书籍哦！</view>
           <navigator url="/pages/publish/publish">
             <AtButton>去发布</AtButton>
           </navigator>
@@ -48,10 +46,6 @@
         :index="2"
       >
         <BookList :list="bookList.off" />
-        <!--边界情况:-->
-        <AtNoticebar v-if="bookList.off.length === 0 && isOwn">
-          你还没有下架任何书籍哦！
-        </AtNoticebar>
       </AtTabsPane>
     </AtTabs>
   </view>
@@ -60,6 +54,8 @@
 <script>
 import {AtTabs, AtTabsPane, AtNoticebar, AtButton} from "taro-ui-vue";
 import BookList from "../../components/bookList/BookList";
+import "./PersonPublish.scss";
+import nonePublishIcon from "../../assets/nonePublish.png";
 
 export default {
   name: "PersonPublish",
@@ -74,6 +70,7 @@ export default {
   data() {
     return {
       currentTab: 0,
+      nonePublishIcon,
     }
   },
   components: {

@@ -1,0 +1,57 @@
+// tips
+.person_publish > .at-noticebar {
+  margin: 0 auto;
+  border: 1px solid #f3f8f1;
+  border-radius: 33px;
+  background-color: #f3f8f1;
+  color: #2A851E;
+  font-size: large;
+}
+
+.person_publish >.at-tabs {
+  margin-top: 30px;
+  background: #ffffff;
+  border-radius: 33px;
+  // Tab
+  .at-tabs__header {
+    height: 62px;
+    width: 400px;
+    margin: 10px auto 0;
+    background-color: #f1f1f1;
+    border-radius: 59px;
+  }
+  .at-tabs__item {
+    color: #7b7b7b;
+    border-style: none;
+    font-size: small;
+    line-height: 23px;
+  }
+  .at-tabs__item--active {
+    background-color: #ffcf4d;
+    border-radius: 59px;
+    border-style: none;
+    border-bottom-color: #ffcf4d;
+    color: #ffffff;
+  }
+  .at-tabs__item-underline {
+    background-color: #ffcf4d;
+  }
+}
+
+// 边界情况
+.none_publish {
+  background-color: #F5F5F5;
+  image {
+    width: 377px;
+    height: 377px;
+    margin: 50px auto 20px;
+    display: block;
+  }
+  .at-button {
+    width: 377px;
+    margin: 0 auto;
+    border-radius: 30px;
+    background: #7b94cd;
+    color: white;
+  }
+}

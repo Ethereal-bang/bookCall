@@ -1,9 +1,19 @@
 <template>
-  <view>
+  <view class="personal_homepage">
+    <!--背景-->
+    <!--    <image-->
+    <!--          src="./personBG.png"-->
+    <!--          style="width: 100%;height: 190px"-->
+    <!--    />-->
+
     <!--用户信息-->
-    <view>
+    <view class="info">
       <AtAvatar :image="this.userInfo.avatar" circle />
-      <view>{{userInfo.name}}</view>
+      <AtInput
+        type="nickname" placeholder="请输入昵称"
+        :value="userInfo.name" :on-blur="onUsernameChange"
+        :disabled="!this.userInfo.isOwn"
+      />
       <AtTextarea
         placeholder="点击添加换书宣言，让换书更有吸引力~~~"
         :value="this.userInfo.declaration === '' ? undefined : this.userInfo.declaration"
@@ -21,12 +31,13 @@
 </template>
 
 <script>
-import {AtAvatar, AtTabs, AtTabsPane, AtNoticebar, AtTextarea, AtButton} from "taro-ui-vue";
-import {getUserBooks, getUserInfo, modifyDeclaration} from "../../api/personApi";
+import {AtAvatar, AtTabs, AtTabsPane, AtNoticebar, AtTextarea, AtButton, AtInput} from "taro-ui-vue";
+import {getUserBooks, getUserInfo, modifyDeclaration, modifyUsername} from "../../api/personApi";
 import BookList from "../../components/bookList/BookList";
 import PersonPublish from "../../components/personPublish/personPublish";
 import Taro from "@tarojs/taro";
 import {getOpenid} from "../../utils/storageGetter";
+import "./personalHomepage.scss";
 
 export default {
   name: "personalHomepage",
@@ -39,6 +50,7 @@ export default {
     AtTextarea,
     AtButton,
     PersonPublish,
+    AtInput,
   },
   data() {
     return {
@@ -57,6 +69,11 @@ export default {
     }
   },
   methods: {
+    // 修改name
+    async onUsernameChange(val) { // bug:开发工具选择微信名不触发(真机预览触发
+      await modifyUsername(val);
+      await Taro.showToast({title: "修改成功"})
+    },
     // blur后修改换书宣言
     async onDeclareChange() {
       await modifyDeclaration(this.userInfo.declaration)

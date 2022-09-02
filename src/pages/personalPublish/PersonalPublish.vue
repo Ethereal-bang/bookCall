@@ -1,5 +1,7 @@
 <template>
-  <PersonPublish :book-list="personPublic" is-own="true" />
+  <view class="personal_publish">
+    <PersonPublish :book-list="personPublic" is-own="true"/>
+  </view>
 </template>
 
 <script>
@@ -49,8 +51,10 @@ export default {
 }
 </script>
 
-<style scoped>
-view {
-  height: 20vh;
+<style>
+.personal_publish {
+  height: 100vh;
+  padding: 0 20px;
+  background-color: #F5F5F5;
 }
 </style>

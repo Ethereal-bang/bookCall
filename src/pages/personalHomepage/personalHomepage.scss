@@ -1,0 +1,39 @@
+// 页面
+.personal_homepage {
+  height: 100vh;
+  padding: 200px 30px 80px;
+  background-color: #F5F5F5;
+}
+
+// 用户信息
+.info {
+  padding: 126px 0 60px;
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: 33px;
+  .at-avatar {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    left: 37%;
+    top: -10%;
+    border-style: solid;
+    border-color: #ffffff;
+  }
+  .at-input {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  .at-textarea {
+    width: 640px;
+    height: 107px;
+    margin: 0 auto;
+    padding: 28px;  // 控制字体显示区域
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    border-style: none;
+    font-size: 12px;
+  }
+}
+
