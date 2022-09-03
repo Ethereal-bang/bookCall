@@ -153,7 +153,7 @@ import Taro from "@tarojs/taro";
 import {getAllBooks, getGenreBooks, getSchoolList, login, searchBook} from "../../api/indexApi";
 import BookList from "../../components/bookList/BookList";
 import {schoolMap, genreMap, genreMap2} from "../../data/map";
-import {getSchoolIp} from "../../utils/storageGetter";
+import {getOpenid, getSchoolIp} from "../../utils/storageGetter";
 import banner1 from "../../assets/banner1.png";
 import banner2 from "../../assets/banner2.png";
 import locationImg from "../../assets/location.png";
@@ -307,20 +307,22 @@ export default {
     }
   },
   onLoad() {
-    // 获取登录凭证code（需后端
-    Taro.login({ // 获取登录凭证
-      success: (res) => {
-        const {code} = res;
-        if (code) {
-          // 获取openid并存储
-          login(code).then(res => {
-            Taro.setStorageSync("openid", res.data)
-          })
-        } else {
-          console.log("登录失败：" + res.errMsg);
+    // 获取登录凭证code
+    if (!getOpenid()) {
+      Taro.login({ // 获取登录凭证
+        success: (res) => {
+          const {code} = res;
+          if (code) {
+            // 获取openid并存储
+            login(code).then(res => {
+              Taro.setStorageSync("openid", res.data)
+            })
+          } else {
+            console.log("登录失败：" + res.errMsg);
+          }
         }
-      }
-    })
+      })
+    }
     // 学校
     const memoIp = getSchoolIp();
     if (memoIp) { // 已经选择过学校
