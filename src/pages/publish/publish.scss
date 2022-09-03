@@ -56,9 +56,22 @@
     }
   }
   // 手动输入modal
-  .at-modal__content>view {
-    text-align: center;
-    color: #FD973F;
+  .at-modal__content {
+    >view {
+      text-align: center;
+      color: #FD973F;
+    }
+    image {
+      width: 360px;
+      height: 200px;
+      margin: 0 auto;
+      display: block;
+    }
+    .at-input {
+      width: 260px;
+      margin: 0 auto;
+      background-color: #f0f0f0;
+    }
   }
   .at-modal__action {
     height: 90px;

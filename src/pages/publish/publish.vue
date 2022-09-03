@@ -75,6 +75,7 @@
           <AtModalContent>
             <view>请输入ISBN条码</view>
             <!--这里插入ISBN图片-->
+            <image mode="aspectFit" :src="isbnImg" />
             <AtInput
               :border="false"
               placeholder="在这输入..."
@@ -126,8 +127,9 @@ import {AtInput, AtTag, AtTextarea, AtAccordion, AtRadio, AtButton, AtToast,
   AtModal, AtModalContent, AtModalHeader, AtModalAction} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import './publish.scss'
-import {genreMap, oldDegreeMap, genreMap3} from "../../data/map";
+import {oldDegreeMap, genreMap3} from "../../data/map";
 import {addBook} from "../../api/bookApi";
+import isbnImg from "../../assets/isbn.png";
 
 const SELECTED_BGC = "background-color: #FFCA4E",
   BLANK_BGC = "background-color: #F5F5F5";
@@ -167,6 +169,7 @@ export default {
       // 书籍信息
       inputISBN: "",
       isISBNModalOpen: false,
+      isbnImg,
       // 换书寄语
       inputWords: "", // 寄语
       // 跳转用
