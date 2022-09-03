@@ -73,27 +73,11 @@
       align-items: center;
       >view {
         display: flex;
-        align-content: center;
-        // 第一个icon
-        image {
-          width: 60px;
-          height: 60px;
-          background-color: #81CEA2;
-          //background: url("../../assets/icons.png") 2px;
-          border-radius: 19px;
-        }
+        align-items: center;
         .text {
           margin-left: 30px;
           font-size: large;
         }
-      }
-      // 后一个icon
-      >image {
-        width: 30px;
-        height: 30px;
-        margin-right: 20px;
-        background-color: #81CEA2;
-        //background: url("../../assets/icons.png") center;
       }
     }
   }
