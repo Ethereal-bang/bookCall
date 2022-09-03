@@ -3,7 +3,7 @@
     <!--发布目的-->
     <view>
       <view class="title">
-<!--        <image class="icon_x" style=" width: 17rpx; height: 17rpx; display: inline-block"/>-->
+        <view class="sprite sprite-publish_highlight" />
         <text>发布目的</text>
       </view>
       <view
@@ -17,7 +17,7 @@
     <!--新旧程度-->
     <view class="old">
       <view class="title">
-        <!--这里插入icon-->
+        <view class="sprite sprite-publish_highlight" />
         <text>新旧程度</text>
       </view>
       <view @tap="clickOld">
@@ -37,7 +37,7 @@
     <!--书籍类别-->
     <view>
       <view class="title">
-        <!--这里插入icon-->
+        <view class="sprite sprite-publish_highlight" />
         <text>书籍类别</text>
       </view>
       <view @tap="clickGenre">
@@ -57,7 +57,7 @@
     <!--书籍信息-ISBN-->
     <view class="isbn">
       <view class="title">
-        <!--这里插入icon-->
+        <view class="sprite sprite-publish_highlight" />
         <text>书籍信息</text>
       </view>
       <view>选择扫码或输入ISBN码，快速完善书籍信息</view>
@@ -93,6 +93,7 @@
     <!--换书寄语-->
     <view class="words">
       <view class="title">
+        <view class="sprite sprite-publish_highlight" />
         <text>换书寄语</text>
       </view>
       <AtTextarea

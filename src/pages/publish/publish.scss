@@ -20,10 +20,11 @@
     border-style: solid;
     border-color: #ffffff;
     // 必填项icon
-    .icon_x{
+    >.sprite-publish_highlight {
+      display: inline-block;
       position: absolute;
-      //top:-3rpx;
-      left:9px;
+      left: -19px;
+      bottom: 13px;
     }
 }
 // 新旧程度
