@@ -48,7 +48,7 @@
             open-type="navigate"
             style="height: 100%"
           >
-            <image :src="item.imgPath" mode="aspectFit" />
+            <image :src="item.imgPath" mode="aspectFit"/>
           </navigator>
         </swiper-item>
       </swiper>
@@ -75,17 +75,11 @@
             :data-name="genre.name"
             @tap="() => genreClick(genre.name)"
           >
-            <view>
-              <image
-                :src=genre.src
-                mode="aspectFit"
-                style="height: 45px; width: 100%"
-              />
-              <text
-                style="display: block; text-align: center"
-              >{{ genre.title }}
-              </text>
-            </view>
+            <view :class="'sprite ' + genre.src"/>
+            <text
+              style="display: block; text-align: center"
+            >{{ genre.title }}
+            </text>
           </view>
         </scroll-view>
       </view>
@@ -103,15 +97,15 @@
             :current="currentTab"
             :index="0"
           >
-            <BookList :list=bookList :class="tabs_body_class" />
+            <BookList :list=bookList :class="tabs_body_class"/>
             <view
               class="no_location"
               v-if="!isChosenUniversity"
             >
-              <image :src="locationImg" mode="aspectFit" />
+              <image :src="locationImg" mode="aspectFit"/>
               <text>
                 选择你所在的大学后，才能查看书籍动态以及发布书籍哦~
-                {{"\n"}}（点击左上角立即选择）
+                {{ "\n" }}（点击左上角立即选择）
               </text>
             </view>
           </AtTabsPane>
@@ -196,13 +190,13 @@ export default {
       bookList: [],
       /*分类换书*/
       tags: [
-        {key: 1, name: "novel", title: "小说", src: ""},
-        {key: 2, name: "literature", title: "文学", src: ""},
-        {key: 3, name: "internet", title: "互联网", src: ""},
-        {key: 4, name: "technology", title: "科技", src: ""},
-        {key: 5, name: "psychology", title: "心理学", src: ""},
-        {key: 6, name: "teaching", title: "教材教辅", src: ""},
-        {key: 7, name: "other", title: "其他", src: ""},
+        {key: 1, name: "novel", title: "小说", src: "sprite-group_1novel"},
+        {key: 2, name: "literature", title: "文学", src: "sprite-group_4literature"},
+        {key: 3, name: "internet", title: "互联网", src: "sprite-group_3internet"},
+        {key: 4, name: "technology", title: "科技", src: "sprite-group_5science"},
+        {key: 5, name: "psychology", title: "心理学", src: "sprite-group_6psychology"},
+        {key: 6, name: "teaching", title: "教材教辅", src: "sprite-group_2education"},
+        {key: 7, name: "other", title: "其他", src: "sprite-group_7other"},
       ],
       /*校园认证：*/
       showState: false,
@@ -216,9 +210,9 @@ export default {
       tabs_body_class: "",
     }
   },
-  methods:  {
+  methods: {
     onSearch() {
-      if (!this.judgeUniversity())  return;
+      if (!this.judgeUniversity()) return;
       searchBook(this.searchValue)
         .then(res => {
           const list = res.data;
@@ -284,7 +278,7 @@ export default {
       return true;
     },
     clickToAllBooks() {
-      if (!this.judgeUniversity())  return;
+      if (!this.judgeUniversity()) return;
       Taro.navigateTo({
         url: "/pages/books/books?title=" + "全部书籍",
         success: res => {
@@ -349,11 +343,13 @@ export default {
 .square_scroll {
   height: 100vh;
 }
+
 .title_scroll {
   position: sticky;
   top: 1vh;
   height: 5vh;
 }
+
 .at-tabs__body_scroll {
   width: 100%;
   /*position: absolute;*/

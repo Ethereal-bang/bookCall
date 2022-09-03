@@ -94,6 +94,9 @@
     .scroll-item {
       display: inline-block;
       width: 25%;
+      view {
+        margin: 0 auto;
+      }
     }
   }
 }
