@@ -60,7 +60,7 @@
         <view class="sprite sprite-publish_highlight" />
         <text>书籍信息</text>
       </view>
-      <view>选择扫码或输入ISBN码，快速完善书籍信息</view>
+      <view>{{this.inputISBN ? 'ISBN: ' + this.inputISBN : '选择扫码或输入ISBN码，快速完善书籍信息'}}</view>
       <view>
         <AtButton>直接扫码</AtButton>
         <AtButton
