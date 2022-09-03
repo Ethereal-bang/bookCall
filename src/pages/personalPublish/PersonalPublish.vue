@@ -9,6 +9,7 @@ import {AtTabs, AtTabsPane, AtList, AtListItem, AtDivider, AtNoticebar, AtButton
 import Taro from "@tarojs/taro";
 import BookList from "../../components/bookList/BookList";
 import PersonPublish from "../../components/personPublish/personPublish";
+import {getUserBooks} from "../../api/personApi";
 
 export default {
   name: "PersonalPublish",
@@ -47,6 +48,12 @@ export default {
   },
   onLoad() {
     // openid请求个人发布
+    getUserBooks().then(res => {
+      const {get, sale, history} = res.data.bookList;
+      this.personPublic.in = get;
+      this.personPublic.out = sale;
+      this.personPublic.off = history;
+    })
   },
 }
 </script>
