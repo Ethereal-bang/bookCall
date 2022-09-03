@@ -21,10 +21,22 @@
 }
 // 校园认证
 .school {
-  height: 57px;
+  height: 70px;
+  padding-left: 30px;
   // 标题
   >view:nth-of-type(1) {
-    font-size: large;
+    >view {
+      width: 60px;
+      height: 60px;
+      display: inline-block;
+      background-color: #2A851E;
+      //background: url("../../assets/icons.png") 20px 50px;
+    }
+    text {
+      display: inline-block;
+      margin-left: 40px;
+      font-size: large;
+    }
   }
   // 展开列表
   .university_list {
@@ -98,6 +110,19 @@
 }
 // 换书广场
 .square {
+  .no_location {
+    text-align: center;
+    image {
+      width: 350px;
+      height: 200px;
+      margin: 0 auto;
+      display: block;
+    }
+    text {
+      height: 100px;
+      font-size: 38px;
+    }
+  }
   // Tab
   .at-tabs__header{
     height: 62px;

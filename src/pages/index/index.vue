@@ -4,7 +4,8 @@
       <!--校园认证-->
       <view class="school">
         <view @tap="choseUniversity">
-          {{ chosenUniversity }}
+          <view />
+          <text>{{ chosenUniversity }}</text>
         </view>
         <view v-if="showState" @tap="choseWitchUniversity" class="university_list">
           <view
@@ -103,14 +104,16 @@
             :index="0"
           >
             <BookList :list=bookList :class="tabs_body_class" />
-            <AtList
-              :class="tabs_body_class"
+            <view
+              class="no_location"
+              v-if="!isChosenUniversity"
             >
-              <AtListItem
-                v-if="!isChosenUniversity"
-                note="选择你所在的大学后，才能查看书籍动态以及发布书籍哦~（点击左上角立即选择）"
-              />
-            </AtList>
+              <image :src="locationImg" mode="aspectFit" />
+              <text>
+                选择你所在的大学后，才能查看书籍动态以及发布书籍哦~
+                {{"\n"}}（点击左上角立即选择）
+              </text>
+            </view>
           </AtTabsPane>
           <AtTabsPane
             :current="currentTab"
@@ -159,6 +162,7 @@ import {schoolMap, genreMap, genreMap2} from "../../data/map";
 import {getSchoolIp} from "../../utils/storageGetter";
 import banner1 from "../../assets/banner1.png";
 import banner2 from "../../assets/banner2.png";
+import locationImg from "../../assets/location.png";
 
 export default {
   components: {
@@ -206,6 +210,7 @@ export default {
       university: [],
       chosenUniversity: "我的大学",
       /*换书广场页面滚动*/
+      locationImg,
       square_class: "",
       square_title_class: "",
       tabs_body_class: "",
