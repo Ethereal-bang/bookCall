@@ -26,7 +26,7 @@
             v-for="degree in (purpose === '0' ? degreeList.slice(0, 3) : degreeList.slice(3))"
             :key="degree.code"
             :data-degree="degree.code"
-            :style="degree.isSelected ? SELECTED_BGC : BLANK_BGC"
+            :style="degree.isSelected ? SELECTED_COLOR : BLANK_COLOR"
           >
             {{ oldDegreeMap[degree.code] }}
           </AtTag>
@@ -132,8 +132,10 @@ import {oldDegreeMap, genreMap3} from "../../data/map";
 import {addBook} from "../../api/bookApi";
 import isbnImg from "../../assets/isbn.png";
 
-const SELECTED_BGC = "background-color: #FFCA4E",
+const SELECTED_BGC = "background-color: #ADADAD",
   BLANK_BGC = "background-color: #F5F5F5";
+const SELECTED_COLOR = "color: #FF000F; border-color: #FF000F",
+  BLANK_COLOR = "color: #FD973F; border-color: #FD973F";
 
 export default {
   name: "Publish",
@@ -163,6 +165,8 @@ export default {
       degreeList: [],
       oldDegreeMap,
       chosenOld: "",  // 新旧程度数字代号
+      SELECTED_COLOR,
+      BLANK_COLOR,
       // 书籍类别
       genreList: [],
       genreMap3,
