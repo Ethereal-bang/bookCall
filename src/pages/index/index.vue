@@ -258,6 +258,12 @@ export default {
       })
     },
     choseUniversity() {
+      if (!this.showState && this.university.length === 0) {
+        getSchoolList()
+          .then(res => {
+            this.university = res.data;
+          })
+      }
       this.showState = !this.showState;
     },
     choseWitchUniversity(e) {
