@@ -4,7 +4,7 @@
       <!--校园认证-->
       <view class="school">
         <view @tap="choseUniversity">
-          <view />
+          <view class="sprite sprite-index_location"/>
           <text>{{ chosenUniversity }}</text>
         </view>
         <view v-if="showState" @tap="choseWitchUniversity" class="university_list">
