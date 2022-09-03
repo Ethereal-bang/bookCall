@@ -20,23 +20,23 @@ export default {
       {
         pagePath: "pages/index/index",
         text: "首页",
-        iconPath:"./index.png",
-        selectedIconPath:"./index_.png"
+        iconPath:"./assets/index.png",
+        selectedIconPath:"./assets/index_.png"
       }, {
         pagePath: 'pages/publish/publish',
         text: "发布",
-        iconPath:"./publish.png",
-        selectedIconPath:"./publish.png"
+        iconPath:"./assets/publish.png",
+        selectedIconPath:"./assets/publish.png"
       }, {
         pagePath: 'pages/news/news',
         text: "消息",
-        iconPath:"./publish.png",
-        selectedIconPath:"./publish.png"
+        iconPath:"./assets/news.png",
+        selectedIconPath:"./assets/news_.png"
       }, {
         pagePath: "pages/person/person",
         text: "我的",
-        iconPath:"./mine.png",
-        selectedIconPath:"./mine_.png"
+        iconPath:"./assets/mine.png",
+        selectedIconPath:"./assets/mine_.png"
       },
     ]
   },
