@@ -45,8 +45,10 @@
     background-color: whitesmoke;
     // 列表项
     >view {
-      height: 45px;
-      font-size: 27px;
+      height: 52px;
+      padding: 5px 20px;
+      text-align: center;
+      font-size: 40px;
     }
   }
 }
