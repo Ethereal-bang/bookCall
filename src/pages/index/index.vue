@@ -261,16 +261,11 @@ export default {
       this.showState = !this.showState;
     },
     choseWitchUniversity(e) {
+      Taro.setStorageSync("schoolIp", e.target.dataset.ip); // 缓存所选学校ip
       this.requestBooks();  // 请求书籍列表
-      // 缓存所选学校ip
-      Taro.setStorage({
-        key: "schoolIp",
-        data: e.target.dataset.ip,
-      });
       this.choseUniversity()// 选后关闭下拉单
       this.chosenUniversity = e.target.dataset.title; // 下拉单显示
       this.isChosenUniversity = true; // 换书广场显示
-      this.isToastOpen = false;
     },
     judgeUniversity() { // 交互时判断是否选择大学
       if (!this.isChosenUniversity) {
