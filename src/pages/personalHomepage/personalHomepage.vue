@@ -1,32 +1,32 @@
 <template>
   <view class="personal_homepage">
     <!--背景-->
-    <!--    <image-->
-    <!--          src="./personBG.png"-->
-    <!--          style="width: 100%;height: 190px"-->
-    <!--    />-->
+    <image
+      :src="personBG" mode="aspectFit"
+    />
 
-    <!--用户信息-->
-    <view class="info">
-      <AtAvatar :image="this.userInfo.avatar" circle />
-      <AtInput
-        type="nickname" placeholder="请输入昵称"
-        :value="userInfo.name" :on-blur="onUsernameChange"
-        :disabled="!this.userInfo.isOwn"
-      />
-      <AtTextarea
-        placeholder="点击添加换书宣言，让换书更有吸引力~~~"
-        :value="this.userInfo.declaration === '' ? undefined : this.userInfo.declaration"
-        :on-change="(val) => this.declaration = val"
-        :on-blur="onDeclareChange"
-        :count="false"
-        :disabled="!this.userInfo.isOwn"
-      />
+    <view class="container">
+      <!--用户信息-->
+      <view class="info">
+        <AtAvatar :image="this.userInfo.avatar" circle />
+        <AtInput
+          type="nickname" placeholder="请输入昵称"
+          :value="userInfo.name" :on-blur="onUsernameChange"
+          :disabled="!this.userInfo.isOwn"
+        />
+        <AtTextarea
+          placeholder="点击添加换书宣言，让换书更有吸引力~~~"
+          :value="this.userInfo.declaration === '' ? undefined : this.userInfo.declaration"
+          :on-change="(val) => this.declaration = val"
+          :on-blur="onDeclareChange"
+          :count="false"
+          :disabled="!this.userInfo.isOwn"
+        />
+      </view>
+
+      <!--个人书籍-->
+      <PersonPublish :book-list="bookList" :is-own="userInfo.isOwn" />
     </view>
-
-    <!--个人书籍-->
-    <PersonPublish :book-list="bookList" :is-own="userInfo.isOwn" />
-
   </view>
 </template>
 
@@ -38,6 +38,7 @@ import PersonPublish from "../../components/personPublish/personPublish";
 import Taro from "@tarojs/taro";
 import {getOpenid} from "../../utils/storageGetter";
 import "./personalHomepage.scss";
+import personBG from "../../assets/personBG.png";
 
 export default {
   name: "personalHomepage",
@@ -54,6 +55,7 @@ export default {
   },
   data() {
     return {
+      personBG,
       userInfo: {
         avatar: "",
         name: "用户名",

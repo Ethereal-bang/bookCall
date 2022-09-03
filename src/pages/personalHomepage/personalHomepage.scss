@@ -1,8 +1,19 @@
 // 页面
 .personal_homepage {
   height: 100vh;
-  padding: 200px 30px 80px;
   background-color: #F5F5F5;
+}
+
+// 背景图
+.personal_homepage >image {
+  width: 100%;
+  position: absolute;
+  top: -55px;
+}
+
+// 页面主体
+.container {
+  padding: 200px 30px 80px;
 }
 
 // 用户信息
