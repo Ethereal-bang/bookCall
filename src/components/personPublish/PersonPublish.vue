@@ -36,7 +36,7 @@
         <view class="none_publish" v-if="bookList.in.length === 0 && isOwn">
           <image :src="nonePublishIcon" />
           <view>你还没有发布任何书籍哦！</view>
-          <navigator url="/pages/publish/publish">
+          <navigator url="/pages/publish/publish" open-type="switchTab">
             <AtButton>去发布</AtButton>
           </navigator>
         </view>
