@@ -34,3 +34,9 @@ $thumbSize: 110rpx;
   width: $thumbSize;
   height: $thumbSize;
 }
+
+// sprite图
+.sprite {
+  display: block;
+  background: url("./assets/light.png") -1px -1px;
+}
