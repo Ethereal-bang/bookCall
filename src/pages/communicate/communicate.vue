@@ -50,17 +50,28 @@
     <!--输入框bar-->
     <view class="send">
       <AtInput
+        type="text"
         confirmType="发送"
-        :on-confirm="sendMsg"
-        clear
+        :on-change="val => this.news = val"
+        :value="news"
       />
-      <AtAvatar text="十" circle />
+      <view>
+        <AtButton
+          v-if="this.news.length !== 0"
+          :on-click="sendMsg"
+        >
+          发送
+        </AtButton>
+        <AtAvatar text="十" circle
+                  v-if="this.news.length === 0"
+        />
+      </view>
     </view>
   </view>
 </template>
 
 <script>
-import {AtCard, AtAvatar, AtInput, AtList, AtListItem} from "taro-ui-vue";
+import {AtCard, AtAvatar, AtInput, AtList, AtListItem, AtButton} from "taro-ui-vue";
 import {getCommunication, getUserInfo, sendMsg} from "../../api/personApi";
 import {getOpenid} from "../../utils/storageGetter";
 import Taro from "@tarojs/taro";
@@ -76,6 +87,7 @@ export default {
     AtInput,
     AtList,
     AtListItem,
+    AtButton,
   },
   async onLoad(options) {
     // 接收发起人id, bookId
@@ -117,8 +129,12 @@ export default {
     })
   },
   methods: {
-    sendMsg: function (val) {
-      sendMsg(this.book.id, val, this.changer.openid);
+    onChange: function (val) {
+      console.log(val)
+      // this.news = val;
+    },
+    sendMsg: function () {
+      sendMsg(this.book.id, this.news, this.changer.openid);
       this.newsList.push({
         name: this.user.name,
         avatar: this.user.avatar,
@@ -129,6 +145,7 @@ export default {
           message: val,
         },
       })
+      this.news = ''
     },
   },
   data() {
@@ -168,6 +185,7 @@ export default {
         },
       }],
       inOrOut2,
+      news: '', // 发送消息
     }
   }
 }
