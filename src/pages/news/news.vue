@@ -64,7 +64,7 @@ export default {
     toCommunicate(dialogueMap) {
       Taro.navigateTo({
         url: '/pages/communicate/communicate'
-          + '?senderId=' + dialogueMap.Sendopenid
+          + '?senderId=' + dialogueMap.Sendopenid   // 发起者id
           + '&bookId=' + dialogueMap.bookId,
       })
     },
