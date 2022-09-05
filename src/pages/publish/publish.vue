@@ -62,7 +62,7 @@
       </view>
       <view>{{this.inputISBN ? 'ISBN: ' + this.inputISBN : '选择扫码或输入ISBN码，快速完善书籍信息'}}</view>
       <view>
-        <AtButton>直接扫码</AtButton>
+        <AtButton :on-click="scanCode">直接扫码</AtButton>
         <AtButton
           :on-click="() => this.isISBNModalOpen = true"
         >
@@ -226,6 +226,14 @@ export default {
       this.resetGenreList();
       this.genreList[genreCode].isSelected = true;
       this.chosenGenre = genreCode;
+    },
+    scanCode() {
+      Taro.scanCode({
+        scanType: "carCode",
+        success: res => {
+          this.inputISBN = res.result;
+        }
+      })
     },
     post() {
       const info = {
