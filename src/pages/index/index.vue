@@ -268,10 +268,7 @@ export default {
       this.isChosenUniversity = true; // 换书广场显示
       // 订阅消息
       Taro.requestSubscribeMessage({
-        tmplIds: ['LOzU9QG5bMySWuZlHBu_pitoxzirPTR3c32sLEFdeeI'],  // 模板id-新消息通知
-        // success: res => {
-        //   console.log(res)
-        // }
+        tmplIds: ['QoE_19IAHRNj7rq5kfMfA7mbMnS8iLGA49qj0GRs9uo'],  // 模板id-新消息通知
       })
     },
     judgeUniversity() { // 交互时判断是否选择大学

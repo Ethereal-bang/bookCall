@@ -2,7 +2,7 @@ import {myAxios} from "./myAxios";
 import {getSchoolIp, getOpenid} from "../utils/storageGetter";
 
 // 修改username
-export const modifyUsername = (name) =>  {
+export const modifyUsername = (name) => {
   return myAxios("/myInfo/ChangeName", {
     data: {
       openid: getOpenid(),
@@ -67,6 +67,28 @@ export const getNewsList = () => {
   return myAxios("/dialogue/GetNews", {
     data: {
       myopenid: getOpenid(),
+    }
+  })
+}
+
+// 发送订阅消息
+export const sendSubscription = (openid, userName, bookName, news) => {
+  return myAxios("/myInfo/sendMessage", {
+    data: {
+      template_id: "QoE_19IAHRNj7rq5kfMfA7mbMnS8iLGA49qj0GRs9uo",
+      touser: openid,
+      page: "pages/news/news",  // 小程序跳转链接
+      data: {
+        thing4: {
+          value: userName,
+        },
+        thing2: {
+          value: news,
+        },
+        thing7: {
+          value: bookName,
+        },
+      }
     }
   })
 }

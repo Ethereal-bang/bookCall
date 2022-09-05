@@ -72,7 +72,7 @@
 
 <script>
 import {AtCard, AtAvatar, AtInput, AtList, AtListItem, AtButton} from "taro-ui-vue";
-import {getCommunication, getUserInfo, sendMsg} from "../../api/personApi";
+import {getCommunication, getUserInfo, sendMsg, sendSubscription} from "../../api/personApi";
 import {getOpenid} from "../../utils/storageGetter";
 import Taro from "@tarojs/taro";
 import {inOrOut2} from "../../data/map";
@@ -130,10 +130,6 @@ export default {
     await Taro.setNavigationBarTitle({title: this.changer.name})
   },
   methods: {
-    onChange: function (val) {
-      console.log(val)
-      // this.news = val;
-    },
     sendMsg: function () {
       sendMsg(this.book.id, this.news, this.changer.openid);
       this.newsList.push({
@@ -147,6 +143,8 @@ export default {
         },
       })
       this.news = ''
+      // 订阅消息通知对方
+      sendSubscription(this.changer.openid, this.changer.name, this.book.name);
     },
   },
   data() {
