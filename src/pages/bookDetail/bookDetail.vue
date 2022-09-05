@@ -165,9 +165,9 @@ export default {
             case "可换":  // 换给ta
               Taro.navigateTo({
                 url: "/pages/communicate/communicate"
-                  + "?openid=" + getOpenid() // 发起者id-本人
+                  + "?senderId=" + getOpenid() // 发起者id-本人
                   + "&bookId=" + this.bookData.id
-                  + "&getId=" + this.userData.openid  // 对方id（仅此类case传
+                  + "&getterId=" + this.userData.openid  // 对方id（仅此类case传
               })
           }
       }

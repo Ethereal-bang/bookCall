@@ -4,7 +4,7 @@
     <view class="book_area">
       <!--书籍主人头像(对方-->
       <AtAvatar
-        v-if="changer.isDriver"
+        v-if="!changer.isDriver"
         class-name="avatar avatar_left"
         circle
         :image="this.changer.avatar"
@@ -12,7 +12,7 @@
       />
       <!--书籍主人头像(自己-->
       <AtAvatar
-        v-if="!changer.isDriver"
+        v-if="changer.isDriver"
         class-name="avatar avatar_right"
         circle
         :image="this.changer.avatar"
@@ -91,14 +91,13 @@ export default {
   },
   async onLoad(options) {
     // 接收发起人id, bookId
-    const openid = options.openid;
-    this.senderId = openid;
+    this.senderId = options.senderId;
     this.book.id = options.bookId;
-    // 本人发起（从书籍详情导航case
-    if (openid === getOpenid()) {
+    // 本人发起
+    if (this.senderId === getOpenid()) {
       this.changer = {
         isDriver: false,
-        openid: options.getId,
+        openid: options.getterId,
       };
       // 请求对方信息
       const user = (await getUserInfo(this.changer.openid)).data[0];
@@ -107,26 +106,28 @@ export default {
         name: user.name,
         avatar: user.avatar,
       }
-      await Taro.setNavigationBarTitle({title: this.changer.name})
-      this.newsList = [];
       // 请求书籍信息
-      const book = (await getBookDetail(this.book.id)).data[0];
       this.book = {
-        ...book,
+        ...(await getBookDetail(this.book.id)).data[0],
       };
-    } else {  // 对方发起（从消息列表导航case
-      // 请求与对方聊天记录
-      const data = (await getCommunication(this.senderId, this.book.id)).data;
-      this.newsList = data.slice(0, 6).reverse();  // 暂定！最多显示6条消息
-      this.senderId = data[0].askopenid;
+    }
+    // 请求与对方聊天记录
+    const newsList = (await getCommunication(this.senderId, this.book.id)).data;
+    if (newsList.length === 0) {  // 首次聊天
+      this.newsList = [];
+    } else {
+      // 获取书籍和消息列表
+      this.newsList = newsList.slice(0, 6).reverse();  // 暂定！最多显示6条消息
       this.book = {
-        ...data[0].book,
+        ...newsList[0].book,
       };
     }
     // 获取本人信息
     getUserInfo(getOpenid()).then(res => {
       this.user = res.data[0];
     })
+    // 修改标题为对方name
+    await Taro.setNavigationBarTitle({title: this.changer.name})
   },
   methods: {
     onChange: function (val) {
@@ -142,7 +143,7 @@ export default {
         dialogueMap: {
           Sendopenid: this.user.openid,
           Getopenid: this.changer.openid,
-          message: val,
+          message: this.news,
         },
       })
       this.news = ''

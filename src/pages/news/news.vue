@@ -20,7 +20,7 @@
         :note="item.dialogueMap.message"
         :thumb="item.avatar"
         :extra-text="item.dialogueMap.time.slice(11, 16)"
-        :on-click="() => toCommunicate(item.dialogueMap)"
+        :on-click="() => toCommunicate(item)"
       />
     </AtList>
   </view>
@@ -44,6 +44,7 @@ export default {
           name: "",
           avatar: "",
           ownopenid: "",  // 书主id
+          askopenid: "",  // 发起者id
           dialogueMap: {
             Sendopenid: "", // 聊天发起者
             Getopenid: "",  // 聊天接收者
@@ -61,11 +62,13 @@ export default {
   },
   methods: {
     // 跳转至聊天
-    toCommunicate(dialogueMap) {
+    toCommunicate(newsItem) {
+      console.log(newsItem)
       Taro.navigateTo({
         url: '/pages/communicate/communicate'
-          + '?senderId=' + dialogueMap.Sendopenid   // 发起者id
-          + '&bookId=' + dialogueMap.bookId,
+          + '?senderId=' + newsItem.askopenid   // 发起者id
+          + '&bookId=' + newsItem.dialogueMap.bookId
+          + '&getterId=' + newsItem.ownopenid   // 所有者id
       })
     },
   },
