@@ -266,6 +266,13 @@ export default {
       this.choseUniversity()// 选后关闭下拉单
       this.chosenUniversity = e.target.dataset.title; // 下拉单显示
       this.isChosenUniversity = true; // 换书广场显示
+      // 订阅消息
+      Taro.requestSubscribeMessage({
+        tmplIds: ['LOzU9QG5bMySWuZlHBu_pitoxzirPTR3c32sLEFdeeI'],  // 模板id-新消息通知
+        // success: res => {
+        //   console.log(res)
+        // }
+      })
     },
     judgeUniversity() { // 交互时判断是否选择大学
       if (!this.isChosenUniversity) {
