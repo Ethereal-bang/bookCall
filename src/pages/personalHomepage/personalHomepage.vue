@@ -2,7 +2,7 @@
   <view class="personal_homepage">
     <!--背景-->
     <image
-      :src="personBG" mode="aspectFit"
+      src="https://bookchang.com:8443/images/personBG.png" mode="aspectFit"
     />
 
     <view class="container">
@@ -38,7 +38,6 @@ import PersonPublish from "../../components/personPublish/personPublish";
 import Taro from "@tarojs/taro";
 import {getOpenid} from "../../utils/storageGetter";
 import "./personalHomepage.scss";
-import personBG from "../../assets/personBG.png";
 
 export default {
   name: "personalHomepage",
@@ -55,7 +54,6 @@ export default {
   },
   data() {
     return {
-      personBG,
       userInfo: {
         avatar: "",
         name: "用户名",

@@ -2,7 +2,7 @@
   <view class="person">
     <!--背景-->
     <image
-      :src="personBG" mode="aspectFit"
+      src="https://bookchang.com:8443/images/personBG.png" mode="aspectFit"
     />
     <navigator url="/pages/personalHomepage/personalHomepage">
       我的主页
@@ -50,7 +50,6 @@ import { AtAvatar, AtTextarea, AtDivider, AtInput } from "taro-ui-vue";
 import './person.scss'
 import {getUserInfo, modifyDeclaration, modifyUsername} from "../../api/personApi";
 import Taro from "@tarojs/taro";
-import personBG from "../../assets/personBG.png";
 
 export default {
   name: "Person",
@@ -65,7 +64,6 @@ export default {
       name: "Loading",
       declaration: "点击添加换书宣言，让换书更有吸引力",
       avatar: "",
-      personBG,
     }
   },
   onLoad() {

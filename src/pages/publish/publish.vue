@@ -75,7 +75,7 @@
           <AtModalContent>
             <view>请输入ISBN条码</view>
             <!--这里插入ISBN图片-->
-            <image mode="aspectFit" :src="isbnImg" />
+            <image mode="aspectFit" src="https://bookchang.com:8443/images/isbn.png" />
             <AtInput
               :border="false"
               placeholder="在这输入..."
@@ -130,7 +130,6 @@ import Taro from "@tarojs/taro";
 import './publish.scss'
 import {oldDegreeMap, genreMap3} from "../../data/map";
 import {addBook} from "../../api/bookApi";
-import isbnImg from "../../assets/isbn.png";
 
 const SELECTED_BGC = "background-color: #ADADAD",
   BLANK_BGC = "background-color: #F5F5F5";
@@ -174,7 +173,6 @@ export default {
       // 书籍信息
       inputISBN: "",
       isISBNModalOpen: false,
-      isbnImg,
       // 换书寄语
       inputWords: "", // 寄语
       // 跳转用

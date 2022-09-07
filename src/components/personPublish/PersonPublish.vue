@@ -20,7 +20,7 @@
         <BookList :list=bookList.out />
         <!--边界情况:-->
         <view class="none_publish" v-if="bookList.out.length === 0 && isOwn">
-          <image :src="nonePublishIcon" />
+          <image src="https://bookchang.com:8443/images/nonePublish.png" />
           <view>你还没有发布任何书籍哦！</view>
           <navigator url="/pages/publish/publish" open-type="switchTab">
             <AtButton>去发布</AtButton>
@@ -34,7 +34,7 @@
         <BookList :list="bookList.in" />
         <!--边界情况:-->
         <view class="none_publish" v-if="bookList.in.length === 0 && isOwn">
-          <image :src="nonePublishIcon" />
+          <image src="https://bookchang.com:8443/images/nonePublish.png" />
           <view>你还没有发布任何书籍哦！</view>
           <navigator url="/pages/publish/publish" open-type="switchTab">
             <AtButton>去发布</AtButton>
@@ -55,7 +55,6 @@
 import {AtTabs, AtTabsPane, AtNoticebar, AtButton} from "taro-ui-vue";
 import BookList from "../../components/bookList/BookList";
 import "./PersonPublish.scss";
-import nonePublishIcon from "../../assets/nonePublish.png";
 
 export default {
   name: "PersonPublish",
@@ -70,7 +69,6 @@ export default {
   data() {
     return {
       currentTab: 0,
-      nonePublishIcon,
     }
   },
   components: {

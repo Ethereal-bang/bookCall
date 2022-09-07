@@ -9,7 +9,7 @@
 
     <!--消息列表-->
     <view class="no_news" v-if="newsList.length === 0">
-      <image mode="aspectFit" :src="noneNewsImg" />
+      <image mode="aspectFit" src="https://bookchang.com:8443/images/noneNews.png" />
       <view>什么消息也没有~</view>
     </view>
     <AtList class-name="news_list">
@@ -31,13 +31,11 @@ import {getNewsList} from "../../api/personApi";
 import {AtList, AtListItem} from "taro-ui-vue";
 import Taro from "@tarojs/taro";
 import "./news.scss";
-import noneNewsImg from "../../assets/noneNews.png";
 
 export default {
   name: "News",
   data() {
     return {
-      noneNewsImg,
       newsList: [
         { // 消息列表项格式
           id: 0,
