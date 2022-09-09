@@ -27,7 +27,9 @@
   >view:nth-of-type(1) {
     >view {
       display: inline-block;
-      background-color: #2A851E;
+      background-color: #81cea2;
+      border-radius: 40px;
+      transform: scale(0.9);
     }
     text {
       display: inline-block;
