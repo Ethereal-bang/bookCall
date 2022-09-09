@@ -29,7 +29,7 @@
             :extra-text="inOrOut2[book.getOrSale]"
           />
         </AtList>
-        <navigator :url="'/pages/bookDetail/bookDetail?key=' + book.id">
+        <navigator v-if="!user.openid === senderId" :url="'/pages/bookDetail/bookDetail?key=' + book.id">
           <button>已达成交换，去下架</button>
         </navigator>
       </view>
