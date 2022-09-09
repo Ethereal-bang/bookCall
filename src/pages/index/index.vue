@@ -84,8 +84,8 @@
         </scroll-view>
       </view>
       <!--换书广场-->
-      <view class="area square">
-        <view class="title">
+      <view :class="'area square ' + square_class">
+        <view :class="'title ' + square_title_class">
           换书广场
         </view>
         <AtTabs
@@ -208,6 +208,7 @@ export default {
       square_class: "",
       square_title_class: "",
       tabs_body_class: "",
+      screenHeight: 0,
     }
   },
   methods: {
@@ -300,7 +301,7 @@ export default {
     },
   },
   onPageScroll(scroll) {  // 监测页面滚动值
-    if (scroll.scrollTop >= 327) {
+    if (scroll.scrollTop >= this.screenHeight / 2) {
       this.square_class = "square_scroll";
       this.square_title_class = "title_scroll";
       this.tabs_body_class = "at-tabs__body_scroll";
@@ -311,6 +312,8 @@ export default {
     }
   },
   onLoad() {
+    // 获取窗口大小
+    this.screenHeight = Taro.getSystemInfoSync().windowHeight;
     // 获取登录凭证code
     if (!getOpenid()) {
       Taro.login({ // 获取登录凭证
