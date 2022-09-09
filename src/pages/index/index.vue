@@ -228,6 +228,8 @@ export default {
         }, err => {
           console.log(err)
         })
+      // 清空搜索框
+      this.searchValue = '';
     },
     genreClick(genre) {
       if (!this.judgeUniversity()) return;
