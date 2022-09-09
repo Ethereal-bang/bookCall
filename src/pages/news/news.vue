@@ -15,7 +15,7 @@
     <AtList class-name="news_list">
       <AtListItem
         v-for="item in newsList"
-        :key="item.id"
+        :key="item.askopenid+item.ownopenid"
         :title="item.name"
         :note="item.dialogueMap.message"
         :thumb="item.avatar"
@@ -61,7 +61,6 @@ export default {
   methods: {
     // 跳转至聊天
     toCommunicate(newsItem) {
-      console.log(newsItem)
       Taro.navigateTo({
         url: '/pages/communicate/communicate'
           + '?senderId=' + newsItem.askopenid   // 发起者id
