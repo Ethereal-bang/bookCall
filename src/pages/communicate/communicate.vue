@@ -99,22 +99,30 @@ export default {
         isDriver: false,
         openid: options.getterId,
       };
-      // 请求对方信息
-      const user = (await getUserInfo(this.changer.openid)).data[0];
-      this.changer = {
-        ...this.changer,
-        name: user.name,
-        avatar: user.avatar,
-      }
       // 请求书籍信息
       this.book = {
         ...(await getBookDetail(this.book.id)).data[0],
       };
+    // 对方发起
+    } else {
+      this.changer = {
+        isDriver: true,
+        openid: this.senderId,
+      }
+    }
+    // 请求对方信息
+    const user = (await getUserInfo(this.changer.openid)).data[0];
+    this.changer = {
+      ...this.changer,
+      name: user.name,
+      avatar: user.avatar,
     }
     // 请求与对方聊天记录
     const newsList = (await getCommunication(this.senderId, this.book.id)).data;
-    if (newsList.length === 0) {  // 首次聊天
+      // 首次聊天
+    if (newsList.length === 0) {
       this.newsList = [];
+      // 非首次
     } else {
       // 获取书籍和消息列表
       this.newsList = newsList.slice(0, 6).reverse();  // 暂定！最多显示6条消息
@@ -144,7 +152,7 @@ export default {
       })
       this.news = ''
       // 订阅消息通知对方
-      sendSubscription(this.changer.openid, this.changer.name, this.book.name);
+      // sendSubscription(this.changer.openid, this.changer.name, this.book.name);
     },
   },
   data() {
