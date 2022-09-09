@@ -55,7 +55,8 @@ export default {
       ],
     }
   },
-  async onLoad() {
+  // 每次打开页面重新请求（区别onLoad）
+  async onShow() {
     this.newsList = (await getNewsList()).data;
   },
   methods: {
