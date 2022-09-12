@@ -2,8 +2,7 @@
   <view class="person">
     <!--背景-->
     <image
-      src="https://bookchang.com:8443/images/personBG.png" mode="aspectFit"
-    />
+      src="https://bookchang.com:8443/images/personBG.png" />
     <navigator url="/pages/personalHomepage/personalHomepage">
       我的主页
     </navigator>

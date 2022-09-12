@@ -2,8 +2,7 @@
   <view class="personal_homepage">
     <!--背景-->
     <image
-      src="https://bookchang.com:8443/images/personBG.png" mode="aspectFit"
-    />
+      src="https://bookchang.com:8443/images/personBG.png" />
 
     <view class="container">
       <!--用户信息-->
