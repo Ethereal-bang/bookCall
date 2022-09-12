@@ -363,9 +363,7 @@ export default {
 
 .at-tabs__body_scroll {
   width: 100%;
-  /*position: absolute;*/
-  /*top: 4vh;*/
-  height: 85vh;
+  height: 95vh;
   overflow-y: scroll;
 }
 </style>
