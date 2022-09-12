@@ -39,7 +39,7 @@
     <view class="news_area">
       <!--每条消息-->
       <view
-        v-for="news in newsList"
+        v-for="news in newsList.slice(0, 6).reverse()"
         :class="'news ' + (news.dialogueMap.Sendopenid === getOpenid() ? 'news_right' : 'news_left')"
       >
         <AtAvatar class-name="avatar" circle :image="news.avatar" size="small"/>
@@ -125,7 +125,7 @@ export default {
       // 非首次
     } else {
       // 获取书籍和消息列表
-      this.newsList = newsList.slice(0, 6).reverse();  // 暂定！最多显示6条消息
+      this.newsList = newsList;
       this.book = {
         ...newsList[0].book,
       };
@@ -140,7 +140,7 @@ export default {
   methods: {
     sendMsg: function () {
       sendMsg(this.book.id, this.news, this.changer.openid);
-      this.newsList.push({
+      this.newsList.unshift({
         name: this.user.name,
         avatar: this.user.avatar,
         openid: this.user.openid,
