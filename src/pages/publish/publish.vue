@@ -119,6 +119,7 @@
       :on-confirm="continuePost"
       cancel-text="查看详情"
       :on-cancel="toDetail"
+      :closeOnClickOverlay="false"
     />
   </view>
 </template>
@@ -278,7 +279,7 @@ export default {
     },
     toDetail() {
       this.isModalOpen = false;
-      Taro.navigateTo({
+      Taro.reLaunch({
         url: `/pages/bookDetail/bookDetail?key=` + this.bookId,
       })
     }
