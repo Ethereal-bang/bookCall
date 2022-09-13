@@ -20,17 +20,17 @@
       />
       <!--书籍信息-->
       <view class="info">
-        <AtList class-name="book_list">
-          <AtListItem
-            :key="book.name"
-            :title="book.name"
-            :note="'换书寄语' + book.message"
-            :thumb="book.photoPath"
-            :extra-text="inOrOut2[book.getOrSale]"
-          />
-        </AtList>
-        <navigator v-if="!user.openid === senderId" :url="'/pages/bookDetail/bookDetail?key=' + book.id">
-          <button>已达成交换，去下架</button>
+        <navigator :url="'/pages/bookDetail/bookDetail?key=' + book.id">
+          <AtList class-name="book_list">
+            <AtListItem
+              :key="book.name"
+              :title="book.name"
+              :note="'换书寄语' + book.message"
+              :thumb="book.photoPath"
+              :extra-text="inOrOut2[book.getOrSale]"
+            />
+          </AtList>
+          <button v-if="!user.openid === senderId">已达成交换，去下架</button>
         </navigator>
       </view>
     </view>
