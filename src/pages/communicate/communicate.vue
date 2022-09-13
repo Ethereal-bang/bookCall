@@ -42,7 +42,11 @@
         v-for="news in newsList"
         :class="'news ' + (news.dialogueMap.Sendopenid === getOpenid() ? 'news_right' : 'news_left')"
       >
-        <AtAvatar class-name="avatar" circle :image="news.avatar" size="small"/>
+        <navigator
+          :url="'/pages/personalHomepage/personalHomepage?userId=' + news.dialogueMap.Sendopenid"
+        >
+          <AtAvatar class-name="avatar" circle :image="news.avatar" size="small"/>
+        </navigator>
         <text>{{ news.dialogueMap.message }}</text>
       </view>
     </view>
