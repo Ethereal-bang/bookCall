@@ -23,7 +23,7 @@
   border: 1px solid white;
   border-radius: 50px;
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
   color: #FFFFFF;
   background: #968f81;
   opacity: 0.7;
@@ -36,6 +36,7 @@
   padding: 103px 30px 0;
   position: relative;
   background-color: #FFFFFF;
+  box-shadow: 2px 0 11px #888888;
   border-radius: 33px;
   // 头像
   .at-avatar {
@@ -55,7 +56,7 @@
   }
   // 宣言
   .at-textarea {
-    width: 640px;
+    width: 610px;
     height: 107px;
     margin: 0 auto;
     padding: 28px;  // 控制字体显示区域
@@ -78,7 +79,7 @@
         align-items: center;
         .text {
           margin-left: 30px;
-          font-size: large;
+          font-size: 28px;
         }
       }
     }

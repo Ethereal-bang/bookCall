@@ -60,9 +60,10 @@ $thumbSize: 110rpx;
 }
 
 .sprite-arrow_right_small {
-  width: 6px;
-  height: 6px;
-  background-position: -35px -1px;
+  width: 15px;
+  height: 16px;
+  background-position: -69px -1px;
+  transform: scale(2, 2.5);
 }
 
 .sprite-group_1novel {
@@ -126,9 +127,12 @@ $thumbSize: 110rpx;
 }
 
 .sprite-mine_modify {
-  width: 16px;
-  height: 16px;
-  background-position: -1px -18px;
+  width: 32px;
+  height: 32px;
+  background-position: -1px -34px;
+  position: absolute;
+  margin: 8px 50px 32px 526px;
+  z-index: 100;
 }
 
 .sprite-mine_rules {

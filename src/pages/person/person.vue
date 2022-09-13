@@ -9,6 +9,7 @@
 
     <view class="container">
       <AtAvatar circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
+      <view class="sprite sprite-mine_modify" />
       <AtInput
         type="nickname" placeholder="请输入昵称"
         :value="name" :on-blur="onUsernameChange"
@@ -28,14 +29,14 @@
             <view class="sprite sprite-mine_books" />
             <view class="text">管理书籍</view>
           </view>
-          <view class="sprite sprite-arrow_down" />
+          <view class="sprite sprite-arrow_down_small" />
         </navigator>
         <navigator url="/pages/changeRules/changeRules" open-type="navigate">
           <view>
             <view class="sprite sprite-mine_rules" />
             <view class="text">换书规则</view>
           </view>
-          <view class="sprite sprite-arrow_down" />
+          <view class="sprite sprite-arrow_down_small" />
         </navigator>
       </view>
     </view>
