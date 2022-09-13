@@ -39,7 +39,7 @@
     <view class="news_area">
       <!--每条消息-->
       <view
-        v-for="news in newsList.slice(0, 6).reverse()"
+        v-for="news in newsList"
         :class="'news ' + (news.dialogueMap.Sendopenid === getOpenid() ? 'news_right' : 'news_left')"
       >
         <AtAvatar class-name="avatar" circle :image="news.avatar" size="small"/>
@@ -125,7 +125,7 @@ export default {
       // 非首次
     } else {
       // 获取书籍和消息列表
-      this.newsList = newsList;
+      this.newsList = newsList.reverse();
       this.book = {
         ...newsList[0].book,
       };
@@ -137,10 +137,18 @@ export default {
     // 修改标题为对方name
     await Taro.setNavigationBarTitle({title: this.changer.name})
   },
+  // onReady() {
+  // ?试图实现滚动到最后
+  //   Taro.createSelectorQuery().select(".news_area")
+  //     .boundingClientRect()
+  //     .exec(res => {
+  //     console.log(res)
+  //   })
+  // },
   methods: {
     sendMsg: function () {
       sendMsg(this.book.id, this.news, this.changer.openid);
-      this.newsList.unshift({
+      this.newsList.push({
         name: this.user.name,
         avatar: this.user.avatar,
         openid: this.user.openid,

@@ -1,15 +1,17 @@
 .communicate {
-  height: 100vh;
+  height: 96vh;
+  padding-top: 4vh;
   background-color: #F5F5F5;
 }
 .book_area, .news_area {
-  margin: 30px 16px;
+  margin: 0 5vw;
 }
 
 .book_area {
-  margin-bottom: 50px;
+  height: 17vh;
+  margin-bottom: 2vh;
   .info {
-    width: 78%;
+    width: 77%;
     height: 242px;
     margin: 0 auto;
     background-color: #FFFFFF;
@@ -31,14 +33,18 @@
   }
 }
 
+.news_area {
+  width: 90vw;
+  height: 69vh;
+  margin-bottom: 2vh;
+  overflow-y: scroll;
+}
 /*每一条*/
 .news {
+  width: 90vw;
   height: 145px;
-  position: relative;
+  clear: both;
   line-height: 81px;
-  >.at-avatar {
-    float: left;
-  }
   >text { // 消息文本
     display: inline-block;
     padding: 0 24px;
@@ -46,22 +52,29 @@
     border-radius: 32px;
   }
 }
-.news_left >.at-avatar {
-  margin-right: 30px;
+.news_left {
+  float: left;
+  clear: both;
+  >.at-avatar {
+    float: left;
+    margin-right: 30px;
+  }
 }
 .news_right {
   float: right;
-  clear: both;
   >.at-avatar {
     float: right;
-    clear: both;
     margin-left: 30px;
+  }
+  >text {
+    float: right;
   }
 }
 
 // 输入bar
 .send {
   width: 100vw;
+  height: 7vh;
   padding: 20px 30px 20px 8px;
   display: flex;
   justify-content: space-between;
