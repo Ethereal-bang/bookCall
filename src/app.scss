@@ -18,15 +18,15 @@
       font-weight: 100;
 }
 .at-list__item {  /*list item*/
-  font-size: 38rpx;
+  font-size: 34px;
   line-height: 2.5;
 }
 .at-list__item-extra {  /*可换、求换标签*/
-  line-height: 54rpx; /*让文子居中*/
+  line-height: 54px; /*让文子居中*/
 }
 .item-extra__info { /*标签内字体*/
   height: 57px;
-  padding-left: 28rpx;
+  padding-left: 28px;
   align-items: center;
 }
 $thumbSize: 110rpx;

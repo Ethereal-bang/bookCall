@@ -13,7 +13,7 @@
     margin-top: 17px;
     margin-left: 12px;
     font-weight: 500;
-    font-size: 35px;
+    font-size: 32px;
     color: #666666;
   }
 }
@@ -31,22 +31,35 @@
     }
     text {
       display: inline-block;
-      margin-left: 30px;
-      font-size: large;
+      position: absolute;
+      margin: 17px 53px -12px 72px;
+      font-size: 28px;
     }
   }
+  .sprite-index_location {
+    position: absolute;
+    margin-top: 2px;
+  }
+
   // 展开列表
   .university_list {
+    width: 287px;
     min-width: 287px;
+    height: 176px;
     padding: 5px 0;
+    margin-top: 60px;
     position: absolute;
+    border-radius: 0 0 30px 30px;
     z-index: 100;
     background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     // 列表项
     >view {
+      width: 198px;
       height: 43px;
       padding: 12px 24px;
       margin: 14px 0 0 21px;
+      background-color: #f7f7f7;
       border-radius: 29px;
       color: #81CEA2;
       text-align: center;
@@ -65,7 +78,6 @@
     text-align: center;
     background-color: #81cea2;
     border-radius: 23px;
-
   }
 }
 // banner
@@ -103,7 +115,7 @@
 .atAll{
   height: 40px;
   padding: 0;
-  margin: 20px 10px 20px 280px;
+  margin: 20px 22px 20px 406px;
   color: #B8B7B7;
   font-size: 20px;
   line-height: 37px;
