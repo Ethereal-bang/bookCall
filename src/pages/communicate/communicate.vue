@@ -61,14 +61,19 @@
       />
       <view>
         <AtButton
+          class-name="send_btn"
           v-if="this.news.length !== 0"
           :on-click="sendMsg"
         >
           发送
         </AtButton>
-        <AtAvatar text="十" circle
-                  v-if="this.news.length === 0"
-        />
+        <AtButton
+          class-name="media_btn"
+          v-if="this.news.length === 0"
+          :on-click="sendImg"
+        >
+          <AtAvatar text="十" circle />
+        </AtButton>
       </view>
     </view>
   </view>
@@ -164,8 +169,23 @@ export default {
       })
       this.news = ''
       // 订阅消息通知对方
-      // sendSubscription(this.changer.openid, this.changer.name, this.book.name);
+      sendSubscription(this.changer.openid, this.changer.name, this.book.name);
     },
+    sendImg: function() {
+      Taro.chooseMedia({
+        count: 1,
+        mediaType: ['image'],
+        sizeType: ['compressed'], // 压缩
+        // success: res => {
+          // Taro.uploadFile({
+          //   url: "",
+          //   filePath: res.tempFiles[0].tempFilePath,
+          //   success: res2 => {
+          //     console.log(res2)
+          //   }
+          // })
+        // }
+      })    },
   },
   data() {
     return {

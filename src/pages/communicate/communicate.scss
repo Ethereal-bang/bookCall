@@ -82,14 +82,19 @@
   bottom: 0;
   background-color: #FFFFFF;
   .at-input {
-    width: 72%;
+    width: 72vw;
     padding: 24px 14px;
     background-color: #ECECEC;
     border-radius: 42px;
   }
+  // "发送"
+  .send_btn, .media_btn {
+    width: 18vw;
+  }
   // ＋号
-  .at-avatar {
-    margin-right: 30px;
+  .media_btn {
+    height: auto;
+    border: none;
     .at-avatar__text {
       color: black;
     }
