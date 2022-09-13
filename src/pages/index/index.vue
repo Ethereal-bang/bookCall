@@ -36,7 +36,7 @@
         interval="2000"
         circular="true"
         autoplay="true"
-        speed="3500"
+        speed="4500"
         indicator-dots="true"
       >
         <swiper-item
