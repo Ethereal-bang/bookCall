@@ -29,14 +29,14 @@
             <view class="sprite sprite-mine_books" />
             <view class="text">管理书籍</view>
           </view>
-          <view class="sprite sprite-arrow_down_small" />
+          <view class="sprite sprite-arrow_right_small" />
         </navigator>
         <navigator url="/pages/changeRules/changeRules" open-type="navigate">
           <view>
             <view class="sprite sprite-mine_rules" />
             <view class="text">换书规则</view>
           </view>
-          <view class="sprite sprite-arrow_down_small" />
+          <view class="sprite sprite-arrow_right_small" />
         </navigator>
       </view>
     </view>
