@@ -30,7 +30,7 @@
               :extra-text="inOrOut2[book.getOrSale]"
             />
           </AtList>
-          <button v-if="!user.openid === senderId">已达成交换，去下架</button>
+          <button v-if="!(user.openid === senderId)">已达成交换，去下架</button>
         </navigator>
       </view>
     </view>
@@ -145,6 +145,7 @@ export default {
     })
     // 修改标题为对方name
     await Taro.setNavigationBarTitle({title: this.changer.name})
+    console.log(this.user.openid, this.senderId, this.user.openid === this.senderId)
   },
   // onReady() {
   // ?试图实现滚动到最后
