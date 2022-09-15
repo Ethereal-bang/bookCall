@@ -14,7 +14,7 @@
           :disabled="!this.userInfo.isOwn"
         />
         <AtTextarea
-          placeholder="点击添加换书宣言，让换书更有吸引力~~~"
+          placeholder="点击添加换书宣言，让换书更有吸引力"
           :value="this.userInfo.declaration === '' ? undefined : this.userInfo.declaration"
           :on-change="(val) => this.declaration = val"
           :on-blur="onDeclareChange"
