@@ -8,7 +8,7 @@
     </navigator>
 
     <view class="container">
-      <AtAvatar circle image='http://photo.chaoxing.com/photo_80.jpg'></AtAvatar>
+      <AtAvatar circle :image="this.avatar"></AtAvatar>
       <view class="sprite sprite-mine_modify" />
       <AtInput
         type="nickname" placeholder="请输入昵称"
