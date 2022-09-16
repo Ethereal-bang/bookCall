@@ -52,12 +52,16 @@
     </view>
 
     <!--输入框bar-->
-    <view class="send">
+    <view class="send"
+          :style="'bottom:' + inputPos + 'px'"
+    >
       <AtInput
         type="text"
         confirmType="发送"
         :on-change="val => this.news = val"
         :value="news"
+        :adjust-position="false"
+        :onKeyboardHeightChange="onKeyboardHeightChange"
       />
       <view>
         <AtButton
@@ -145,16 +149,18 @@ export default {
     })
     // 修改标题为对方name
     await Taro.setNavigationBarTitle({title: this.changer.name})
-    console.log(this.user.openid, this.senderId, this.user.openid === this.senderId)
   },
-  // onReady() {
+  onReady() {
   // ?试图实现滚动到最后
   //   Taro.createSelectorQuery().select(".news_area")
   //     .boundingClientRect()
   //     .exec(res => {
   //     console.log(res)
   //   })
-  // },
+    Taro.onKeyboardHeightChange(res => {
+      this.inputPos = res.height;
+    })
+  },
   methods: {
     sendMsg: function () {
       sendMsg(this.book.id, this.news, this.changer.openid);
@@ -226,6 +232,7 @@ export default {
       }],
       inOrOut2,
       news: '', // 发送消息
+      inputPos: 0,
     }
   }
 }
