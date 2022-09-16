@@ -15,7 +15,7 @@
     <AtList class-name="news_list">
       <AtListItem
         v-for="item in newsList"
-        :key="item.askopenid+item.ownopenid"
+        :key="item.askopenid+item.ownopenid+item.dialogueMap.bookId"
         :title="item.name"
         :note="item.dialogueMap.message"
         :thumb="item.avatar"
